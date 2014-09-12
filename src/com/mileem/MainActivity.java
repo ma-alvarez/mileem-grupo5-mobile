@@ -1,4 +1,6 @@
-package com.example.appejemplo;
+package com.mileem;
+
+import com.example.appejemplo.R;
 
 import android.app.ActionBar;
 import android.app.Activity;
