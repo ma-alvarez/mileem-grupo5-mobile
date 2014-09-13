@@ -85,11 +85,11 @@ public class Publication {
         sb.append(PROP_TYPE).append(" : ").append(property_type).append('\n');
         sb.append(ADDRESS).append(" : ").append(address).append('\n');
         sb.append(PRICE).append(" : ").append(price).append('\n');
-        sb.append(PHONE).append(" : ").append(transaction_type).append('\n');
-        sb.append(AGE).append(" : ").append(property_type).append('\n');
-        sb.append(EXPENSES).append(" : ").append(address).append('\n');
-        sb.append(NUM_OF_ROOMS).append(" : ").append(price).append('\n');
-        sb.append(AREA).append(" : ").append(price).append('\n');
+        sb.append(PHONE).append(" : ").append(phone).append('\n');
+        sb.append(AGE).append(" : ").append(age).append('\n');
+        sb.append(EXPENSES).append(" : ").append(expenses).append('\n');
+        sb.append(NUM_OF_ROOMS).append(" : ").append(number_of_rooms).append('\n');
+        sb.append(AREA).append(" : ").append(area).append('\n');
         
 		return sb.toString();
 		
