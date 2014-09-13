@@ -26,22 +26,22 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-//        // Create a progressdialog
-//        mProgressDialog = new ProgressDialog(ctx);
-//        // Set progressdialog title
-//        mProgressDialog.setTitle("MiLEEM");
-//        // Set progressdialog message
-//        mProgressDialog.setMessage("Cargando Publicaciones...");
-//        mProgressDialog.setIndeterminate(false);
-//        // Show progressdialog
-//        mProgressDialog.show();
+        // Create a progressdialog
+        mProgressDialog = new ProgressDialog(ctx);
+        // Set progressdialog title
+        mProgressDialog.setTitle("MiLEEM");
+        // Set progressdialog message
+        mProgressDialog.setMessage("Cargando Publicaciones...");
+        mProgressDialog.setIndeterminate(false);
+        // Show progressdialog
+        mProgressDialog.show();
     }
 
     @Override
     protected Void doInBackground(Context... params) {
     	
     	arraylist = new ArrayList<HashMap<String, String>>();
-    	jsonobject = JSONutils.getJSONfromURL("http://www.androidbegin.com/tutorial/jsonparsetutorial.txt");
+    	jsonarray = JSONutils.getJSONfromURL(ConfigManager.URL_ALLPUBLICATIONS);
 
     	return null;
     }
@@ -56,7 +56,7 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
 //    	listview.setAdapter(adapter);
 //    	// Close the progressdialog
 //    	mProgressDialog.dismiss();
-    	Toast.makeText(ctx, jsonobject.toString(),Toast.LENGTH_SHORT).show();
+    	Toast.makeText(ctx, jsonarray.toString(),Toast.LENGTH_SHORT).show();
     }
 
 }

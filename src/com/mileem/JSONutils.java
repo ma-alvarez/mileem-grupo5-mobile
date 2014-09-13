@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,16 +18,16 @@ import android.util.Log;
 
 public class JSONutils {
 
-   public static JSONObject getJSONfromURL(String url) {
+   public static JSONArray getJSONfromURL(String url) {
        InputStream is = null;
        String result = "";
-       JSONObject jArray = null;
+       JSONArray jArray = null;
 
        // Download JSON data from URL
        try {
            HttpClient httpclient = new DefaultHttpClient();
-           HttpPost httppost = new HttpPost(url);
-           HttpResponse response = httpclient.execute(httppost);
+           HttpGet httpget = new HttpGet(url);
+           HttpResponse response = httpclient.execute(httpget);
            HttpEntity entity = response.getEntity();
            is = entity.getContent();
 
@@ -50,7 +52,7 @@ public class JSONutils {
 
        try {
 
-           jArray = new JSONObject(result);
+           jArray = new JSONArray(result);
        } catch (JSONException e) {
            Log.e("log_tag", "Error parsing data " + e.toString());
        }
