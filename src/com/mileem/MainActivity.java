@@ -1,6 +1,6 @@
 package com.mileem;
 
-import com.example.appejemplo.R;
+import com.example.mileem.R;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -39,6 +39,7 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        
         
         new ListPublicacionesTask(this).execute();
     }
