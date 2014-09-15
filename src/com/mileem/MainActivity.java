@@ -1,7 +1,5 @@
 package com.mileem;
 
-import com.example.mileem.R;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -13,7 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
+import com.example.mileem.R;
 
 
 public class MainActivity extends Activity
@@ -41,15 +40,26 @@ public class MainActivity extends Activity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         
         
-        new ListPublicacionesTask(this).execute();
+        
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
+        
+    	Fragment fragment = PlaceholderFragment.newInstance(position + 1);
+        switch(position) {
+        case 0:
+            fragment = new PublicationsFragment();
+            break;
+        case 1:
+            //
+            break;
+    }
+    	
+    	// update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 

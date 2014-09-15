@@ -20,10 +20,10 @@ import android.widget.Toast;
 import com.example.mileem.R;
 import com.mileem.model.Publication;
 
-public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
+public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 
 	private String TAG = this.getClass().getSimpleName();
-	private Context ctx;
+	private PublicationsFragment pFragment;
     private ProgressDialog mProgressDialog;
     private ArrayList<Publication> publications;
 	private JSONResponse jResponse;
@@ -33,15 +33,15 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
 	//private ArrayList<HashMap<String, String>> arraylist;
 
     
-    public ListPublicacionesTask(Context ctx) {
-		this.ctx = ctx;
+    public ListPublicacionesTask(PublicationsFragment fragment) {
+		this.pFragment = fragment;
 	}
     
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         // Create a progressdialog
-        mProgressDialog = new ProgressDialog(ctx);
+        mProgressDialog = new ProgressDialog(pFragment.getActivity());
         // Set progressdialog title
         mProgressDialog.setTitle("MiLEEM");
         // Set progressdialog message
@@ -52,7 +52,7 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Context... params) {
+    protected Void doInBackground(Void... params) {
 
     	jResponse = JSONutils.getJSONfromURL(ConfigManager.URL_ALLPUBLICATIONS);
     	publications = new ArrayList<Publication>();
@@ -82,28 +82,28 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
     @Override
     protected void onPostExecute(Void args) {
     	
-    	PublicationsFragment publicationFragment = new PublicationsFragment();
+//    	PublicationsFragment publicationFragment = new PublicationsFragment();
     	
-    	FragmentManager fragmentManager = ((Activity)ctx).getFragmentManager();
-        fragmentManager.beginTransaction().
-        add(R.id.container, publicationFragment)
-        .commit();
+//    	FragmentManager fragmentManager = ((Activity)ctx).getFragmentManager();
+//        fragmentManager.beginTransaction().
+//        add(R.id.container, publicationFragment)
+//        .commit();
         
 
     	// Locate the listview in listview_main.xml
     	//listview = (ListView) ((Activity)ctx).findViewById(R.id.listview);
 //    	// Pass the results into ListViewAdapter.java
-        adapter = new ListPublicacionesViewAdapter(ctx, publications);
+        adapter = new ListPublicacionesViewAdapter(pFragment.getActivity(), publications);
     	//adapter = new ArrayAdapter<Publication>(ctx, android.R.layout.simple_list_item_1, publications);
 //    	// Set the adapter to the ListView
 //    	listview.setAdapter(adapter);
     	
-        publicationFragment.setListAdapter(adapter);
+        pFragment.setListAdapter(adapter);
     	// Close the progressdialog
     	mProgressDialog.dismiss();
     	
     	if(!jResponse.getError().isEmpty()){
-    		Toast.makeText(ctx, jResponse.getError(),Toast.LENGTH_LONG).show();
+    		Toast.makeText(pFragment.getActivity(), jResponse.getError(),Toast.LENGTH_LONG).show();
     	}
     }
 
