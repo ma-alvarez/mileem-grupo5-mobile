@@ -1,6 +1,7 @@
 package com.mileem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,10 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
     private JSONObject jsonobject;
 	private JSONArray jsonarray;
 	private ListView listview;
-	private ArrayAdapter<Publication> adapter;
+	//private ArrayAdapter<Publication> adapter;
+	private ListPublicacionesViewAdapter adapter;
+	//private ArrayList<HashMap<String, String>> arraylist;
+
     
     public ListPublicacionesTask(Context ctx) {
 		this.ctx = ctx;
@@ -95,8 +99,8 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
     	// Locate the listview in listview_main.xml
     	//listview = (ListView) ((Activity)ctx).findViewById(R.id.listview);
 //    	// Pass the results into ListViewAdapter.java
-//    	adapter = new ListViewAdapter(ctx, arraylist);
-    	adapter = new ArrayAdapter<Publication>(ctx, android.R.layout.simple_list_item_1, publications);
+        adapter = new ListPublicacionesViewAdapter(ctx, publications);
+    	//adapter = new ArrayAdapter<Publication>(ctx, android.R.layout.simple_list_item_1, publications);
 //    	// Set the adapter to the ListView
 //    	listview.setAdapter(adapter);
     	

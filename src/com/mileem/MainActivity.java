@@ -22,9 +22,9 @@ public class MainActivity extends Activity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
 
-
-    ListView listview;
-//    ListViewAdapter adapter;
+    static String CURRENCY_SYMBOL = "$";
+    //ListView listview;
+    //ListPublicacionesViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
