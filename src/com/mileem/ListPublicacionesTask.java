@@ -12,21 +12,21 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mileem.R;
-import com.mileem.MainActivity.PlaceholderFragment;
 import com.mileem.model.Publication;
 
 public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
 
+	private String TAG = this.getClass().getSimpleName();
 	private Context ctx;
     private ProgressDialog mProgressDialog;
     private ArrayList<Publication> publications;
-    private JSONObject jsonobject;
-	private JSONArray jsonarray;
+	private JSONResponse jResponse;
 	private ListView listview;
 	//private ArrayAdapter<Publication> adapter;
 	private ListPublicacionesViewAdapter adapter;
@@ -54,34 +54,28 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
     @Override
     protected Void doInBackground(Context... params) {
 
-    	jsonarray = JSONutils.getJSONfromURL(ConfigManager.URL_ALLPUBLICATIONS);
+    	jResponse = JSONutils.getJSONfromURL(ConfigManager.URL_ALLPUBLICATIONS);
     	publications = new ArrayList<Publication>();
-    	
-    	try {
-    		for (int i = 0; i < jsonarray.length(); i++) {
 
-    			jsonobject = jsonarray.getJSONObject(i);
-    			Publication publication = new Publication();
-    			publication.setTransaction_type(jsonobject.getString(Publication.TRAN_TYPE));
-    			publication.setProperty_type(jsonobject.getString(Publication.PROP_TYPE));
-    			publication.setAddress(jsonobject.getString(Publication.ADDRESS));
-    			publication.setNumber_of_rooms(jsonobject.getInt(Publication.NUM_OF_ROOMS));
-    			publication.setArea(jsonobject.getInt(Publication.AREA));
-    			publication.setPhone(jsonobject.getString(Publication.PHONE));
-    			publication.setPrice(jsonobject.getDouble(Publication.PRICE));
-    			publication.setExpenses(jsonobject.getDouble(Publication.EXPENSES));
-    			publication.setAge(jsonobject.getDouble(Publication.AGE));
+    	if(jResponse.getError().isEmpty()){
+    		JSONArray jsonarray = jResponse.getjArray();
 
-    			publications.add(publication);
-    		}
+    			for (int i = 0; i < jsonarray.length(); i++) {
+    				Publication publication = null;
+    				
+    				try {
+						JSONObject jsonobject = jsonarray.getJSONObject(i);
+	    				publication = new Publication();
+	    				loadPublication(publication, jsonobject);
+    				} catch (JSONException e) {
+    					Log.e(TAG, "Error in parsing JSON object " + i);
+    					e.printStackTrace();
+					}
 
-    	} catch (Exception e) {
-    		if(jsonobject == null){
-    			Toast.makeText(ctx,"JSON Object NULL",Toast.LENGTH_LONG).show();
-    		}
-    		e.printStackTrace();
+    				publications.add(publication);
+    			}
+
     	}
-
     	return null;
     }
 
@@ -107,7 +101,30 @@ public class ListPublicacionesTask extends AsyncTask<Context, Void, Void> {
         publicationFragment.setListAdapter(adapter);
     	// Close the progressdialog
     	mProgressDialog.dismiss();
-    	//Toast.makeText(ctx, publications.toString(),Toast.LENGTH_LONG).show();
+    	
+    	if(!jResponse.getError().isEmpty()){
+    		Toast.makeText(ctx, jResponse.getError(),Toast.LENGTH_LONG).show();
+    	}
+    }
+
+    private void loadPublication(Publication publication,JSONObject jsonobject){
+    	
+    	try {
+    		publication.setTransaction_type(jsonobject.getString(Publication.TRAN_TYPE));
+    		publication.setProperty_type(jsonobject.getString(Publication.PROP_TYPE));
+    		publication.setAddress(jsonobject.getString(Publication.ADDRESS));
+    		publication.setNumber_of_rooms(jsonobject.getInt(Publication.NUM_OF_ROOMS));
+    		publication.setArea(jsonobject.getInt(Publication.AREA));
+    		publication.setPhone(jsonobject.getString(Publication.PHONE));
+    		publication.setPrice(jsonobject.getDouble(Publication.PRICE));
+    		publication.setExpenses(jsonobject.getDouble(Publication.EXPENSES));
+    		publication.setAge(jsonobject.getDouble(Publication.AGE));
+
+
+		} catch (JSONException e) {
+			Log.e(TAG, "Error in parsing JSON");
+			e.printStackTrace();
+		} 
     }
 
 }

@@ -8,20 +8,19 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.util.Log;
 
 public class JSONutils {
 
-   public static JSONArray getJSONfromURL(String url) {
+   public static JSONResponse getJSONfromURL(String url) {
        InputStream is = null;
        String result = "";
        JSONArray jArray = null;
+       JSONResponse jResponse = new JSONResponse();
 
        // Download JSON data from URL
        try {
@@ -32,6 +31,7 @@ public class JSONutils {
            is = entity.getContent();
 
        } catch (Exception e) {
+    	   jResponse.setError(e.getMessage());
            Log.e("log_tag", "Error in http connection " + e.toString());
        }
 
@@ -50,13 +50,17 @@ public class JSONutils {
            Log.e("log_tag", "Error converting result " + e.toString());
        }
 
-       try {
+       if(!result.isEmpty()){
+    	   try {
 
-           jArray = new JSONArray(result);
-       } catch (JSONException e) {
-           Log.e("log_tag", "Error parsing data " + e.toString());
+    		   jArray = new JSONArray(result);
+    		   jResponse.setjArray(jArray);
+    		   
+    	   } catch (JSONException e) {
+    		   jResponse.setError(e.getMessage());
+    		   Log.e("log_tag", "Error parsing data " + e.toString());
+    	   }
        }
-
-       return jArray;
+       return jResponse;
    }
 }

@@ -22,6 +22,17 @@ public class Publication {
 	private double age;
 	private String phone;
 	
+	public Publication(){
+		transaction_type = "def_type";
+		property_type = "def_type";
+		address = "def_address";
+		area = 0;
+		number_of_rooms = 0;
+		price = 0;
+		expenses = 0;
+		age = 0;
+		phone = "0000-0000";
+	}
 	
 	public String getTransaction_type() {
 		return transaction_type;
