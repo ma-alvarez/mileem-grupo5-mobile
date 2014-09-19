@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="70dp"
     android:background="@color/Wheat" >
 
     <ImageView
         android:id="@+id/house_thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:contentDescription="nada"
         android:src="@drawable/home_mileem2" />
  
@@ -15,6 +15,7 @@
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
         android:textStyle="bold"
         android:layout_toRightOf="@+id/house_thumbnail"
         android:text="direccion"
@@ -28,7 +29,7 @@
         android:layout_toRightOf="@+id/rooms"
         android:gravity="center|right"
         android:text="precio"
-        android:textColor="@color/Violet"
+        android:textColor="@color/DarkBlue"
         android:textStyle="bold" />
  
     <TextView
@@ -36,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="italic"
+        android:layout_marginLeft="2dp"
         android:layout_toRightOf="@+id/house_thumbnail"
         android:layout_below="@+id/address"
         android:text="habitaciones"/>

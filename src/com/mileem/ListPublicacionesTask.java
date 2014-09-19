@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -40,21 +41,21 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        // Create a progressdialog
-        mProgressDialog = new ProgressDialog(pFragment.getActivity());
-        // Set progressdialog title
-        mProgressDialog.setTitle("MiLEEM");
-        // Set progressdialog message
-        mProgressDialog.setMessage("Cargando Publicaciones...");
-        mProgressDialog.setIndeterminate(false);
-        // Show progressdialog
-        mProgressDialog.show();
+//        // Create a progressdialog
+//        mProgressDialog = new ProgressDialog(pFragment.getActivity());
+//        // Set progressdialog title
+//        mProgressDialog.setTitle("MiLEEM");
+//        // Set progressdialog message
+//        mProgressDialog.setMessage("Cargando Publicaciones...");
+//        mProgressDialog.setIndeterminate(false);
+//        // Show progressdialog
+//        mProgressDialog.show();
     }
 
     @Override
     protected Void doInBackground(Void... params) {
 
-    	jResponse = JSONutils.getJSONfromURL(ConfigManager.URL_ALLPUBLICATIONS);
+    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_ALLPUBLICATIONS);
     	publications = new ArrayList<Publication>();
 
     	if(jResponse.getError().isEmpty()){
@@ -67,6 +68,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 						JSONObject jsonobject = jsonarray.getJSONObject(i);
 	    				publication = new Publication();
 	    				loadPublication(publication, jsonobject);
+	    				
     				} catch (JSONException e) {
     					Log.e(TAG, "Error in parsing JSON object " + i);
     					e.printStackTrace();
@@ -100,7 +102,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     	
         pFragment.setListAdapter(adapter);
     	// Close the progressdialog
-    	mProgressDialog.dismiss();
+//    	mProgressDialog.dismiss();
     	
     	if(!jResponse.getError().isEmpty()){
     		Toast.makeText(pFragment.getActivity(), jResponse.getError(),Toast.LENGTH_LONG).show();
@@ -119,7 +121,13 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     		publication.setPrice(jsonobject.getDouble(Publication.PRICE));
     		publication.setExpenses(jsonobject.getDouble(Publication.EXPENSES));
     		publication.setAge(jsonobject.getDouble(Publication.AGE));
-
+    		JSONArray attachments = jsonobject.getJSONArray(Publication.ATTACHMENTS);
+    		
+    		for(int i=0; i < attachments.length(); i++){
+    			JSONObject image = attachments.getJSONObject(i);
+    			JSONObject url = image.getJSONObject(Publication.URL_IMAGE);
+    			publication.addUrl_Image(url.getString(Publication.URL));
+    		}
 
 		} catch (JSONException e) {
 			Log.e(TAG, "Error in parsing JSON");

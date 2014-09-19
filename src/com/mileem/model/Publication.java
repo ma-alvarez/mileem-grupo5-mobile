@@ -1,5 +1,7 @@
 package com.mileem.model;
 
+import java.util.ArrayList;
+
 public class Publication {
 	
 	public static String TRAN_TYPE = "transaction_type";
@@ -11,6 +13,9 @@ public class Publication {
 	public static String PRICE = "price";
 	public static String AGE = "age";
 	public static String PHONE = "phone";
+	public static String ATTACHMENTS = "publication_attachments";
+	public static String URL_IMAGE = "image";
+	public static String URL = "url";
 	
 	private String transaction_type;
 	private String property_type;
@@ -21,6 +26,7 @@ public class Publication {
 	private double expenses;
 	private double age;
 	private String phone;
+	private ArrayList<String> urls_image;
 	
 	public Publication(){
 		transaction_type = "def_type";
@@ -32,6 +38,8 @@ public class Publication {
 		expenses = 0;
 		age = 0;
 		phone = "0000-0000";
+		urls_image = new ArrayList<String>();
+		
 	}
 	
 	public String getTransaction_type() {
@@ -87,6 +95,14 @@ public class Publication {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	
+	public void addUrl_Image(String url){
+		this.urls_image.add(url);
+	}
+	
+	public String getUrl_Image(int pos){
+		return this.urls_image.get(pos);
 	}
 	
 	public String toString(){
