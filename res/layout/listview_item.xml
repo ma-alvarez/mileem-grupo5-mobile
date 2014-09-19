@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
- 
-    <TextView
-        android:id="@+id/addresslabel"
+    android:layout_height="fill_parent"
+    android:background="@color/Wheat" >
+
+    <ImageView
+        android:id="@+id/house_thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addresslabel" />
+        android:contentDescription="nada"
+        android:src="@drawable/home_mileem2" />
  
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/addresslabel" />
- 
-    <TextView
-        android:id="@+id/pricelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/addresslabel"
-        android:text="@string/pricelabel" />
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/house_thumbnail"
+        android:text="direccion"
+         />
  
     <TextView
         android:id="@+id/price"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/address"
-        android:layout_toRightOf="@+id/pricelabel" />
- 
-    <TextView
-        android:id="@+id/roomslabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pricelabel"
-        android:text="@string/roomslabel" />
+        android:layout_toRightOf="@+id/rooms"
+        android:gravity="center|right"
+        android:text="precio"
+        android:textColor="@color/Violet"
+        android:textStyle="bold" />
  
     <TextView
         android:id="@+id/rooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/price"
-        android:layout_toRightOf="@+id/roomslabel" />
+        android:textStyle="italic"
+        android:layout_toRightOf="@+id/house_thumbnail"
+        android:layout_below="@+id/address"
+        android:text="habitaciones"/>
+
  
 </RelativeLayout>    
 
