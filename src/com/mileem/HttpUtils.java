@@ -20,6 +20,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public class HttpUtils {
+	private static String TAG = "HttpUtils";
 
    public static JSONResponse getJSONfromURL(String url) {
        InputStream is = null;
@@ -52,7 +53,7 @@ public class HttpUtils {
            is.close();
            result = sb.toString();
        } catch (Exception e) {
-           Log.e("log_tag", "Error converting result " + e.toString());
+           Log.e(TAG, "Error converting result " + e.toString());
        }
 
        if(!result.isEmpty()){
@@ -63,7 +64,7 @@ public class HttpUtils {
     		   
     	   } catch (JSONException e) {
     		   jResponse.setError(e.getMessage());
-    		   Log.e("log_tag", "Error parsing data " + e.toString());
+    		   Log.e(TAG, "Error parsing data " + e.toString());
     	   }
        }
        return jResponse;
@@ -82,7 +83,7 @@ public class HttpUtils {
 		   return myBitmap;
 	   } catch (IOException e) {
 		   e.printStackTrace();
-		   Log.e("log_tag", "Error fetching img from URL:  " + src);
+		   Log.e(TAG, "Error fetching img from URL:  " + src);
 		   return null;
 	   }
 

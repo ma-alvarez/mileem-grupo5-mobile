@@ -41,7 +41,7 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		return null;
+		return lista_publicaciones.get(position);
 	}
 
 	@Override
@@ -81,33 +81,6 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
         rooms.setText(Integer.toString(publicacion.getNumber_of_rooms()) + " Amb.");
 		
 		loadBitmap(icon, publicacion.getUrl_Image(0));
-		
-        // Capture position and set results to the ImageViewger
-        // Passes flag images URL into ImageLoader.class
-        //imageLoader.DisplayImage(resultp.get(MainActivity.FLAG), flag);
-        // Capture ListView item click
-        itemView.setOnClickListener(new OnClickListener() {
-
-        	@Override
-        	public void onClick(View arg0) {
-        		Log.v( this.getClass().toString() , "Click on");
-        		//Intent intent = new Intent(context, SingleItemView.class);
-        		// Get the position
-        		//resultp = data.get(position);
-        		//Intent intent = new Intent(context, SingleItemView.class);
-        		// Pass all data rank
-        		//intent.putExtra("rank", resultp.get(MainActivity.RANK));
-        		// Pass all data country
-        		//intent.putExtra("country", resultp.get(MainActivity.COUNTRY));
-        		// Pass all data population
-        		//intent.putExtra("population",resultp.get(MainActivity.POPULATION));
-        		// Pass all data flag
-        		//intent.putExtra("flag", resultp.get(MainActivity.FLAG));
-        		// Start SingleItemView Class
-        		//context.startActivity(intent);
-
-        	}
-        });
         return itemView;
 	}
 	

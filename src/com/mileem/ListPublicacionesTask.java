@@ -84,13 +84,8 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void args) {
     	
+    	pFragment.setPublicaciones(publications);
 //    	PublicationsFragment publicationFragment = new PublicationsFragment();
-    	
-//    	FragmentManager fragmentManager = ((Activity)ctx).getFragmentManager();
-//        fragmentManager.beginTransaction().
-//        add(R.id.container, publicationFragment)
-//        .commit();
-        
 
     	// Locate the listview in listview_main.xml
     	//listview = (ListView) ((Activity)ctx).findViewById(R.id.listview);

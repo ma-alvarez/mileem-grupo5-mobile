@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/address"
         android:layout_toRightOf="@+id/rooms"
+        android:layout_marginRight="2dp"
         android:gravity="center|right"
         android:text="precio"
         android:textColor="@color/DarkBlue"
