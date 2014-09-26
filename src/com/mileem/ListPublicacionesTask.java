@@ -91,9 +91,6 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     	//listview = (ListView) ((Activity)ctx).findViewById(R.id.listview);
 //    	// Pass the results into ListViewAdapter.java
         adapter = new ListPublicacionesViewAdapter(pFragment.getActivity(), publications);
-    	//adapter = new ArrayAdapter<Publication>(ctx, android.R.layout.simple_list_item_1, publications);
-//    	// Set the adapter to the ListView
-//    	listview.setAdapter(adapter);
     	
         pFragment.setListAdapter(adapter);
     	// Close the progressdialog
