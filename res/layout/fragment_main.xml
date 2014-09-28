@@ -156,7 +156,7 @@
             android:layout_alignRight="@+id/button_fecha_pub_to"
             android:layout_toRightOf="@+id/spinner_ambientes"
             android:gravity="center"
-            android:text="Orden" />
+            android:text="Órden" />
 
         <Spinner
             android:id="@+id/spinner_orden"
@@ -212,6 +212,6 @@
         android:layout_alignLeft="@+id/busqueda_avanzada"
         android:layout_below="@+id/button_buscar"
         android:layout_marginTop="10dp"
-        android:text="Busqueda Avanzada" />
+        android:text="Búsqueda Avanzada" />
 
 </RelativeLayout>
