@@ -26,6 +26,19 @@
         <item>Depto.</item>
     </string-array>
     
+    <string-array name="rooms">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4+</item>
+    </string-array>
+    
+    <string-array name="order">
+        <item>Relevancia</item>
+        <item>Fecha de Publicación</item>
+        <item>Precio</item>
+    </string-array>    
+    
     <string-array name="neighbourhoods">
         <item>Agronomía</item>
         <item>Almagro</item>

@@ -28,14 +28,13 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     private ProgressDialog mProgressDialog;
     private ArrayList<Publication> publications;
 	private JSONResponse jResponse;
-	private ListView listview;
-	//private ArrayAdapter<Publication> adapter;
 	private ListPublicacionesViewAdapter adapter;
-	//private ArrayList<HashMap<String, String>> arraylist;
+	private String query;
 
     
     public ListPublicacionesTask(PublicationsFragment fragment) {
 		this.pFragment = fragment;
+		query = fragment.getPublicationsQuery();
 	}
     
     @Override
@@ -55,7 +54,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
 
-    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_ALLPUBLICATIONS);
+    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_SEARCH + query);
     	publications = new ArrayList<Publication>();
 
     	if(jResponse.getError().isEmpty()){

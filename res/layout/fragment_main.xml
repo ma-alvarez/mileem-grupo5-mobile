@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="@color/LightSteelBlue"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -74,26 +74,103 @@
         android:text="Todas" />
 
     <RelativeLayout
+        android:id="@+id/busqueda_avanzada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_selec_loc"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/button_localidades"
-        android:layout_below="@+id/button_buscar"
-        android:layout_marginTop="25dp" >
+        android:layout_below="@+id/text_busq_avanzada" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/text_superficie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_below="@+id/text_ambientes"
+            android:layout_marginTop="15dp"
+            android:text="Superficie" />
+
+        <RelativeLayout
+            android:id="@+id/RSeekBarSup"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text_superficie"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/text_ambientes" >
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/text_ambientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/spinner_ambientes"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/spinner_ambientes"
+            android:gravity="center"
+            android:text="Ambientes" />
+
+        <TextView
+            android:id="@+id/sup_de_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/text_superficie"
+            android:text="De: A:" />
+
+        <Spinner
+            android:id="@+id/spinner_ambientes"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
-            android:text="Busqueda Avanzada" />
+            android:layout_toRightOf="@+id/text_ambientes"
+            android:entries="@array/rooms"
+            android:gravity="right" />
+
+        <Button
+            android:id="@+id/button_fecha_pub_from"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sup_de_a"
+            android:text="Publicado Desde" />
+
+        <Button
+            android:id="@+id/button_fecha_pub_to"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="false"
+            android:layout_below="@+id/sup_de_a"
+            android:layout_toRightOf="@+id/button_fecha_pub_from"
+            android:text="Publicado Hasta" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/text_ambientes"
+            android:layout_alignBottom="@+id/text_ambientes"
+            android:layout_alignRight="@+id/button_fecha_pub_to"
+            android:layout_toRightOf="@+id/spinner_ambientes"
+            android:gravity="center"
+            android:text="Orden" />
+
+        <Spinner
+            android:id="@+id/spinner_orden"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:entries="@array/order"
+            android:gravity="right" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/seekBar1"
+        android:id="@+id/RSeekBarPrecios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/button_localidades"
@@ -105,7 +182,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/precio_de"
+        android:layout_below="@+id/precio_hasta"
         android:layout_centerHorizontal="true"
         android:text="Buscar" />
 
@@ -113,19 +190,28 @@
         android:id="@+id/precio_de"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/seekBar1"
+        android:layout_alignBottom="@+id/RSeekBarPrecios"
         android:layout_alignLeft="@+id/text_selec_loc"
-        android:layout_alignTop="@+id/seekBar1"
+        android:layout_alignTop="@+id/RSeekBarPrecios"
         android:gravity="left"
-        android:text="De: "/>
-    
-        <TextView
+        android:text="De: " />
+
+    <TextView
         android:id="@+id/precio_hasta"
-        android:layout_width="75dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/precio_de"
         android:layout_below="@+id/precio_de"
         android:gravity="left"
         android:text="A: " />
+
+    <TextView
+        android:id="@+id/text_busq_avanzada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/busqueda_avanzada"
+        android:layout_below="@+id/button_buscar"
+        android:layout_marginTop="10dp"
+        android:text="Busqueda Avanzada" />
 
 </RelativeLayout>
