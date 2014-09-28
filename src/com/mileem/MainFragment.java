@@ -48,6 +48,7 @@ public class MainFragment extends Fragment{
 	private TextView sup_from_to;
 	private TextView advanced_search;
 
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
