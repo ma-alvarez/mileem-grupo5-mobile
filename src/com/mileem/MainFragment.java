@@ -7,11 +7,11 @@ import java.util.Calendar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,7 +120,7 @@ public class MainFragment extends Fragment{
 				fragment.AppendAdditionalParameters(queryParams);
 				
 		    	// update the main content by replacing fragments
-		        FragmentManager fragmentManager = getFragmentManager();
+		        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
 		        fragmentManager.beginTransaction()
 		        .replace(R.id.container, fragment)
 		        .addToBackStack("busqueda")

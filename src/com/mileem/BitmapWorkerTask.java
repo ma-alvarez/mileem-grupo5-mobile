@@ -9,19 +9,26 @@ import android.widget.ImageView;
 class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
     private final WeakReference<ImageView> imageViewReference;
     private String url;
+    private Boolean icon;
 
-    public BitmapWorkerTask(ImageView imageView) {
+    public BitmapWorkerTask(ImageView imageView, Boolean icon) {
         // Use a WeakReference to ensure the ImageView can be garbage collected
         imageViewReference = new WeakReference<ImageView>(imageView);
+        this.icon = icon;
     }
 
     // Decode image in background.
     @Override
     protected Bitmap doInBackground(String... params) {
     	url = params[0];
-		Bitmap icon_bitmap = HttpUtils.getBitmapFromURL(ConfigManager.URL_SERVER + url);
-		
-		return icon_bitmap;
+    	Bitmap bitmap;
+    	if (this.icon){
+    		bitmap = HttpUtils.getIconFromURL(ConfigManager.URL_SERVER + url);
+    	}
+    	else {
+    		bitmap = HttpUtils.getBitmapFromURL(ConfigManager.URL_SERVER + url);
+    	}
+		return bitmap;
     }
 
     // Once complete, see if ImageView is still around and set bitmap.
