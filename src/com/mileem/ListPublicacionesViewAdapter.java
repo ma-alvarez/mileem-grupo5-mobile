@@ -53,7 +53,7 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-        TextView address;
+        TextView zone;
         TextView price;
         TextView rooms;
         ImageView icon;
@@ -65,7 +65,7 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
 
         publicacion = lista_publicaciones.get(position);
         // Locate the TextViews in listview_item.xml
-        address = (TextView) itemView.findViewById(R.id.address);
+        zone = (TextView) itemView.findViewById(R.id.text_barrio_itemlist);
         price = (TextView) itemView.findViewById(R.id.price);
         rooms = (TextView) itemView.findViewById(R.id.rooms);
 
@@ -73,14 +73,18 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
         icon = (ImageView) itemView.findViewById(R.id.house_thumbnail);
 
         // Capture position and set results to the TextViews
-        address.setText(publicacion.getAddress());
-        DecimalFormat df = new DecimalFormat( "#,###,###,##0" );
+        zone.setText(publicacion.getZone());
+        
+        DecimalFormat df = new DecimalFormat("#,###,###,##0" );
+        df.getDecimalFormatSymbols().setGroupingSeparator('.');
         
         //TODO: currency type must be setted in the model and sent in the json
         price.setText( MainActivity.CURRENCY_SYMBOL + " " + df.format(publicacion.getPrice()));
         rooms.setText(Integer.toString(publicacion.getNumber_of_rooms()) + " Amb.");
-		
-		loadBitmap(icon, publicacion.getUrl_Image(0));
+
+        if(publicacion.getUrls_image().size() > 0)
+        	loadBitmap(icon, publicacion.getUrl_Image(0));
+        
         return itemView;
 	}
 	

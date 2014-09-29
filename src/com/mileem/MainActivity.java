@@ -16,7 +16,7 @@ public class MainActivity extends FragmentActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
 
-    static String CURRENCY_SYMBOL = "$";
+    static String CURRENCY_SYMBOL = "AR$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

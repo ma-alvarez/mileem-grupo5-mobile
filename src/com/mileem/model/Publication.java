@@ -7,6 +7,7 @@ public class Publication {
 	public static String TRAN_TYPE = "transaction_type";
 	public static String PROP_TYPE = "property_type";
 	public static String ADDRESS = "address";
+	public static String ZONE = "zone";
 	public static String AREA = "area";
 	public static String NUM_OF_ROOMS = "number_of_rooms";
 	public static String EXPENSES = "expenses";
@@ -20,6 +21,7 @@ public class Publication {
 	private String transaction_type;
 	private String property_type;
 	private String address;
+	private String zone;
 	private int area;
 	private int number_of_rooms;
 	private double price;
@@ -128,5 +130,13 @@ public class Publication {
         
 		return sb.toString();
 		
+	}
+
+	public String getZone() {
+		return zone;
+	}
+
+	public void setZone(String zone) {
+		this.zone = zone;
 	}
 }

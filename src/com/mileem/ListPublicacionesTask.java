@@ -106,6 +106,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     		publication.setTransaction_type(jsonobject.getString(Publication.TRAN_TYPE));
     		publication.setProperty_type(jsonobject.getString(Publication.PROP_TYPE));
     		publication.setAddress(jsonobject.getString(Publication.ADDRESS));
+    		publication.setZone(jsonobject.getString(Publication.ZONE));
     		publication.setNumber_of_rooms(jsonobject.getInt(Publication.NUM_OF_ROOMS));
     		publication.setArea(jsonobject.getInt(Publication.AREA));
     		publication.setPhone(jsonobject.getString(Publication.PHONE));
