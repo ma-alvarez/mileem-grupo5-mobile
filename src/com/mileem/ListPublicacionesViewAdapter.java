@@ -85,7 +85,7 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
 	}
 	
 	public void loadBitmap(ImageView imageView, String url) {
-	    BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+	    BitmapWorkerTask task = new BitmapWorkerTask(imageView, true);
 	    task.execute(url);
 	}
 

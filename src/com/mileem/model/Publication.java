@@ -42,6 +42,14 @@ public class Publication {
 		
 	}
 	
+	public ArrayList<String> getUrls_image() {
+		return urls_image;
+	}
+
+	public void setUrls_image(ArrayList<String> urls_image) {
+		this.urls_image = urls_image;
+	}
+	
 	public String getTransaction_type() {
 		return transaction_type;
 	}

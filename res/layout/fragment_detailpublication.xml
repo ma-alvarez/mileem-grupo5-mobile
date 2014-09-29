@@ -3,11 +3,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-        <TextView
-        android:id="@+id/algo"
-        android:text="Rellenar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/contact"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="Contactar" />
+
+        <Button
+            android:id="@+id/telephone"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="Ver Teléfono" />
+               
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_weight="0.42"
+            android:background="#000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="direccion"
+                android:textStyle="bold" />
+            
+            <TextView
+                android:id="@+id/area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="superficie"
+                android:textStyle="bold" />
+            
+              <TextView
+                android:id="@+id/number_of_rooms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ambientes"
+                android:textStyle="bold" />  
+                      
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="antiguedad"
+                android:textStyle="bold" />
+            
+             
+   	 	</LinearLayout>
+    
 </LinearLayout>

@@ -70,7 +70,7 @@ public class HttpUtils {
        return jResponse;
    }
 
-   public static Bitmap getBitmapFromURL(String src){
+   public static Bitmap getIconFromURL(String src){
 	   try {
 		   URL url = new URL(src);
 		   HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -80,6 +80,25 @@ public class HttpUtils {
 		   Bitmap myBitmap = BitmapFactory.decodeStream(input);
 
 		   myBitmap = Bitmap.createScaledBitmap(myBitmap, 100, 100, false);
+		   return myBitmap;
+	   } catch (IOException e) {
+		   e.printStackTrace();
+		   Log.e(TAG, "Error fetching img from URL:  " + src);
+		   return null;
+	   }
+
+   }
+   
+   public static Bitmap getBitmapFromURL(String src){
+	   try {
+		   URL url = new URL(src);
+		   HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		   connection.setDoInput(true);
+		   connection.connect();
+		   InputStream input = connection.getInputStream();
+		   Bitmap myBitmap = BitmapFactory.decodeStream(input);
+
+		   myBitmap = Bitmap.createScaledBitmap(myBitmap, 300, 200, false);
 		   return myBitmap;
 	   } catch (IOException e) {
 		   e.printStackTrace();
