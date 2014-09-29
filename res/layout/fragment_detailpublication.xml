@@ -37,10 +37,24 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/type_op"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tipo_propiedad"
+                android:textStyle="bold" />
+            
+            <TextView
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="direccion"
+                android:textStyle="bold" />
+            
+            <TextView
+                android:id="@+id/zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="barrio"
                 android:textStyle="bold" />
             
             <TextView

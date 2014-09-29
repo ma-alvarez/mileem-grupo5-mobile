@@ -34,13 +34,17 @@ public class DetailPublicationFragment extends Fragment{
         pager.setAdapter(adapter);
 	   
         // Locate the TextViews in layout
+        TextView type = (TextView) view.findViewById(R.id.type_op);
         TextView address = (TextView) view.findViewById(R.id.address);
+        TextView zone = (TextView) view.findViewById(R.id.zone);
         TextView area = (TextView) view.findViewById(R.id.area);
         TextView age = (TextView) view.findViewById(R.id.age);
         TextView rooms = (TextView) view.findViewById(R.id.number_of_rooms);
 
         // Capture position and set results to the TextViews
+        type.setText(publication.getProperty_type());
         address.setText(publication.getAddress());
+        zone.setText(publication.getZone());
         area.setText(Integer.toString(publication.getArea()) + " m2");
         age.setText(publication.getAge() + " Años");      
         rooms.setText(Integer.toString(publication.getNumber_of_rooms()) + " Ambientes");
