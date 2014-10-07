@@ -8,11 +8,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,7 +30,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 
 	private String TAG = this.getClass().getSimpleName();
 	private PublicationsFragment pFragment;
-    private ProgressDialog mProgressDialog;
+    private NoResultsDialog mNoticeDialog;
     private ArrayList<Publication> publications;
 	private JSONResponse jResponse;
 	private ListPublicacionesViewAdapter adapter;
@@ -83,20 +88,27 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void args) {
     	
-    	pFragment.setPublicaciones(publications);
-//    	PublicationsFragment publicationFragment = new PublicationsFragment();
+    	if (publications.isEmpty()){
+    		/*Toast.makeText(
+    			pFragment.getActivity(), 
+				"No hay Publicaciones", 
+				Toast.LENGTH_LONG).show();*/
+    		
+    		mNoticeDialog = new NoResultsDialog();
+    		mNoticeDialog.show(pFragment.getActivity().getSupportFragmentManager(), 
+    							"NoResultsDialogFragment");  		
+    	}
+    	else{
+    		pFragment.setPublicaciones(publications);
 
-    	// Locate the listview in listview_main.xml
-    	//listview = (ListView) ((Activity)ctx).findViewById(R.id.listview);
 //    	// Pass the results into ListViewAdapter.java
-        adapter = new ListPublicacionesViewAdapter(pFragment.getActivity(), publications);
+    		adapter = new ListPublicacionesViewAdapter(pFragment.getActivity(), publications);
     	
-        pFragment.setListAdapter(adapter);
-    	// Close the progressdialog
-//    	mProgressDialog.dismiss();
+    		pFragment.setListAdapter(adapter);
     	
-    	if(!jResponse.getError().isEmpty()){
-    		Toast.makeText(pFragment.getActivity(), jResponse.getError(),Toast.LENGTH_LONG).show();
+    		if(!jResponse.getError().isEmpty()){
+    			Toast.makeText(pFragment.getActivity(), jResponse.getError(),Toast.LENGTH_LONG).show();
+    		}
     	}
     }
 
@@ -126,5 +138,24 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 			e.printStackTrace();
 		} 
     }
+    
+    private class NoResultsDialog extends DialogFragment {
+        	
+    	@Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("No hay publicaciones")
+                   .setNegativeButton("Volver", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int id) {
+                    	   dialog.dismiss();
+                    	   ListPublicacionesTask.this.pFragment.getFragmentManager().popBackStack();
+                       }
+                   });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
+    
 
 }
