@@ -9,6 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mileem.R;
+import com.mileem.fragments.NavigationDrawerFragment;
+import com.mileem.fragments.NewSearchFragment;
+import com.mileem.fragments.SearchFragment;
+import com.pixate.freestyle.PixateFreestyle;
 
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -16,13 +20,15 @@ public class MainActivity extends FragmentActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
 
-    static String CURRENCY_SYMBOL = "AR$";
+    public static String CURRENCY_SYMBOL = "AR$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        PixateFreestyle.init(this);
+        
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -35,7 +41,7 @@ public class MainActivity extends FragmentActivity
     	// update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container,new MainFragment())
+                .replace(R.id.container,new NewSearchFragment())
                 .commit();
         
     }

@@ -1,0 +1,8 @@
+/* ActionBar styling (done directly on the View with the 'action_bar' ID */
+#action_bar {
+	background-color: orange;
+}
+
+#button_localidades {
+  background-color: linear-gradient(blue,white);
+}

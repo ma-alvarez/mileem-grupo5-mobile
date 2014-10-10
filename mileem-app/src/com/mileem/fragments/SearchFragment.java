@@ -1,4 +1,4 @@
-package com.mileem;
+package com.mileem.fragments;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -23,9 +23,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.mileem.R;
+import com.mileem.ConfigManager;
+import com.mileem.Fx;
+import com.mileem.MainActivity;
+import com.mileem.RangeSeekBar;
 import com.mileem.RangeSeekBar.OnRangeSeekBarChangeListener;
+import com.pixate.freestyle.PixateFreestyle;
 
-public class MainFragment extends Fragment{
+public class SearchFragment extends Fragment{
 	
 	private String TAG = this.getClass().getSimpleName();
 	private Button button_neighbourhoods;

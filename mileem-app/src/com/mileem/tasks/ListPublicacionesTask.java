@@ -1,4 +1,4 @@
-package com.mileem;
+package com.mileem.tasks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +19,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mileem.R;
+import com.mileem.ConfigManager;
+import com.mileem.HttpUtils;
+import com.mileem.JSONResponse;
+import com.mileem.ListPublicacionesViewAdapter;
+import com.mileem.fragments.PublicationsFragment;
 import com.mileem.model.Publication;
 
 public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {

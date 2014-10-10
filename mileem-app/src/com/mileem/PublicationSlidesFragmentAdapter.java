@@ -4,6 +4,7 @@ package com.mileem;
 import java.util.ArrayList;
 
 import com.example.mileem.R;
+import com.mileem.fragments.PublicationSlidesFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

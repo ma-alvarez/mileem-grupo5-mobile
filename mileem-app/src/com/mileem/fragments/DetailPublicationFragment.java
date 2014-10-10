@@ -1,4 +1,4 @@
-package com.mileem;
+package com.mileem.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mileem.R;
+import com.mileem.PublicationSlidesFragmentAdapter;
 import com.mileem.model.Publication;
 
 public class DetailPublicationFragment extends Fragment{
