@@ -96,4 +96,6 @@ public class PublicationsFragment extends ListFragment {
 	public String getPublicationsQuery(){
 		return query;
 	}
+	
+	
 }
