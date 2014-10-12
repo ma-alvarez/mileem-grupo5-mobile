@@ -13,12 +13,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.mileem.R;
+import com.mileem.IPlaceableFragment;
 import com.mileem.LayerEnablingAnimatorListener;
 
 public class NewSearchFragment extends Fragment {
@@ -26,10 +25,12 @@ public class NewSearchFragment extends Fragment {
 	private final Rect mTmpRect = new Rect();
 
 	private FrameLayout mMainContainer, mEditModeContainer, mEditFragmentContainer;
-	private BootstrapButton mTv1, mTv2, mTv3;
+	private BootstrapButton bb_operation, bb_house_type, bb_zones, bb_price;
 	private RelativeLayout mFirstGroup;
-	private ArrayList<View> buttons;
-	private ArrayList<Fragment> fragments;
+	private View search_bar;
+	private ArrayList<View> sliding_views;
+	private ArrayList<IPlaceableFragment> fragments;
+	private boolean editMode = false;
 
 	private TimeInterpolator ANIMATION_INTERPOLATOR = new DecelerateInterpolator();
 	private int ANIMATION_DURATION = 300;
@@ -42,24 +43,24 @@ public class NewSearchFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.newsearch_fragment, container, false);
 		
 		retrieveViews(rootView);
-		mHalfHeight = 400;
-		mEditModeContainer.setTranslationY(mHalfHeight);
-		mEditModeContainer.setAlpha(0f);
+		mHalfHeight = 200;
+		//mEditModeContainer.setTranslationY(mHalfHeight);
+		//mEditModeContainer.setAlpha(0f);
 		
-		fragments = new ArrayList<Fragment>();
+		fragments = new ArrayList<IPlaceableFragment>();
 		
-		Fragment f_ejemplo = new FragmentEjemplo();
+		IPlaceableFragment f_ejemplo = new FragmentEjemplo();
 		fragments.add(f_ejemplo);
-		Fragment operation_fragment = new FragmentOperationType();
+		IPlaceableFragment operation_fragment = new FragmentOperationType();
 		fragments.add(operation_fragment);
 		f_ejemplo = new FragmentDatePicker();
 		fragments.add(f_ejemplo);
 		
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        for(Fragment fragment : fragments){
+        for(IPlaceableFragment fragment : fragments){
             fragmentManager.beginTransaction()
-            .add(R.id.edit_mode_fragment_container_full,fragment)
-            .hide(fragment)
+            .add(fragment.getContainer(),fragment.getFragment())
+            .hide(fragment.getFragment())
             .commit();
         }
 
@@ -70,23 +71,28 @@ public class NewSearchFragment extends Fragment {
 	private void retrieveViews(View rootView) {
 		mMainContainer = (FrameLayout) rootView.findViewById(R.id.main_container);
 		mFirstGroup = (RelativeLayout) rootView.findViewById(R.id.scrollview_container);
-
-		buttons = new ArrayList<View>(); 
+		search_bar = rootView.findViewById(R.id.barra_buscar);
 		
-		mTv1 = (BootstrapButton) rootView.findViewById(R.id.btnBig);
-		mTv2 = (BootstrapButton) rootView.findViewById(R.id.tv2);
-		mTv3 = (BootstrapButton) rootView.findViewById(R.id.tv3);
 		
-		buttons.add(mTv1);
-		buttons.add(mTv2);
-		buttons.add(mTv3);
+		sliding_views = new ArrayList<View>(); 
 		
-		for(int i=0; i < buttons.size(); i++){
-			buttons.get(i).setOnClickListener(new myOnclickListener(i));
+		bb_operation = (BootstrapButton) rootView.findViewById(R.id.btnBig);
+		bb_house_type = (BootstrapButton) rootView.findViewById(R.id.tv2);
+		bb_zones = (BootstrapButton) rootView.findViewById(R.id.tv3);
+		bb_price = (BootstrapButton) rootView.findViewById(R.id.tv4);
+		
+		sliding_views.add(bb_operation);
+		sliding_views.add(bb_house_type);
+		sliding_views.add(bb_zones);
+		sliding_views.add(bb_price);
+		sliding_views.add(search_bar);
+		
+		for(int i=0; i < sliding_views.size(); i++){
+			sliding_views.get(i).setOnClickListener(new myOnclickListener(i));
 		}
 
 
-		mEditModeContainer = (FrameLayout) rootView.findViewById(R.id.edit_mode_container_main);
+//		mEditModeContainer = (FrameLayout) rootView.findViewById(R.id.edit_mode_container_main);
 		mEditFragmentContainer = (FrameLayout) rootView.findViewById(R.id.edit_mode_fragment_container_full);
 		
 	}
@@ -100,44 +106,50 @@ public class NewSearchFragment extends Fragment {
 		
 		@Override
 		public void onClick(View v) {
-			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-			if(sw % 2 != 0){
-				fragmentManager.beginTransaction()
-				.hide(fragments.get(i))
-				.commit();
-				contraer(v,i);
-			}else{
-				fragmentManager.beginTransaction()
-				.show(fragments.get(i))
-				.commit();
-				expander(v,i);
+
+			if(fragments.size() > i){
+				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+				View containerView = getActivity().findViewById(fragments.get(i).getContainer());
+
+				if(sw % 2 != 0){
+					fragmentManager.beginTransaction()
+					.hide(fragments.get(i).getFragment())
+					.commit();
+					contraer(v,containerView,i);
+					editMode = false;
+				}else{
+					fragmentManager.beginTransaction()
+					.show(fragments.get(i).getFragment())
+					.commit();
+					expander(v,containerView,i);
+					editMode = true;
+				}
+				sw++;
+
 			}
-			sw++;
-
 		}
-
 	}
 	
-	private void expander(View v, int index){
+	private void expander(View v, View containerView, int index){
 		focusOn(v, mFirstGroup, true);
-		for(int i= index; i < buttons.size();i++){
+		for(int i= index; i < sliding_views.size();i++){
 			
-			if(i + 1 < buttons.size())
-				fadeOutToBottom(buttons.get(i + 1), true);
+			if(i + 1 < sliding_views.size())
+				fadeOutToBottom(sliding_views.get(i + 1), containerView, true);
 		}
-
+		
 		//stickTo(mFirstSpacer, viewFrom, true);
-		slideInToTop(mEditModeContainer, true);
-		mEditModeContainer.setVisibility(View.VISIBLE);
+		slideInToTop(containerView, true);
+		containerView.setVisibility(View.VISIBLE);
 	}
 	
-	private void contraer(View v, int index){
-		slideOutToBottom(mEditModeContainer, true);
+	private void contraer(View v, View containerView, int index){
+		slideOutToBottom(containerView, true);
 		//unstickFrom(mFirstSpacer, viewFrom, true);
-		for(int i= index; i < buttons.size();i++){
+		for(int i= index; i < sliding_views.size();i++){
 			
-			if(i + 1 < buttons.size())
-				fadeInToTop(buttons.get(i + 1), true);
+			if(i + 1 < sliding_views.size())
+				fadeInToTop(sliding_views.get(i + 1),containerView,true);
 		}
 		unfocus(v, mFirstGroup, true);
 	}
@@ -164,11 +176,11 @@ public class NewSearchFragment extends Fragment {
 				start();
 	}
 
-	private void fadeOutToBottom(View v, boolean animated) {
-		
+	private void fadeOutToBottom(View v, View containerView, boolean animated) {
+		int dp = (int) getResources().getDimension(R.dimen.margin);
 		v.animate().
 				//translationYBy(mHalfHeight).
-		translationYBy(mEditFragmentContainer.getHeight()).
+		translationYBy(containerView.getHeight()+ dp).
 				//alpha(0).
 				setDuration(animated ? ANIMATION_DURATION : 0).
 				setInterpolator(ANIMATION_INTERPOLATOR).
@@ -176,10 +188,11 @@ public class NewSearchFragment extends Fragment {
 				start();
 	}
 
-	private void fadeInToTop(View v, boolean animated) {		
+	private void fadeInToTop(View v, View containerView, boolean animated) {		
+		int dp = (int) getResources().getDimension(R.dimen.margin);
 		v.animate().
 				//translationYBy(-mHalfHeight).
-				translationYBy(-mEditFragmentContainer.getHeight()).
+				translationYBy(-(containerView.getHeight()+dp)).
 				//alpha(1).
 				setDuration(animated ? ANIMATION_DURATION : 0).
 				setInterpolator(ANIMATION_INTERPOLATOR).

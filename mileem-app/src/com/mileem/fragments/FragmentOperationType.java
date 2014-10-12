@@ -7,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mileem.R;
+import com.mileem.IPlaceableFragment;
 
-public class FragmentOperationType extends Fragment {
+public class FragmentOperationType extends Fragment implements IPlaceableFragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,5 +23,15 @@ public class FragmentOperationType extends Fragment {
 			View view = inflater.inflate(R.layout.operation_type_layout,
 	                container, false);
 			return view;
+	}
+
+	@Override
+	public int getContainer() {
+		return R.id.edit_mode_fragment_container_small;
+	}
+
+	@Override
+	public Fragment getFragment() {
+		return this;
 	}
 }

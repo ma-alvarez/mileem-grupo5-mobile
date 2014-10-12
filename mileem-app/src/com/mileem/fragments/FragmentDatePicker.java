@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mileem.R;
+import com.mileem.IPlaceableFragment;
 import com.squareup.timessquare.CalendarPickerView;
 import com.squareup.timessquare.CalendarPickerView.SelectionMode;
 
-public class FragmentDatePicker extends Fragment {
+public class FragmentDatePicker extends Fragment implements IPlaceableFragment{
 	
 	private CalendarPickerView calendar;
 	
@@ -46,5 +47,15 @@ public class FragmentDatePicker extends Fragment {
 		            .withSelectedDates(dates);
 			
 			return view;
+	}
+
+	@Override
+	public int getContainer() {
+		return R.id.edit_mode_fragment_container_full;
+	}
+
+	@Override
+	public Fragment getFragment() {
+		return this;
 	}
 }
