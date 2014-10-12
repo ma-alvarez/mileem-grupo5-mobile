@@ -1,12 +1,18 @@
 package com.mileem;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mileem.R;
 import com.mileem.model.Publication;
@@ -16,10 +22,16 @@ public class DetailPublicationFragment extends Fragment{
 	private Publication publication;
 	private PublicationSlidesFragmentAdapter adapter;
     private ViewPager pager;
+    private ImageButton call;
+    private ImageButton mail;
     //private PageIndicator indicator;
 	
 	public DetailPublicationFragment(Publication publication) {
 		this.publication = publication;
+		this.adapter = null;
+		this.pager = null;
+		this.call = null;
+		this.mail = null;
 	}
 	
 	@Override
@@ -49,8 +61,67 @@ public class DetailPublicationFragment extends Fragment{
         age.setText(publication.getAge() + " Años");      
         rooms.setText(Integer.toString(publication.getNumber_of_rooms()) + " Ambientes");
         
+        if (publication.getPhone().isEmpty()){
+        
+        	call = (ImageButton) view.findViewById(R.id.callButton);
+        
+			call.setOnClickListener(new OnClickListener() {
+ 
+				@Override
+				public void onClick(View arg0) {
+ 
+					/*Toast.makeText(getActivity(),
+							"CallButton is clicked!", Toast.LENGTH_SHORT).show();*/
+			   
+					Intent callIntent = new Intent(Intent.ACTION_CALL);
+					callIntent.setData(Uri.parse("tel:"+publication.getPhone()));
+					startActivity(callIntent);
+ 
+				}
+ 
+			});
+        }
+        
+		mail = (ImageButton) view.findViewById(R.id.mailButton);
+        
+		mail.setOnClickListener(new OnClickListener() {
+ 
+			@Override
+			public void onClick(View arg0) {
+ 
+			   /*Toast.makeText(getActivity(),
+				"MailButton is clicked!", Toast.LENGTH_SHORT).show();*/
+			   sendEmail();
+ 
+			}
+ 
+		});
+        
         return view;
 		//return inflater.inflate(R.layout.fragment_detailpublication, container, false);
 
 	}
+	
+	protected void sendEmail() {
+	      Log.i("Envio de Correo", "");
+
+	      String[] TO = {publication.getUser_email()};
+	      Intent emailIntent = new Intent(Intent.ACTION_SEND);
+	      emailIntent.setData(Uri.parse("mailto:"));
+	      emailIntent.setType("text/plain");
+
+
+	      emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+	      emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Consulta sobre anuncio");
+	      emailIntent.putExtra(Intent.EXTRA_TEXT, "Escriba su mensaje");
+
+	      try {
+	         startActivity(Intent.createChooser(emailIntent, "Enviar Correo..."));
+	         //finish();
+	         Log.i("Envio de correo finalizado...", "");
+	      } catch (android.content.ActivityNotFoundException ex) {
+	         Toast.makeText(getActivity(), 
+	         "No hay un cliente de correo configurado.", Toast.LENGTH_SHORT).show();
+	      }
+	   }
 }
