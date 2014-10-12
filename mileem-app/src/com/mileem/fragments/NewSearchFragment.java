@@ -26,8 +26,7 @@ public class NewSearchFragment extends Fragment {
 	private final Rect mTmpRect = new Rect();
 
 	private FrameLayout mMainContainer, mEditModeContainer, mEditFragmentContainer;
-	private TextView mTv2, mTv3;
-	private BootstrapButton mTv1;
+	private BootstrapButton mTv1, mTv2, mTv3;
 	private RelativeLayout mFirstGroup;
 	private ArrayList<View> buttons;
 	private ArrayList<Fragment> fragments;
@@ -40,7 +39,7 @@ public class NewSearchFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View rootView = inflater.inflate(R.layout.fragment_test, container, false);
+		View rootView = inflater.inflate(R.layout.newsearch_fragment, container, false);
 		
 		retrieveViews(rootView);
 		mHalfHeight = 400;
@@ -59,7 +58,7 @@ public class NewSearchFragment extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         for(Fragment fragment : fragments){
             fragmentManager.beginTransaction()
-            .add(R.id.edit_mode_fragment_container,fragment)
+            .add(R.id.edit_mode_fragment_container_full,fragment)
             .hide(fragment)
             .commit();
         }
@@ -75,8 +74,8 @@ public class NewSearchFragment extends Fragment {
 		buttons = new ArrayList<View>(); 
 		
 		mTv1 = (BootstrapButton) rootView.findViewById(R.id.btnBig);
-		mTv2 = (TextView) rootView.findViewById(R.id.tv2);
-		mTv3 = (TextView) rootView.findViewById(R.id.tv3);
+		mTv2 = (BootstrapButton) rootView.findViewById(R.id.tv2);
+		mTv3 = (BootstrapButton) rootView.findViewById(R.id.tv3);
 		
 		buttons.add(mTv1);
 		buttons.add(mTv2);
@@ -87,8 +86,8 @@ public class NewSearchFragment extends Fragment {
 		}
 
 
-		mEditModeContainer = (FrameLayout) rootView.findViewById(R.id.edit_mode_container);
-		mEditFragmentContainer = (FrameLayout) rootView.findViewById(R.id.edit_mode_fragment_container);
+		mEditModeContainer = (FrameLayout) rootView.findViewById(R.id.edit_mode_container_main);
+		mEditFragmentContainer = (FrameLayout) rootView.findViewById(R.id.edit_mode_fragment_container_full);
 		
 	}
 
@@ -167,11 +166,9 @@ public class NewSearchFragment extends Fragment {
 
 	private void fadeOutToBottom(View v, boolean animated) {
 		
-		LinearLayout ll = (LinearLayout) getActivity().findViewById(R.id.edit_mode_fragment);
-		
 		v.animate().
 				//translationYBy(mHalfHeight).
-		translationYBy(mEditFragmentContainer.getHeight()+ll.getPaddingTop()).
+		translationYBy(mEditFragmentContainer.getHeight()).
 				//alpha(0).
 				setDuration(animated ? ANIMATION_DURATION : 0).
 				setInterpolator(ANIMATION_INTERPOLATOR).
@@ -179,12 +176,10 @@ public class NewSearchFragment extends Fragment {
 				start();
 	}
 
-	private void fadeInToTop(View v, boolean animated) {
-		LinearLayout ll = (LinearLayout) getActivity().findViewById(R.id.edit_mode_fragment);
-		
+	private void fadeInToTop(View v, boolean animated) {		
 		v.animate().
 				//translationYBy(-mHalfHeight).
-				translationYBy(-(mEditFragmentContainer.getHeight()+ll.getPaddingTop())).
+				translationYBy(-mEditFragmentContainer.getHeight()).
 				//alpha(1).
 				setDuration(animated ? ANIMATION_DURATION : 0).
 				setInterpolator(ANIMATION_INTERPOLATOR).

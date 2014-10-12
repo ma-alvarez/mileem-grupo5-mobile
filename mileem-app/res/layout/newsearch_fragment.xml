@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/main_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ScrollView
+        android:id="@+id/normal_mode_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/scrollview_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="16dip">
+
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/btnBig"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:text="Tipo de Operación"
+                        bootstrapbutton:bb_icon_left="fa-gavel"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/tv2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:layout_below="@id/btnBig"
+                        android:text="Tipo de Vivienda"
+                        bootstrapbutton:bb_icon_left="fa-home"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/tv3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:layout_below="@id/tv2"
+                        android:text="Localidades"
+                        bootstrapbutton:bb_icon_left="fa-map-marker"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/tv4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:layout_below="@id/tv3"
+                        android:text="Precio de Venta"
+                        bootstrapbutton:bb_icon_left="fa-usd"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+                    
+            <FrameLayout
+                android:id="@+id/second_spacer"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_below="@id/tv4"
+                android:background="#ffeaeaea" >
+            </FrameLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/second_spacer"
+                android:background="@android:color/holo_blue_light"
+                android:orientation="horizontal"
+                android:padding="10dp" >
+               
+                 <com.beardedhen.androidbootstrap.BootstrapButton
+                     android:id="@+id/bb_buscar"
+                     android:layout_width="wrap_content"
+                     android:layout_height="@dimen/view_height"
+                     android:layout_margin="10dp"
+                     android:layout_weight="1"
+                     android:text="Buscar"
+                     bootstrapbutton:bb_icon_left="fa-search"
+                     bootstrapbutton:bb_roundedCorners="true"
+                     bootstrapbutton:bb_text_gravity="center"
+                     bootstrapbutton:bb_type="success" />
+                 
+                 <com.beardedhen.androidbootstrap.BootstrapButton
+                     android:id="@+id/bb_limpiar_filtros"
+                     android:layout_width="wrap_content"
+                     android:layout_height="@dimen/view_height"
+                     android:layout_margin="10dp"
+                     android:layout_weight="1"
+                     bootstrapbutton:bb_icon_left="fa-eraser"
+                     bootstrapbutton:bb_roundedCorners="true"
+                     bootstrapbutton:bb_text_gravity="center"
+                     bootstrapbutton:bb_type="warning" />
+
+		    </LinearLayout>
+		    
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/edit_mode_container_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible" >
+
+            <FrameLayout
+                android:id="@+id/edit_mode_fragment_container_full"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/marginandview"
+                android:background="@android:color/holo_purple"
+                 />
+
+    </FrameLayout>
+
+</FrameLayout>
