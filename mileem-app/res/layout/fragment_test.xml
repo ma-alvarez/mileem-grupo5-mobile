@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/main_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ScrollView
+        android:id="@+id/normal_mode_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/scrollview_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="16dip">
+
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/btnBig"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:text="Primary"
+                        bootstrapbutton:bb_icon_right="fa-cloud"
+                        bootstrapbutton:bb_roundedCorners="true"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_below="@id/btnBig"
+                        android:text="Tipo de Inmueble"/>
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_below="@id/tv2"
+                        android:text="Precios"/>
+               
+
+            <FrameLayout
+                android:id="@+id/second_spacer"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_below="@id/tv3"
+                android:background="#ffeaeaea" >
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/edit_mode_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="@dimen/view_height"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:id="@+id/edit_mode_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/margin">
+
+            <FrameLayout
+                android:id="@+id/edit_mode_fragment_container"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_purple" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

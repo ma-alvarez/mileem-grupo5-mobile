@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.mileem.R;
 import com.mileem.model.Publication;
+import com.mileem.tasks.BitmapWorkerTask;
 
 
 public class ListPublicacionesViewAdapter extends BaseAdapter {

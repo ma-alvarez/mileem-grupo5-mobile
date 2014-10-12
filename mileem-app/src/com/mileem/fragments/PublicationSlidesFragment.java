@@ -1,17 +1,14 @@
-package com.mileem;
+package com.mileem.fragments;
 
-import com.example.mileem.R;
-
-import android.support.v4.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
+import com.example.mileem.R;
+import com.mileem.tasks.BitmapWorkerTask;
 
 public class PublicationSlidesFragment extends Fragment {
 

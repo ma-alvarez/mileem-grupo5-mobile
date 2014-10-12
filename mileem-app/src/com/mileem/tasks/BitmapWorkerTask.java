@@ -1,12 +1,15 @@
-package com.mileem;
+package com.mileem.tasks;
 
 import java.lang.ref.WeakReference;
+
+import com.mileem.ConfigManager;
+import com.mileem.HttpUtils;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
+public class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
     private final WeakReference<ImageView> imageViewReference;
     private String url;
     private Boolean icon;

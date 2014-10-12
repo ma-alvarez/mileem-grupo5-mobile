@@ -1,4 +1,4 @@
-package com.mileem;
+package com.mileem.fragments;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mileem.R;
+import com.mileem.ConfigManager;
 import com.mileem.model.Publication;
+import com.mileem.tasks.ListPublicacionesTask;
 
 public class PublicationsFragment extends ListFragment {
 
