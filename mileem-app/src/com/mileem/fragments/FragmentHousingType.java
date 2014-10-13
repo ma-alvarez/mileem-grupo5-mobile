@@ -20,7 +20,7 @@ public class FragmentHousingType extends Fragment implements IPlaceableFragment{
 	  public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
 //		container.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 50));
-			View view = inflater.inflate(R.layout.operation_type_layout,
+			View view = inflater.inflate(R.layout.fragment_housing_type,
 	                container, false);
 			return view;
 	}

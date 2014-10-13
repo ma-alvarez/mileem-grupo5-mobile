@@ -40,7 +40,7 @@ public class NewSearchFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View rootView = inflater.inflate(R.layout.newsearch_fragment, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_newsearch, container, false);
 		
 		retrieveViews(rootView);
 		mHalfHeight = 200;
@@ -49,12 +49,14 @@ public class NewSearchFragment extends Fragment {
 		
 		fragments = new ArrayList<IPlaceableFragment>();
 		
-		IPlaceableFragment f_ejemplo = new FragmentTransactionType();
-		fragments.add(f_ejemplo);
-		IPlaceableFragment operation_fragment = new FragmentHousingType();
-		fragments.add(operation_fragment);
-		f_ejemplo = new FragmentDatePicker();
-		fragments.add(f_ejemplo);
+		IPlaceableFragment pFragment = new FragmentTransactionType();
+		fragments.add(pFragment);
+		pFragment = new FragmentHousingType();
+		fragments.add(pFragment);
+		pFragment = new FragmentListZones();
+		fragments.add(pFragment);
+		pFragment = new PricesFragment();
+		fragments.add(pFragment);
 		
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         for(IPlaceableFragment fragment : fragments){
