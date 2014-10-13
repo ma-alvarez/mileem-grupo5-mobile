@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,8 @@ public class DetailPublicationFragment extends Fragment{
 	private Publication publication;
 	private PublicationSlidesFragmentAdapter adapter;
     private ViewPager pager;
+    private ViewGroup contact_layout;
+    private Button contact;
     private ImageButton call;
     private ImageButton mail;
     //private PageIndicator indicator;
@@ -61,31 +64,32 @@ public class DetailPublicationFragment extends Fragment{
         age.setText(publication.getAge() + " Años");      
         rooms.setText(Integer.toString(publication.getNumber_of_rooms()) + " Ambientes");
         
-        if (publication.getPhone().isEmpty()){
-        
-        	call = (ImageButton) view.findViewById(R.id.callButton);
-        
-			call.setOnClickListener(new OnClickListener() {
+        contact_layout = (ViewGroup) view.findViewById(R.id.contact_layout);
+		contact = (Button) view.findViewById(R.id.contact);
+		setUpContact();
+		
+		call = (ImageButton) view.findViewById(R.id.callButton);
+         
+		call.setOnClickListener(new OnClickListener() {
  
-				@Override
-				public void onClick(View arg0) {
+			@Override
+			public void onClick(View arg0) {
  
-					/*Toast.makeText(getActivity(),
-							"CallButton is clicked!", Toast.LENGTH_SHORT).show();*/
+				/*Toast.makeText(getActivity(),
+					"CallButton is clicked!", Toast.LENGTH_SHORT).show();*/
 			   
-					Intent callIntent = new Intent(Intent.ACTION_CALL);
-					callIntent.setData(Uri.parse("tel:"+publication.getPhone()));
-					startActivity(callIntent);
+				Intent callIntent = new Intent(Intent.ACTION_CALL);
+				callIntent.setData(Uri.parse("tel:"+publication.getPhone()));
+				startActivity(callIntent);
  
-				}
+			}
  
-			});
-        }
+		});
         
 		mail = (ImageButton) view.findViewById(R.id.mailButton);
-        
+ 	
 		mail.setOnClickListener(new OnClickListener() {
- 
+			 
 			@Override
 			public void onClick(View arg0) {
  
@@ -95,13 +99,31 @@ public class DetailPublicationFragment extends Fragment{
  
 			}
  
-		});
-        
+		}); 
         return view;
 		//return inflater.inflate(R.layout.fragment_detailpublication, container, false);
 
 	}
 	
+	private void setUpContact() {
+		contact_layout.setVisibility(View.GONE);
+		contact.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(contact_layout.isShown()){
+					Fx.slide_up(getActivity(), contact_layout);
+					contact_layout.setVisibility(View.GONE);
+				}
+				else{
+					contact_layout.setVisibility(View.VISIBLE);
+					Fx.slide_down(getActivity(), contact_layout);
+				}			
+			}
+		});
+	}
+		
+
 	protected void sendEmail() {
 	      Log.i("Envio de Correo", "");
 

@@ -54,31 +54,42 @@
                 android:layout_height="wrap_content"
                 android:text="antiguedad"
                 android:textStyle="bold" />
-  			<RelativeLayout
-        		android:layout_width="match_parent"
-        		android:layout_height="wrap_content"
-        		android:orientation="horizontal" >
 
-  				<ImageButton
-  				    android:id="@+id/mailButton"
-  				    android:layout_width="wrap_content"
-  				    android:layout_height="wrap_content"
-  				    android:layout_alignParentRight="true"
-  				    android:layout_alignParentTop="true"
-  				    android:contentDescription="Enviar Mail"
-  				    android:src="@drawable/icon_mail" />
+            <Button
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="Contactar" />
 
-  				<ImageButton
-  				    android:id="@+id/callButton"
-  				    android:layout_width="wrap_content"
-  				    android:layout_height="wrap_content"
-  				    android:layout_alignParentLeft="true"
-  				    android:layout_alignParentTop="true"
-  				    android:contentDescription="Llamar Anunciante"
-  				    android:src="@drawable/icon_call1" />
+            <RelativeLayout
+                android:id="@+id/contact_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-			</RelativeLayout>
+                <ImageButton
+                    android:id="@+id/callButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="47dp"
+                    android:contentDescription="Llamar Anunciante"
+                    android:src="@drawable/icon_call1" />
 
+                <ImageButton
+                    android:id="@+id/mailButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="28dp"
+                    android:contentDescription="Enviar Mail"
+                    android:src="@drawable/icon_mail" />
+            </RelativeLayout>
   			
         </LinearLayout> 
 </LinearLayout>
