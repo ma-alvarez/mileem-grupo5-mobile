@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="@android:color/holo_blue_light"
+    android:orientation="horizontal" >
+
+			<com.beardedhen.androidbootstrap.BootstrapButton
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_margin="10dp"
+			    android:layout_alignParentLeft="true"
+			    android:layout_centerInParent="true"
+			    android:text="Casa"
+			    bootstrapbutton:bb_icon_left="fa-home"
+			    bootstrapbutton:bb_roundedCorners="true"
+			    bootstrapbutton:bb_type="warning" />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_centerInParent="true"
+                android:text="Depto."
+                bootstrapbutton:bb_icon_left="fa-building"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_type="warning" />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="Todas"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_type="warning" />
+
+ </RelativeLayout>
+ 
