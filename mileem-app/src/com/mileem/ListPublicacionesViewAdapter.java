@@ -69,7 +69,7 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
         zone = (TextView) itemView.findViewById(R.id.text_barrio_itemlist);
         price = (TextView) itemView.findViewById(R.id.price);
         rooms = (TextView) itemView.findViewById(R.id.rooms);
-
+        
         // Locate the ImageView in listview_item.xml
         icon = (ImageView) itemView.findViewById(R.id.house_thumbnail);
 
