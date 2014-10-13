@@ -45,13 +45,13 @@ public class NewSearchFragment extends Fragment {
 		retrieveViews(rootView);
 		mHalfHeight = 200;
 		//mEditModeContainer.setTranslationY(mHalfHeight);
-		//mEditModeContainer.setAlpha(0f);
+		mEditFragmentContainer.setAlpha(0f);
 		
 		fragments = new ArrayList<IPlaceableFragment>();
 		
-		IPlaceableFragment f_ejemplo = new FragmentEjemplo();
+		IPlaceableFragment f_ejemplo = new FragmentTransactionType();
 		fragments.add(f_ejemplo);
-		IPlaceableFragment operation_fragment = new FragmentOperationType();
+		IPlaceableFragment operation_fragment = new FragmentHousingType();
 		fragments.add(operation_fragment);
 		f_ejemplo = new FragmentDatePicker();
 		fragments.add(f_ejemplo);

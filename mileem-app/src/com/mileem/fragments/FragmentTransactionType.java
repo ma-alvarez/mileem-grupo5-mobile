@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentEjemplo extends Fragment implements IPlaceableFragment{
+public class FragmentTransactionType extends Fragment implements IPlaceableFragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -19,14 +19,14 @@ public class FragmentEjemplo extends Fragment implements IPlaceableFragment{
 	@Override
 	  public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
-			View view = inflater.inflate(R.layout.ejemplo,
+			View view = inflater.inflate(R.layout.fragment_transaction_type,
 	                container, false);
 			return view;
 	}
 
 	@Override
 	public int getContainer() {
-		return R.id.edit_mode_fragment_container_full;
+		return R.id.edit_mode_fragment_container_small;
 	}
 
 	@Override

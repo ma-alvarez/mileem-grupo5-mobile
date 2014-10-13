@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.example.mileem.R;
 import com.mileem.IPlaceableFragment;
 
-public class FragmentOperationType extends Fragment implements IPlaceableFragment{
+public class FragmentHousingType extends Fragment implements IPlaceableFragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
