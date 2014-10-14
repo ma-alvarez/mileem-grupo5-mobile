@@ -119,10 +119,16 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     		publication.setZone(jsonobject.getString(Publication.ZONE));
     		publication.setNumber_of_rooms(jsonobject.getInt(Publication.NUM_OF_ROOMS));
     		publication.setArea(jsonobject.getInt(Publication.AREA));
-    		publication.setPhone(jsonobject.getString(Publication.PHONE));
+    		//TODO: COmpletar con los otros datos que me faltan.
+    		publication.setCurrency(jsonobject.getString(Publication.CURRENCY));
     		publication.setPrice(jsonobject.getDouble(Publication.PRICE));
     		publication.setExpenses(jsonobject.getDouble(Publication.EXPENSES));
     		publication.setAge(jsonobject.getDouble(Publication.AGE));
+    		JSONObject user = jsonobject.getJSONObject(Publication.USER);
+    		
+    		publication.setUser_email(user.getString(Publication.USER_EMAIL));
+    		publication.setPhone(user.getString(Publication.USER_PHONE));
+    		
     		JSONArray attachments = jsonobject.getJSONArray(Publication.ATTACHMENTS);
     		
     		for(int i=0; i < attachments.length(); i++){

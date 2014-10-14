@@ -8,6 +8,7 @@ import com.mileem.HttpUtils;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 public class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
     private final WeakReference<ImageView> imageViewReference;
@@ -41,6 +42,7 @@ public class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
             final ImageView imageView = imageViewReference.get();
             if (imageView != null) {
                 imageView.setImageBitmap(bitmap);
+                imageView.setScaleType(ScaleType.FIT_XY);
             }
         }
     }
