@@ -41,7 +41,8 @@ public class MainActivity extends FragmentActivity
     	// update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container,new NewSearchFragment())
+                //.replace(R.id.container,new NewSearchFragment())
+        		.replace(R.id.container,new SearchFragment())
                 .commit();
         
     }
