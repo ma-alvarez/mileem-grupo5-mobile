@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+
+    <ScrollView
+        android:id="@+id/normal_mode_advanced_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffeaeaea"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/scrollview_advanced_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="16dip">
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/bb_rooms"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:text="Ambientes"
+                        bootstrapbutton:bb_icon_left="fa-th-large"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/bb_area"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:layout_below="@id/bb_rooms"
+                        android:text="Superficie"
+                        bootstrapbutton:bb_icon_left="fa-superscript"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/bb_date"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:layout_below="@id/bb_area"
+                        android:text="Fecha de Publicación"
+                        bootstrapbutton:bb_icon_left="fa-calendar"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/bb_price"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:layout_below="@id/bb_date"
+                        android:text="Ordenamiento?"
+                        bootstrapbutton:bb_icon_left="fa-usd"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />
+                    
+        </RelativeLayout>
+
+    </ScrollView>
+</FrameLayout>
