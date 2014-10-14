@@ -28,7 +28,7 @@ public class FragmentDatePicker extends Fragment implements IPlaceableFragment{
 	@Override
 	  public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
-			View view = inflater.inflate(R.layout.fragment_sample_calendar_picker,
+			View view = inflater.inflate(R.layout.fragment_calendar_picker,
 	                container, false);
 			
 			calendar = (CalendarPickerView) view.findViewById(R.id.calendar_view);

@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 //.replace(R.id.container,new NewSearchFragment())
-        		  .replace(R.id.container,new SearchFragment())
+        		.replace(R.id.container,new SearchFragment())
                 .commit();
         
     }

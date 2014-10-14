@@ -17,51 +17,42 @@ import com.example.mileem.R;
 import com.mileem.Fx;
 import com.mileem.IPlaceableFragment;
 
-public class NewSearchFragment extends Fragment {
+public class AdvancedSearchFragment extends Fragment implements
+		IPlaceableFragment {
 
+	
 	private FrameLayout mMainContainer;
-	private BootstrapButton bb_operation, bb_house_type, bb_zones, bb_price, bb_advanced_search;
+	private BootstrapButton bb_rooms, bb_area, bb_date, bb_order;
 	private RelativeLayout movableGroup;
-	private View search_bar;
-	private ArrayList<View> sliding_views;
 	private ArrayList<IPlaceableFragment> fragments;
-	private boolean editMode = false;
+	private ArrayList<View> sliding_views;
 	private Fx animator;
-
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		View rootView = inflater.inflate(R.layout.fragment_newsearch, container, false);
+				
+		View rootView = inflater.inflate(R.layout.fragment_advanced_search, container, false);
 		
 		retrieveViews(rootView);
-
 		animator = new Fx(mMainContainer);
 		
 		sliding_views = new ArrayList<View>(); 
-		sliding_views.add(bb_operation);
-		sliding_views.add(bb_house_type);
-		sliding_views.add(bb_zones);
-		sliding_views.add(bb_price);
-		sliding_views.add(bb_advanced_search);
-		sliding_views.add(search_bar);
+		sliding_views.add(bb_rooms);
+		sliding_views.add(bb_area);
+		sliding_views.add(bb_date);
+		sliding_views.add(bb_order);
 		
 		for(int i=0; i < sliding_views.size(); i++){
 			sliding_views.get(i).setOnClickListener(new myOnclickListener(i));
 		}
 		
 		fragments = new ArrayList<IPlaceableFragment>();
-		
-		IPlaceableFragment pFragment = new FragmentTransactionType();
+		IPlaceableFragment pFragment = new RoomsFragment();
 		fragments.add(pFragment);
-		pFragment = new FragmentHousingType();
+		pFragment = new AreaFragment();
 		fragments.add(pFragment);
-		pFragment = new FragmentListZones();
-		fragments.add(pFragment);
-		pFragment = new PricesFragment();
-		fragments.add(pFragment);
-		pFragment = new AdvancedSearchFragment();
+		pFragment = new FragmentDatePicker();
 		fragments.add(pFragment);
 		
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -71,25 +62,31 @@ public class NewSearchFragment extends Fragment {
             .hide(fragment.getFragment())
             .commit();
         }
-
+		
 		return rootView;
-
+		
 	}
 	
 	private void retrieveViews(View rootView) {
-		mMainContainer = (FrameLayout) rootView.findViewById(R.id.main_container);
-		movableGroup = (RelativeLayout) rootView.findViewById(R.id.scrollview_container);
-		search_bar = rootView.findViewById(R.id.barra_buscar);
-
+		mMainContainer = (FrameLayout) rootView.findViewById(R.id.main_container_advanced);
+		movableGroup = (RelativeLayout) rootView.findViewById(R.id.scrollview_advanced_container);
 		
-		bb_operation = (BootstrapButton) rootView.findViewById(R.id.bb_operation_type);
-		bb_house_type = (BootstrapButton) rootView.findViewById(R.id.bb_housing_type);
-		bb_zones = (BootstrapButton) rootView.findViewById(R.id.bb_zones);
-		bb_price = (BootstrapButton) rootView.findViewById(R.id.bb_price);
-		bb_advanced_search = (BootstrapButton) rootView.findViewById(R.id.bb_advanced_search);
-		
+		bb_rooms = (BootstrapButton) rootView.findViewById(R.id.bb_rooms);
+		bb_area = (BootstrapButton) rootView.findViewById(R.id.bb_area);
+		bb_date = (BootstrapButton) rootView.findViewById(R.id.bb_date);
+		bb_order = (BootstrapButton) rootView.findViewById(R.id.bb_order);
+	}
+	
+	@Override
+	public int getContainer() {
+		return R.id.edit_mode_fragment_container_full;
 	}
 
+	@Override
+	public Fragment getFragment() {
+		return this;
+	}
+	
 	private class myOnclickListener implements OnClickListener{
 		int i, sw = 0;
 
@@ -109,13 +106,13 @@ public class NewSearchFragment extends Fragment {
 					.hide(fragments.get(i).getFragment())
 					.commit();
 					contraer(v,containerView,i);
-					editMode = false;
+					//editMode = false;
 				}else{
 					fragmentManager.beginTransaction()
 					.show(fragments.get(i).getFragment())
 					.commit();
 					expander(v,containerView,i);
-					editMode = true;
+					//editMode = true;
 				}
 				sw++;
 
@@ -125,7 +122,7 @@ public class NewSearchFragment extends Fragment {
 	
 	private void expander(View v, View containerView, int index){
 
-		animator.focusOn(v, movableGroup);
+		//animator.focusOn(v, movableGroup);
 		int dp = (int) getResources().getDimension(R.dimen.margin);
 		for(int i= index; i < sliding_views.size();i++){
 			
@@ -146,7 +143,7 @@ public class NewSearchFragment extends Fragment {
 			if(i + 1 < sliding_views.size())
 				animator.fadeInToTop(sliding_views.get(i + 1),containerView,dp);
 		}
-		animator.unfocus(v, movableGroup);	
+		//animator.unfocus(v, movableGroup);	
 	}
 
 }

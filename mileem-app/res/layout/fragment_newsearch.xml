@@ -12,6 +12,7 @@
         android:id="@+id/normal_mode_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ffeaeaea"
         android:fillViewport="true">
 
         <RelativeLayout
@@ -20,12 +21,11 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:background="#ffeaeaea"
             android:paddingBottom="16dip">
 
 
                     <com.beardedhen.androidbootstrap.BootstrapButton
-                        android:id="@+id/btnBig"
+                        android:id="@+id/bb_operation_type"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/view_height"
                         android:text="Tipo de Operación"
@@ -35,10 +35,10 @@
                         bootstrapbutton:bb_type="primary" />
 
                     <com.beardedhen.androidbootstrap.BootstrapButton
-                        android:id="@+id/tv2"
+                        android:id="@+id/bb_housing_type"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/view_height"
-                        android:layout_below="@id/btnBig"
+                        android:layout_below="@id/bb_operation_type"
                         android:text="Tipo de Vivienda"
                         bootstrapbutton:bb_icon_left="fa-home"
                         bootstrapbutton:bb_roundedCorners="false"
@@ -46,10 +46,10 @@
                         bootstrapbutton:bb_type="primary" />
 
                     <com.beardedhen.androidbootstrap.BootstrapButton
-                        android:id="@+id/tv3"
+                        android:id="@+id/bb_zones"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/view_height"
-                        android:layout_below="@id/tv2"
+                        android:layout_below="@id/bb_housing_type"
                         android:text="Localidades"
                         bootstrapbutton:bb_icon_left="fa-map-marker"
                         bootstrapbutton:bb_roundedCorners="false"
@@ -57,23 +57,33 @@
                         bootstrapbutton:bb_type="primary" />
 
                     <com.beardedhen.androidbootstrap.BootstrapButton
-                        android:id="@+id/tv4"
+                        android:id="@+id/bb_price"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/view_height"
-                        android:layout_below="@id/tv3"
+                        android:layout_below="@id/bb_zones"
                         android:text="Precio de Venta"
                         bootstrapbutton:bb_icon_left="fa-usd"
                         bootstrapbutton:bb_roundedCorners="false"
                         bootstrapbutton:bb_text_gravity="left"
                         bootstrapbutton:bb_type="primary" />
                     
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:id="@+id/bb_advanced_search"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/view_height"
+                        android:layout_below="@id/bb_price"
+                        android:text="Búsqueda Avanzada"
+                        bootstrapbutton:bb_icon_left="fa-filter"
+                        bootstrapbutton:bb_roundedCorners="false"
+                        bootstrapbutton:bb_text_gravity="left"
+                        bootstrapbutton:bb_type="primary" />                    
 
             
             <LinearLayout
                 android:id="@+id/barra_buscar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv4"
+                android:layout_below="@id/bb_advanced_search"
                 android:background="@android:color/holo_blue_light"
                 android:orientation="horizontal"
                 android:padding="10dp" >
@@ -113,6 +123,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/marginandview"
+                android:translationY="100dp"
                 android:visibility="invisible"
                 android:background="@android:color/holo_purple"/>
             
@@ -120,6 +131,7 @@
                 android:id="@+id/edit_mode_fragment_container_small"
                 android:layout_width="fill_parent"
                 android:layout_height="120dp"
+                android:translationY="100dp"
                 android:layout_marginTop="@dimen/marginandview"
                 android:visibility="invisible"/>
                 />
