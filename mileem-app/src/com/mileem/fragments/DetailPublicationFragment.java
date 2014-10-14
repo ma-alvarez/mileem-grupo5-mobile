@@ -27,6 +27,7 @@ public class DetailPublicationFragment extends Fragment{
     private ViewPager pager;
     private ViewGroup contact_layout;
     private Button contact;
+    private Button viewMap;
     private ImageButton call;
     private ImageButton mail;
     //private PageIndicator indicator;
@@ -65,6 +66,9 @@ public class DetailPublicationFragment extends Fragment{
         area.setText(Integer.toString(publication.getArea()) + " m2");
         age.setText(publication.getAge() + " Años");      
         rooms.setText(Integer.toString(publication.getNumber_of_rooms()) + " Ambientes");
+        
+        
+        //viewMap = (Button) view.findViewById(R.id.viewMap);
         
         contact_layout = (ViewGroup) view.findViewById(R.id.contact_layout);
 		contact = (Button) view.findViewById(R.id.contact);
