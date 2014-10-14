@@ -7,8 +7,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AndroidBootstrap"/>
 	<classpathentry kind="src" path="/library"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/MainActivity"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PixateFreestyle"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/PixateFreestyleShowcase"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
