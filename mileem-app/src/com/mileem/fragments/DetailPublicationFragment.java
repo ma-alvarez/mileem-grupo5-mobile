@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mileem.R;
+import com.mileem.Fx;
 import com.mileem.PublicationSlidesFragmentAdapter;
 import com.mileem.model.Publication;
 
