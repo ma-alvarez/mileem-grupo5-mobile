@@ -39,6 +39,18 @@ public class NewSearchFragment extends Fragment {
 
 		animator = new Fx(mMainContainer);
 		
+		sliding_views = new ArrayList<View>(); 
+		sliding_views.add(bb_operation);
+		sliding_views.add(bb_house_type);
+		sliding_views.add(bb_zones);
+		sliding_views.add(bb_price);
+		sliding_views.add(bb_advanced_search);
+		sliding_views.add(search_bar);
+		
+		for(int i=0; i < sliding_views.size(); i++){
+			sliding_views.get(i).setOnClickListener(new myOnclickListener(i));
+		}
+		
 		fragments = new ArrayList<IPlaceableFragment>();
 		
 		IPlaceableFragment pFragment = new FragmentTransactionType();
@@ -68,26 +80,13 @@ public class NewSearchFragment extends Fragment {
 		mMainContainer = (FrameLayout) rootView.findViewById(R.id.main_container);
 		movableGroup = (RelativeLayout) rootView.findViewById(R.id.scrollview_container);
 		search_bar = rootView.findViewById(R.id.barra_buscar);
+
 		
-		
-		sliding_views = new ArrayList<View>(); 
-		
-		bb_operation = (BootstrapButton) rootView.findViewById(R.id.bb_rooms);
-		bb_house_type = (BootstrapButton) rootView.findViewById(R.id.bb_area);
-		bb_zones = (BootstrapButton) rootView.findViewById(R.id.bb_date);
+		bb_operation = (BootstrapButton) rootView.findViewById(R.id.bb_operation_type);
+		bb_house_type = (BootstrapButton) rootView.findViewById(R.id.bb_housing_type);
+		bb_zones = (BootstrapButton) rootView.findViewById(R.id.bb_zones);
 		bb_price = (BootstrapButton) rootView.findViewById(R.id.bb_price);
 		bb_advanced_search = (BootstrapButton) rootView.findViewById(R.id.bb_advanced_search);
-		
-		sliding_views.add(bb_operation);
-		sliding_views.add(bb_house_type);
-		sliding_views.add(bb_zones);
-		sliding_views.add(bb_price);
-		sliding_views.add(bb_advanced_search);
-		sliding_views.add(search_bar);
-		
-		for(int i=0; i < sliding_views.size(); i++){
-			sliding_views.get(i).setOnClickListener(new myOnclickListener(i));
-		}
 		
 	}
 
