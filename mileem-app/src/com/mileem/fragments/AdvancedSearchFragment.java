@@ -122,7 +122,7 @@ public class AdvancedSearchFragment extends Fragment implements
 	
 	private void expander(View v, View containerView, int index){
 
-		//animator.focusOn(v, movableGroup);
+		animator.focusOn(v, movableGroup);
 		int dp = (int) getResources().getDimension(R.dimen.margin);
 		for(int i= index; i < sliding_views.size();i++){
 			
@@ -143,7 +143,7 @@ public class AdvancedSearchFragment extends Fragment implements
 			if(i + 1 < sliding_views.size())
 				animator.fadeInToTop(sliding_views.get(i + 1),containerView,dp);
 		}
-		//animator.unfocus(v, movableGroup);	
+		animator.unfocus(v, movableGroup);	
 	}
 
 }

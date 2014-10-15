@@ -78,15 +78,12 @@
                         bootstrapbutton:bb_text_gravity="left"
                         bootstrapbutton:bb_type="primary" />                    
 
-            
             <LinearLayout
                 android:id="@+id/barra_buscar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/bb_advanced_search"
-                android:background="@android:color/holo_blue_light"
-                android:orientation="horizontal"
-                android:padding="10dp" >
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal" >
                
                  <com.beardedhen.androidbootstrap.BootstrapButton
                      android:id="@+id/bb_buscar"
@@ -106,6 +103,7 @@
                      android:layout_height="@dimen/view_height"
                      android:layout_margin="10dp"
                      android:layout_weight="1"
+                     android:text="Limpiar"
                      bootstrapbutton:bb_icon_left="fa-eraser"
                      bootstrapbutton:bb_roundedCorners="true"
                      bootstrapbutton:bb_text_gravity="center"
@@ -124,8 +122,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/marginandview"
                 android:translationY="100dp"
-                android:visibility="invisible"
-                android:background="@android:color/holo_purple"/>
+                android:visibility="invisible" />
             
             <FrameLayout
                 android:id="@+id/edit_mode_fragment_container_small"

@@ -23,7 +23,7 @@ public class RoomsFragment extends Fragment implements IPlaceableFragment {
 	
 	@Override
 	public int getContainer() {
-		return R.id.edit_mode_fragment_container_small;
+		return R.id.advanced_fragment_container_small;
 	}
 
 	@Override

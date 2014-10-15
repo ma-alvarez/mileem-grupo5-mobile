@@ -70,4 +70,21 @@
         </RelativeLayout>
 
     </ScrollView>
+    
+                <FrameLayout
+                android:id="@+id/advanced_fragment_container_full"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/marginandview"
+                android:translationY="100dp"
+                android:visibility="invisible"/>
+            
+            <FrameLayout
+                android:id="@+id/advanced_fragment_container_small"
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:translationY="100dp"
+                android:layout_marginTop="@dimen/marginandview"
+                android:visibility="invisible"/>
+                
 </FrameLayout>

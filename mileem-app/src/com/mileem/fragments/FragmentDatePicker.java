@@ -51,7 +51,7 @@ public class FragmentDatePicker extends Fragment implements IPlaceableFragment{
 
 	@Override
 	public int getContainer() {
-		return R.id.edit_mode_fragment_container_full;
+		return R.id.advanced_fragment_container_full;
 	}
 
 	@Override
