@@ -52,5 +52,17 @@
                 bootstrapbutton:bb_roundedCorners="true"
                 bootstrapbutton:bb_size="small"
                 bootstrapbutton:bb_type="warning" />
+           
+         <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_allprices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/price_to"
+				android:layout_alignRight="@+id/price_to"
+                android:text="Todos"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="small"
+                bootstrapbutton:bb_type="warning" />
 
 </RelativeLayout>

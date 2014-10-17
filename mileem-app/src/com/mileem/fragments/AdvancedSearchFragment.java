@@ -37,36 +37,13 @@ public class AdvancedSearchFragment extends Fragment implements
 		View rootView = inflater.inflate(R.layout.fragment_advanced_search, container, false);
 		
 		retrieveViews(rootView);
+		setEditButtons();
+		setEditFragments();
+		
 		animator = new Fx(mMainContainer);
 		
-		sliding_views = new ArrayList<View>(); 
-		sliding_views.add(bb_rooms);
-		sliding_views.add(bb_area);
-		sliding_views.add(bb_date);
-		sliding_views.add(bb_order);
-		
-		for(int i=0; i < sliding_views.size(); i++){
-			sliding_views.get(i).setOnClickListener(new myOnclickListener(i));
-		}
-		
-		fragments = new ArrayList<IPlaceableFragment>();
-		IPlaceableFragment pFragment = new RoomsFragment();
-		fragments.add(pFragment);
-		pFragment = new AreaFragment();
-		fragments.add(pFragment);
-		pFragment = new FragmentDatePicker();
-		fragments.add(pFragment);
-		
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        for(IPlaceableFragment fragment : fragments){
-            fragmentManager.beginTransaction()
-            .add(fragment.getContainer(),fragment.getFragment())
-            .hide(fragment.getFragment())
-            .commit();
-        }
 		
 		return rootView;
-		
 	}
 	
 	private void retrieveViews(View rootView) {
@@ -77,6 +54,38 @@ public class AdvancedSearchFragment extends Fragment implements
 		bb_area = (BootstrapButton) rootView.findViewById(R.id.bb_area);
 		bb_date = (BootstrapButton) rootView.findViewById(R.id.bb_date);
 		bb_order = (BootstrapButton) rootView.findViewById(R.id.bb_order);
+	}
+	
+	private void setEditButtons(){
+		sliding_views = new ArrayList<View>(); 
+		sliding_views.add(bb_rooms);
+		sliding_views.add(bb_area);
+		sliding_views.add(bb_date);
+		sliding_views.add(bb_order);
+		
+		for(int i=0; i < sliding_views.size(); i++){
+			sliding_views.get(i).setOnClickListener(new myOnclickListener(i));
+		}
+	}
+	
+	private void setEditFragments(){
+		fragments = new ArrayList<IPlaceableFragment>();
+		IPlaceableFragment pFragment = new RoomsFragment();
+		fragments.add(pFragment);
+		pFragment = new AreaFragment();
+		fragments.add(pFragment);
+		pFragment = new FragmentDatePicker();
+		fragments.add(pFragment);
+		pFragment = new OrderTypeFragment();
+		fragments.add(pFragment);
+		
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        for(IPlaceableFragment fragment : fragments){
+            fragmentManager.beginTransaction()
+            .add(fragment.getContainer(),fragment.getFragment())
+            .hide(fragment.getFragment())
+            .commit();
+        }
 	}
 	
 	@Override

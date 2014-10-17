@@ -61,8 +61,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/view_height"
                         android:layout_below="@id/bb_date"
-                        android:text="Ordenamiento?"
-                        bootstrapbutton:bb_icon_left="fa-usd"
+                        android:text="Órden de Resultados"
+                        bootstrapbutton:bb_icon_left="fa-sort-amount-desc"
                         bootstrapbutton:bb_roundedCorners="false"
                         bootstrapbutton:bb_text_gravity="left"
                         bootstrapbutton:bb_type="primary" />

@@ -28,4 +28,16 @@
             android:layout_below="@+id/rangeSeekBarArea"
             android:text="area_to" />
          
+         <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_allareas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/area_to"
+				android:layout_alignRight="@+id/area_to"
+                android:text="Todas"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="small"
+                bootstrapbutton:bb_type="warning" />
+         
 </RelativeLayout>

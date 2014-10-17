@@ -6,23 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.mileem.R;
 import com.mileem.IPlaceableFragment;
 
 public class FragmentHousingType extends Fragment implements IPlaceableFragment{
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-	}
+	
+	private BootstrapButton bb_housing_house, bb_housing_appartment, bb_housing_all;
 	
 	@Override
 	  public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
-//		container.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 50));
-			View view = inflater.inflate(R.layout.fragment_housing_type,
+			View rootView = inflater.inflate(R.layout.fragment_housing_type,
 	                container, false);
-			return view;
+			
+			bb_housing_house = (BootstrapButton) rootView.findViewById(R.id.bb_housing_house);
+			bb_housing_appartment = (BootstrapButton) rootView.findViewById(R.id.bb_housing_appartment);
+			bb_housing_all = (BootstrapButton) rootView.findViewById(R.id.bb_housing_all);
+			
+			return rootView;
 	}
 
 	@Override
