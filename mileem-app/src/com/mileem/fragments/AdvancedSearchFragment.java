@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
@@ -26,6 +27,7 @@ public class AdvancedSearchFragment extends Fragment implements
 	private RelativeLayout movableGroup;
 	private ArrayList<IPlaceableFragment> fragments;
 	private ArrayList<View> sliding_views;
+	private Integer editModeIndex = null;
 	private Fx animator;
 	
 	@Override
@@ -86,39 +88,74 @@ public class AdvancedSearchFragment extends Fragment implements
 	public Fragment getFragment() {
 		return this;
 	}
-	
-	private class myOnclickListener implements OnClickListener{
-		int i, sw = 0;
-
-		public myOnclickListener(int index){
-			i = index;
-		}
 		
-		@Override
-		public void onClick(View v) {
+		private class myOnclickListener implements OnClickListener{
+			private int i;
 
-			if(fragments.size() > i){
+			public myOnclickListener(int index){
+				i = index;
+			}
+			
+			private class Expander implements Runnable{
+				
+				private View v;
+				private View containerView;
+				private int index;
+				
+				public Expander(View view, View container, int idx){
+					v = view;
+					containerView = container;
+					index = idx;
+				}
+				@Override
+				public void run() {
+					expander(v, containerView, index);
+					
+				}
+			};
+			
+			@Override
+			public void onClick(View v) {
+
 				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				View containerView = getActivity().findViewById(fragments.get(i).getContainer());
 
-				if(sw % 2 != 0){
-					fragmentManager.beginTransaction()
-					.hide(fragments.get(i).getFragment())
-					.commit();
-					contraer(v,containerView,i);
-					//editMode = false;
-				}else{
+				if(editModeIndex == null){ // no hay nada en edicion, expander
 					fragmentManager.beginTransaction()
 					.show(fragments.get(i).getFragment())
 					.commit();
 					expander(v,containerView,i);
-					//editMode = true;
-				}
-				sw++;
 
+					//				for(int i=0; i < sliding_views.size(); i++){
+					//					if( i != this.i)
+					//						sliding_views.get(i).setClickable(false);
+					//				}
+					editModeIndex = i;
+				}else{ //sin importar que boton se apreto, colapso la edicion abierta
+					
+					containerView = getActivity().findViewById(fragments.get(editModeIndex).getContainer());
+					fragmentManager.beginTransaction()
+					.hide(fragments.get(editModeIndex).getFragment())
+					.commit();
+					ViewPropertyAnimator vp = contraer(sliding_views.get(editModeIndex),containerView,editModeIndex);
+		
+					if(editModeIndex != i){ //si fue otro boton, abro la edicion de este boton
+						containerView = getActivity().findViewById(fragments.get(i).getContainer());
+						fragmentManager.beginTransaction()
+						.show(fragments.get(i).getFragment())
+						.commit();
+						//expander(v,containerView,i);
+						vp.withEndAction(new Expander(v,containerView,i));
+						//				for(int i=0; i < sliding_views.size(); i++){
+						//						sliding_views.get(i).setClickable(true);
+						//				}
+						editModeIndex = i;
+					}else{
+						editModeIndex = null;
+					}
+				}
 			}
 		}
-	}
 	
 	private void expander(View v, View containerView, int index){
 
@@ -134,7 +171,7 @@ public class AdvancedSearchFragment extends Fragment implements
 		containerView.setVisibility(View.VISIBLE);
 	}
 	
-	private void contraer(View v, View containerView, int index){
+	ViewPropertyAnimator contraer(View v, View containerView, int index){
 		
 		animator.slideOutToBottom(containerView);
 		int dp = (int) getResources().getDimension(R.dimen.margin);
@@ -143,7 +180,7 @@ public class AdvancedSearchFragment extends Fragment implements
 			if(i + 1 < sliding_views.size())
 				animator.fadeInToTop(sliding_views.get(i + 1),containerView,dp);
 		}
-		animator.unfocus(v, movableGroup);	
+		return animator.unfocus(v, movableGroup);	
 	}
 
 }
