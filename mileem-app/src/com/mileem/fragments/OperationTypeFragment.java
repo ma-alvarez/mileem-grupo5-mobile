@@ -5,41 +5,41 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.View.OnTouchListener;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.IPlaceableFragment;
 
-public class OrderTypeFragment extends Fragment implements IPlaceableFragment{
+public class OperationTypeFragment extends Fragment implements IPlaceableFragment{
 	
-	private BootstrapButton bb_order_relevance, bb_order_date, bb_order_price;
+	private BootstrapButton bb_operation_buy, bb_operation_rent, bb_operation_all;
 	private int button_index;
 	
 	@Override
 	  public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
-			View rootView = inflater.inflate(R.layout.fragment_order_type,
+			View rootView = inflater.inflate(R.layout.fragment_operation_type,
 	                container, false);
 			
-			bb_order_relevance = (BootstrapButton) rootView.findViewById(R.id.bb_order_relevance);
-			bb_order_date = (BootstrapButton) rootView.findViewById(R.id.bb_order_date);
-			bb_order_price = (BootstrapButton) rootView.findViewById(R.id.bb_order_price);
+			bb_operation_buy = (BootstrapButton) rootView.findViewById(R.id.bb_operation_buy);
+			bb_operation_rent = (BootstrapButton) rootView.findViewById(R.id.bb_operation_rent);
+			bb_operation_all = (BootstrapButton) rootView.findViewById(R.id.bb_operation_all);
 			
 			setButtonsListeners();
 			
 			return rootView;
 	}
-
+	
 	private void setButtonsListeners(){
-		bb_order_relevance.setOnTouchListener(new myOnTouchListener(0));
-		bb_order_date.setOnTouchListener(new myOnTouchListener(1));
-		bb_order_price.setOnTouchListener(new myOnTouchListener(2));
+		bb_operation_buy.setOnTouchListener(new myOnTouchListener(0));
+		bb_operation_rent.setOnTouchListener(new myOnTouchListener(1));
+		bb_operation_all.setOnTouchListener(new myOnTouchListener(2));
 		
-		bb_order_relevance.setPressed(true);
-		button_index = 0;
+		bb_operation_all.setPressed(true);
+		button_index = 2;
 	}
 	
 	private class myOnTouchListener implements OnTouchListener{
@@ -52,21 +52,21 @@ public class OrderTypeFragment extends Fragment implements IPlaceableFragment{
 		
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			bb_order_relevance.setPressed(false);
-			bb_order_date.setPressed(false);
-			bb_order_price.setPressed(false);
+			bb_operation_buy.setPressed(false);
+			bb_operation_rent.setPressed(false);
+			bb_operation_all.setPressed(false);
 			
 			v.setPressed(true);
 			button_index = index;
 			
 			return true;
 		}
-		
 	}
-	
+		
+
 	@Override
 	public int getTargetContainer() {
-		return R.id.advanced_fragment_container_small;
+		return R.id.edit_mode_fragment_container_small;
 	}
 
 	@Override
@@ -75,6 +75,6 @@ public class OrderTypeFragment extends Fragment implements IPlaceableFragment{
 	}
 	
 	public String toString(){
-		return ConfigManager.ORDER_BY_OPT[button_index];
+		return button_index < 2 ? ConfigManager.OPE_TYPE_OPT[button_index] : null;
 	}
 }

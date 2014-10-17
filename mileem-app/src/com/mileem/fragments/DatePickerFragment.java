@@ -15,7 +15,7 @@ import com.mileem.IPlaceableFragment;
 import com.squareup.timessquare.CalendarPickerView;
 import com.squareup.timessquare.CalendarPickerView.SelectionMode;
 
-public class FragmentDatePicker extends Fragment implements IPlaceableFragment{
+public class DatePickerFragment extends Fragment implements IPlaceableFragment{
 	
 	private CalendarPickerView calendar;
 	
@@ -50,7 +50,7 @@ public class FragmentDatePicker extends Fragment implements IPlaceableFragment{
 	}
 
 	@Override
-	public int getContainer() {
+	public int getTargetContainer() {
 		return R.id.advanced_fragment_container_full;
 	}
 

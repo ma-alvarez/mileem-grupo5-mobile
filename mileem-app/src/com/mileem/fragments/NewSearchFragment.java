@@ -76,9 +76,9 @@ public class NewSearchFragment extends Fragment {
 	private void setEditFragments(){
 		fragments = new ArrayList<IPlaceableFragment>();
 		
-		IPlaceableFragment pFragment = new FragmentTransactionType();
+		IPlaceableFragment pFragment = new OperationTypeFragment();
 		fragments.add(pFragment);
-		pFragment = new FragmentHousingType();
+		pFragment = new HousingTypeFragment();
 		fragments.add(pFragment);
 		pFragment = new FragmentListZones();
 		fragments.add(pFragment);
@@ -90,7 +90,7 @@ public class NewSearchFragment extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         for(IPlaceableFragment fragment : fragments){
             fragmentManager.beginTransaction()
-            .add(fragment.getContainer(),fragment.getFragment())
+            .add(fragment.getTargetContainer(),fragment.getFragment())
             .hide(fragment.getFragment())
             .commit();
         }
@@ -125,7 +125,7 @@ public class NewSearchFragment extends Fragment {
 		public void onClick(View v) {
 
 			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-			View containerView = getActivity().findViewById(fragments.get(i).getContainer());
+			View containerView = getActivity().findViewById(fragments.get(i).getTargetContainer());
 
 			if(editModeIndex == null){ // no hay nada en edicion, expander
 				fragmentManager.beginTransaction()
@@ -140,14 +140,14 @@ public class NewSearchFragment extends Fragment {
 				editModeIndex = i;
 			}else{ //sin importar que boton se apreto, colapso la edicion abierta
 				
-				containerView = getActivity().findViewById(fragments.get(editModeIndex).getContainer());
+				containerView = getActivity().findViewById(fragments.get(editModeIndex).getTargetContainer());
 				fragmentManager.beginTransaction()
 				.hide(fragments.get(editModeIndex).getFragment())
 				.commit();
 				ViewPropertyAnimator vp = contraer(sliding_views.get(editModeIndex),containerView,editModeIndex);
 	
 				if(editModeIndex != i){ //si fue otro boton, abro la edicion de este boton
-					containerView = getActivity().findViewById(fragments.get(i).getContainer());
+					containerView = getActivity().findViewById(fragments.get(i).getTargetContainer());
 					fragmentManager.beginTransaction()
 					.show(fragments.get(i).getFragment())
 					.commit();

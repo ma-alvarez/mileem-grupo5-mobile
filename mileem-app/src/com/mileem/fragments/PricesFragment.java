@@ -5,11 +5,15 @@ import java.text.DecimalFormat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.mileem.R;
+import com.mileem.ConfigManager;
 import com.mileem.IPlaceableFragment;
 import com.mileem.RangeSeekBar;
 import com.mileem.RangeSeekBar.OnRangeSeekBarChangeListener;
@@ -18,7 +22,7 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 
 	
 	private RangeSeekBar<Long> seekBarPrice;
-	private BootstrapButton bb_ars, bb_usd, bb_allprices;
+	private BootstrapButton bb_ars, bb_usd, bb_allprices, bb_price_from, bb_price_to;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,13 +33,37 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 		bb_ars = (BootstrapButton) rootView.findViewById(R.id.bb_ars);
 		bb_usd = (BootstrapButton) rootView.findViewById(R.id.bb_usd);
 		bb_allprices = (BootstrapButton) rootView.findViewById(R.id.bb_allprices);
+		bb_price_from = (BootstrapButton) rootView.findViewById(R.id.bb_price_from);
+		bb_price_to = (BootstrapButton) rootView.findViewById(R.id.bb_price_to);
 		
 		setUpRangeSeekBarPrice();
 		ViewGroup seekBarPrice_layout = (ViewGroup) rootView.findViewById(R.id.RSeekBarPrices);
 		seekBarPrice_layout.addView(seekBarPrice);
 		
+		setButtonsListeners();
+		
 		return rootView;
 		
+	}
+	
+	private void setButtonsListeners(){
+		bb_ars.setOnTouchListener(new myOnTouchListener());
+		bb_usd.setOnTouchListener(new myOnTouchListener());
+		
+		bb_allprices.setPressed(true);
+		bb_allprices.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				seekBarPrice.setSelectedMinValue(seekBarPrice.getAbsoluteMinValue());
+				seekBarPrice.setSelectedMaxValue(seekBarPrice.getAbsoluteMaxValue());
+				bb_price_from.setText("min");
+				bb_price_to.setText("max");
+				
+				v.setPressed(true);
+				return true;
+			}
+		});
 	}
 	
 	private void setUpRangeSeekBarPrice(){
@@ -43,28 +71,59 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 		long MIN_PRICE = 0;
 		long MAX_PRICE = 10000000;
 		final DecimalFormat df = new DecimalFormat( "#,###,###,##0" );
-//		price_from.setText("De: " + MainActivity.CURRENCY_SYMBOL + " " + df.format(MIN_PRICE));
-//        price_to.setText("A: " + MainActivity.CURRENCY_SYMBOL + " " + df.format(MAX_PRICE));
 		
 		
 		seekBarPrice = new RangeSeekBar<Long>(MIN_PRICE, MAX_PRICE, this.getActivity());
 		seekBarPrice.setOnRangeSeekBarChangeListener(new OnRangeSeekBarChangeListener<Long>() {
 		        @Override
 		        public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
-//		                price_from.setText("De: " + MainActivity.CURRENCY_SYMBOL + " " + df.format(minValue));
-//		                price_to.setText("A: " + MainActivity.CURRENCY_SYMBOL + " " + df.format(maxValue));
+		                bb_price_from.setText(df.format(minValue));
+		                bb_price_to.setText(df.format(maxValue));
+		           
+		                bb_allprices.setPressed(false);
+		                if((minValue.longValue() == bar.getAbsoluteMinValue().longValue()) && (maxValue.longValue() == bar.getAbsoluteMaxValue().longValue())){
+			                bb_price_from.setText("min");
+			                bb_price_to.setText("max");
+		                	bb_allprices.setPressed(true);
+		                }
 		        }
 		});
 	}
 	
+	private class myOnTouchListener implements OnTouchListener{
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			bb_ars.setPressed(false);
+			bb_usd.setPressed(false);
+			
+			v.setPressed(true);
+			
+			return true;
+		}
+	}
+	
 	@Override
-	public int getContainer() {
+	public int getTargetContainer() {
 		return R.id.edit_mode_fragment_container_small;
 	}
 
 	@Override
 	public Fragment getFragment() {
 		return this;
+	}
+
+	public String toString(){
+		if(bb_allprices.isPressed()){
+			return null;
+		}else{
+			StringBuilder sb = new StringBuilder();
+			sb.append(ConfigManager.PRICE_FROM);
+			sb.append(seekBarPrice.getSelectedMinValue());
+			sb.append(ConfigManager.PRICE_TO);
+			sb.append(seekBarPrice.getSelectedMaxValue());
+			return sb.toString();
+		}
 	}
 
 }

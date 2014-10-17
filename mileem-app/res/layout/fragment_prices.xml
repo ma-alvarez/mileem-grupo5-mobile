@@ -11,29 +11,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
          />
-
-        <TextView
-            android:id="@+id/price_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/RSeekBarPrices"
-            android:layout_alignLeft="@+id/RSeekBarPrices"
-            android:text="price_from" />
-        
-         <TextView
-            android:id="@+id/price_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/RSeekBarPrices"
-            android:layout_below="@+id/RSeekBarPrices"
-            android:text="price_to" />
+ 
+         <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_price_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RSeekBarPrices"
+                android:layout_alignLeft="@+id/RSeekBarPrices"
+                android:text="Min"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="xsmall"
+                bootstrapbutton:bb_type="info" />
+         
+         <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_price_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/RSeekBarPrices"
+                android:layout_below="@+id/RSeekBarPrices"
+                android:text="Max"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="xsmall"
+                bootstrapbutton:bb_type="info" />
          
          <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/bb_ars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_below="@+id/price_from"
+                android:layout_below="@+id/bb_price_from"
                 android:text="ARS"
                 bootstrapbutton:bb_icon_left="fa-usd"
                 bootstrapbutton:bb_roundedCorners="true"
@@ -45,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_below="@+id/price_from"
+                android:layout_below="@+id/bb_price_from"
                 android:layout_toRightOf="@+id/bb_ars"
                 android:text="USD"
                 bootstrapbutton:bb_icon_left="fa-usd"
@@ -58,8 +64,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_below="@+id/price_to"
-				android:layout_alignRight="@+id/price_to"
+                android:layout_below="@+id/bb_price_to"
+				android:layout_alignRight="@+id/bb_price_to"
                 android:text="Todos"
                 bootstrapbutton:bb_roundedCorners="true"
                 bootstrapbutton:bb_size="small"

@@ -36,7 +36,7 @@ public class FragmentListZones extends Fragment implements IPlaceableFragment{
 	}
 
 	@Override
-	public int getContainer() {
+	public int getTargetContainer() {
 		return R.id.edit_mode_fragment_container_full;
 	}
 
