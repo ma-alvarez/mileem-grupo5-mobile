@@ -3,8 +3,8 @@
 .settings
 eclipsebin
 
-bin
-gen
+library/bin
+library/gen
 build
 out
 lib
