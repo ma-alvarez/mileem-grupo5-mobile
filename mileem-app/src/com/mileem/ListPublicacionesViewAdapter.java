@@ -1,7 +1,9 @@
 package com.mileem;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.FontAwesomeText;
 import com.example.mileem.R;
 import com.mileem.model.Publication;
 import com.mileem.tasks.BitmapWorkerTask;
@@ -54,9 +57,10 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-        TextView zone;
-        TextView price;
-        TextView rooms;
+		TextView price;
+        TextView address;
+        TextView propTypeAndZone;
+        TextView transactionTypeAndRooms;
         ImageView icon;
 
         inflater = (LayoutInflater) context
@@ -66,23 +70,27 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
 
         publicacion = lista_publicaciones.get(position);
         // Locate the TextViews in listview_item.xml
-        zone = (TextView) itemView.findViewById(R.id.text_barrio_itemlist);
-        price = (TextView) itemView.findViewById(R.id.price);
-        rooms = (TextView) itemView.findViewById(R.id.rooms);
+        price = (TextView) itemView.findViewById(R.id.price_itemlist);
+        address = (TextView) itemView.findViewById(R.id.text_address_itemlist);
+        //FontAwesomeText tv1 = (FontAwesomeText) itemView.findViewById(R.id.text_address_itemlist);
+        propTypeAndZone = (TextView) itemView.findViewById(R.id.text_proptype_zone_itemlist);
+        transactionTypeAndRooms = (TextView) itemView.findViewById(R.id.text_transType_rooms_itemlist);
         
         // Locate the ImageView in listview_item.xml
         icon = (ImageView) itemView.findViewById(R.id.house_thumbnail);
 
         // Capture position and set results to the TextViews
-        zone.setText(publicacion.getZone());
+        address.setText(publicacion.getAddress());
+        propTypeAndZone.setText(publicacion.getProperty_type() + " | " + publicacion.getZone());
+        transactionTypeAndRooms.setText(publicacion.getTransaction_type() + " | " + Integer.toString(publicacion.getNumber_of_rooms()) + " Amb.");
         
         DecimalFormat df = new DecimalFormat("#,###,###,##0" );
-        df.getDecimalFormatSymbols().setGroupingSeparator('.');
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("es", "AR"));
+        symbols.setDecimalSeparator(',');
+        symbols.setGroupingSeparator('.');
+        df.setDecimalFormatSymbols(symbols);
+        price.setText( publicacion.getCurrency() + " " + df.format(publicacion.getPrice()));
         
-        //TODO: currency type must be setted in the model and sent in the json
-        price.setText( MainActivity.CURRENCY_SYMBOL + " " + df.format(publicacion.getPrice()));
-        rooms.setText(Integer.toString(publicacion.getNumber_of_rooms()) + " Amb.");
-
         if(publicacion.getUrls_image().size() > 0)
         	loadBitmap(icon, publicacion.getUrl_Image(0));
         

@@ -148,7 +148,7 @@
             android:text="Publicado Hasta" />
 
         <TextView
-            android:id="@+id/TextView01"
+            android:id="@+id/text_proptype_zone_itemlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/text_ambientes"
