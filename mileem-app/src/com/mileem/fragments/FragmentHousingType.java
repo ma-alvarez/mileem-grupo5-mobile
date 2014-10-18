@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.IPlaceableFragment;
 
 public class FragmentHousingType extends Fragment implements IPlaceableFragment{

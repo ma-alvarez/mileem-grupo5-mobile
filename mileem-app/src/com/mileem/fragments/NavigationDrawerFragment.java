@@ -1,7 +1,7 @@
 package com.mileem.fragments;
 
 
-import com.example.mileem.R;
+import com.mileem.R;
 
 import android.app.Activity;
 import android.app.ActionBar;

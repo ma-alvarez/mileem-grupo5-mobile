@@ -8,7 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.fragments.NavigationDrawerFragment;
 import com.mileem.fragments.NewSearchFragment;
 import com.mileem.fragments.SearchFragment;

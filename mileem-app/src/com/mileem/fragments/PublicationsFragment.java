@@ -3,18 +3,15 @@ package com.mileem.fragments;
 import java.util.ArrayList;
 
 import android.app.Activity;
-//import android.app.Fragment;
-//import android.app.FragmentManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
-//import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.model.Publication;
 import com.mileem.tasks.ListPublicacionesTask;
@@ -79,11 +76,6 @@ public class PublicationsFragment extends ListFragment {
 		 */
 		
 		Publication publication = publicaciones.get(position);
-		
-		//FragmentManager fragmentManager = getActivity().getFragmentManager();
-		//fragmentManager.beginTransaction().
-		//replace(R.id.container, new DetailPublicationFragment(publication)).
-		//addToBackStack("publicaciones").commit();
 		
 		FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 		fragmentManager.beginTransaction().

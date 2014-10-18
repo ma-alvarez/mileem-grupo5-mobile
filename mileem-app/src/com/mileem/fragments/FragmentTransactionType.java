@@ -1,6 +1,6 @@
 package com.mileem.fragments;
 
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.IPlaceableFragment;
 
 import android.os.Bundle;

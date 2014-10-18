@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.tasks.BitmapWorkerTask;
 
 public class PublicationSlidesFragment extends Fragment {
@@ -18,7 +18,6 @@ public class PublicationSlidesFragment extends Fragment {
 	
 	
 	public PublicationSlidesFragment(String url) {
-		// TODO Auto-generated constructor stub
 		image_url = url;
 	}
 
@@ -36,18 +35,10 @@ public class PublicationSlidesFragment extends Fragment {
         View itemView = inflater.inflate(R.layout.image_detailpublication, container, false);
 	    
 	    image = (ImageView) itemView.findViewById(R.id.imageView);
-	    
-	    //ImageView image = new ImageView(getActivity());
+	 
 	    task = new BitmapWorkerTask(image, false);
 	    task.execute(image_url);
-	    //image.setImageResource(imageResourceId);
-	    //LinearLayout layout = new LinearLayout(getActivity());
-	    //layout.setLayoutParams(new LayoutParams());
-
-	    //layout.setGravity(Gravity.CENTER);
-	    //layout.addView(picture);
-
-	    //return layout;
+	 
 	    return itemView;
 	}
 

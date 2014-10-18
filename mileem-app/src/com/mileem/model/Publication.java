@@ -37,8 +37,8 @@ public class Publication {
 	private double expenses;
 	private String currency;
 	private double age;
-	private String latitude;
-	private String longitude;
+	private double latitude;
+	private double longitude;
 	private String relevance;
 	private String created_date;
 	private String updated_date;
@@ -144,20 +144,20 @@ public class Publication {
 		this.currency = currency;
 	}
 
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public void setLongitude(double d) {
+		this.longitude = d;
 	}
 
 	public String getRelevance() {

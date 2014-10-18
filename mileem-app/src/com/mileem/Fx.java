@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.example.mileem.R;
+import com.mileem.R;
 
 public class Fx {
 	public static void slide_down(Context ctx, View v){

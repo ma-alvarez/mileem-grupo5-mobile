@@ -2,7 +2,8 @@ package com.mileem;
 
 public class ConfigManager {
 
-	public static String URL_SERVER = "http://192.168.56.1:3000";
+	public static String URL_SERVER = "http://192.168.1.101:3000";
+	//public static String URL_SERVER = "http://192.168.56.1:3000";
 	public static String URL_SEARCH = URL_SERVER + "/filterpublications.json";
 	
 	//Interface params query names
