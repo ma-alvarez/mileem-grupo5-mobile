@@ -38,8 +38,7 @@ public class OperationTypeFragment extends Fragment implements IPlaceableFragmen
 		bb_operation_rent.setOnTouchListener(new myOnTouchListener(1));
 		bb_operation_all.setOnTouchListener(new myOnTouchListener(2));
 		
-		bb_operation_all.setPressed(true);
-		button_index = 2;
+		setDefault();
 	}
 	
 	private class myOnTouchListener implements OnTouchListener{
@@ -75,6 +74,15 @@ public class OperationTypeFragment extends Fragment implements IPlaceableFragmen
 	}
 	
 	public String toString(){
-		return button_index < 2 ? ConfigManager.OPE_TYPE_OPT[button_index] : null;
+
+		return button_index < 2 ? ConfigManager.OPE_TYPE.concat(ConfigManager.OPE_TYPE_OPT[button_index]) : "";
+	}
+
+	@Override
+	public void setDefault() {
+		bb_operation_buy.setPressed(false);
+		bb_operation_rent.setPressed(false);
+		bb_operation_all.setPressed(true);
+		button_index = 2;
 	}
 }

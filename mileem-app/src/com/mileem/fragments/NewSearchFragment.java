@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +22,7 @@ import com.mileem.IPlaceableFragment;
 
 public class NewSearchFragment extends Fragment {
 
+	private String TAG = this.getClass().getSimpleName();
 	private FrameLayout mMainContainer;
 	private BootstrapButton bb_operation, bb_housing_type, bb_zones, bb_price, bb_advanced_search, bb_search, bb_clean_filters;
 	private RelativeLayout movableGroup;
@@ -100,8 +102,9 @@ public class NewSearchFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				for(int i=0; i < fragments.size(); i++){
+					fragments.get(i).setDefault();
+				}
 			}
 		});
 	}
@@ -231,7 +234,8 @@ public class NewSearchFragment extends Fragment {
 		for(int i=0; i < fragments.size(); i++){
 			sb.append(fragments.get(i).toString());
 		}
-				
+		
+		Log.d(TAG, sb.toString());
 		return sb.toString();
 	}
 

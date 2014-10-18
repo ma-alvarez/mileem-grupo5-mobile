@@ -49,18 +49,14 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 	private void setButtonsListeners(){
 		bb_ars.setOnTouchListener(new myOnTouchListener());
 		bb_usd.setOnTouchListener(new myOnTouchListener());
+		bb_ars.setPressed(true);
 		
 		bb_allprices.setPressed(true);
 		bb_allprices.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				seekBarPrice.setSelectedMinValue(seekBarPrice.getAbsoluteMinValue());
-				seekBarPrice.setSelectedMaxValue(seekBarPrice.getAbsoluteMaxValue());
-				bb_price_from.setText("min");
-				bb_price_to.setText("max");
-				
-				v.setPressed(true);
+				setDefault();
 				return true;
 			}
 		});
@@ -115,7 +111,7 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 
 	public String toString(){
 		if(bb_allprices.isPressed()){
-			return null;
+			return "";
 		}else{
 			StringBuilder sb = new StringBuilder();
 			sb.append(ConfigManager.PRICE_FROM);
@@ -124,6 +120,15 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 			sb.append(seekBarPrice.getSelectedMaxValue());
 			return sb.toString();
 		}
+	}
+
+	@Override
+	public void setDefault() {
+		seekBarPrice.setSelectedMinValue(seekBarPrice.getAbsoluteMinValue());
+		seekBarPrice.setSelectedMaxValue(seekBarPrice.getAbsoluteMaxValue());
+		bb_price_from.setText("min");
+		bb_price_to.setText("max");
+		bb_allprices.setPressed(true);
 	}
 
 }

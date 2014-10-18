@@ -49,12 +49,7 @@ public class AreaFragment extends Fragment implements IPlaceableFragment {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				seekBarArea.setSelectedMinValue(seekBarArea.getAbsoluteMinValue());
-				seekBarArea.setSelectedMaxValue(seekBarArea.getAbsoluteMaxValue());
-				bb_area_from.setText("min");
-				bb_area_to.setText("max");
-				
-				v.setPressed(true);
+				setDefault();
 				return true;
 			}
 		});
@@ -98,12 +93,21 @@ public class AreaFragment extends Fragment implements IPlaceableFragment {
 			return "";
 		}else{
 			StringBuilder sb = new StringBuilder();
-			sb.append(ConfigManager.PRICE_FROM);
+			sb.append(ConfigManager.SUP_FROM);
 			sb.append(seekBarArea.getSelectedMinValue());
-			sb.append(ConfigManager.PRICE_TO);
+			sb.append(ConfigManager.SUP_TO);
 			sb.append(seekBarArea.getSelectedMaxValue());
 			return sb.toString();
 		}
+	}
+
+	@Override
+	public void setDefault() {
+		seekBarArea.setSelectedMinValue(seekBarArea.getAbsoluteMinValue());
+		seekBarArea.setSelectedMaxValue(seekBarArea.getAbsoluteMaxValue());
+		bb_area_from.setText("min");
+		bb_area_to.setText("max");
+		bb_allareas.setPressed(true);
 	}
 
 }

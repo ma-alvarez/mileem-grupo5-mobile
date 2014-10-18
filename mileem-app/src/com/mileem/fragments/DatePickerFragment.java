@@ -1,5 +1,6 @@
 package com.mileem.fragments;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -76,15 +77,23 @@ public class DatePickerFragment extends Fragment implements IPlaceableFragment{
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				calendar.selectDate(new Date());
-				v.setPressed(true);
+				setDefault();
 				return true;
 			}
 		});
 	}
 	
+	private String changeDateToYYYYMMDD(Date old){
+		DecimalFormat df = new DecimalFormat("00");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(old);
+		String date = Integer.toString(cal.get(Calendar.YEAR))
+				+ df.format(cal.get(Calendar.MONTH)+1)
+				+ df.format(cal.get(Calendar.DAY_OF_MONTH));
+		return date;
+	}
 
-
+	
 	@Override
 	public int getTargetContainer() {
 		return R.id.advanced_fragment_container_full;
@@ -97,14 +106,20 @@ public class DatePickerFragment extends Fragment implements IPlaceableFragment{
 	
 	public String toString(){
 		if(bb_alldates.isPressed()){
-			return null;
+			return "";
 		}else{
 			StringBuilder sb = new StringBuilder();
 			sb.append(ConfigManager.PUB_TIME_FROM);
-			sb.append(calendar.getSelectedDates().get(0));
+			sb.append(changeDateToYYYYMMDD(calendar.getSelectedDates().get(0)));
 			sb.append(ConfigManager.PUB_TIME_TO);
-			sb.append(calendar.getSelectedDates().get(calendar.getSelectedDates().size()-1));
+			sb.append(changeDateToYYYYMMDD(calendar.getSelectedDates().get(calendar.getSelectedDates().size()-1)));
 			return sb.toString();
 		}
+	}
+
+	@Override
+	public void setDefault() {
+		bb_alldates.setPressed(true);
+		calendar.selectDate(new Date());
 	}
 }

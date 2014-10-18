@@ -97,7 +97,11 @@ public class ListZonesFragment extends Fragment implements IPlaceableFragment{
 			for (int i = 0; i < checkedItems.size(); i++) {
 				int position = checkedItems.keyAt(i);
 				if (checkedItems.valueAt(i)){
-					if(count > 0) sb.append("-");
+					if(count > 0) {
+						sb.append("-");
+					} else {
+						sb.append(ConfigManager.ZONE);
+					}
 					sb.append(adapter.getItem(position).replaceAll(" ", "_").toLowerCase());
 					count++;
 				}
@@ -105,5 +109,15 @@ public class ListZonesFragment extends Fragment implements IPlaceableFragment{
 			}
 			return sb.toString();
 		}
+	}
+
+	@Override
+	public void setDefault() {
+		listView.setItemChecked(0, true);
+		allareas = true;
+		for (int i= 1; i < listView.getAdapter().getCount(); i++){
+			listView.setItemChecked(i, false);
+		}
+
 	}
 }

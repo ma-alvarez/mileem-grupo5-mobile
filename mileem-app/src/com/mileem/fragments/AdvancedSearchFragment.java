@@ -191,5 +191,22 @@ public class AdvancedSearchFragment extends Fragment implements
 		}
 		return animator.unfocus(v, movableGroup);	
 	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i=0; i < fragments.size(); i++){
+			sb.append(fragments.get(i).toString());
+		}
+		return sb.toString();
+		
+	}
+
+	@Override
+	public void setDefault() {
+		for(int i=0; i < fragments.size(); i++){
+			fragments.get(i).setDefault();
+		}
+	}
 
 }

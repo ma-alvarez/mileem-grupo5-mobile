@@ -39,12 +39,11 @@ public class RoomsFragment extends Fragment implements IPlaceableFragment {
 	private void setButtonsListeners(){
 		bb_1room.setOnTouchListener(new myOnTouchListener(0));
 		bb_2room.setOnTouchListener(new myOnTouchListener(1));
-		bb_3room.setOnTouchListener(new myOnTouchListener(3));
-		bb_4room.setOnTouchListener(new myOnTouchListener(4));
-		bb_allrooms.setOnTouchListener(new myOnTouchListener(5));
-		
-		bb_allrooms.setPressed(true);
-		button_index = 0;
+		bb_3room.setOnTouchListener(new myOnTouchListener(2));
+		bb_4room.setOnTouchListener(new myOnTouchListener(3));
+		bb_allrooms.setOnTouchListener(new myOnTouchListener(4));
+
+		setDefault();
 	}
 	
 	private class myOnTouchListener implements OnTouchListener{
@@ -82,6 +81,16 @@ public class RoomsFragment extends Fragment implements IPlaceableFragment {
 	}
 
 	public String toString(){
-		return button_index < 5 ? ConfigManager.ROOMS_OPT[button_index] : null;
+		return button_index < 4 ? ConfigManager.ROOMS.concat(ConfigManager.ROOMS_OPT[button_index]) : "";
+	}
+
+	@Override
+	public void setDefault() {
+		bb_1room.setPressed(false);
+		bb_2room.setPressed(false);
+		bb_3room.setPressed(false);
+		bb_4room.setPressed(false);
+		bb_allrooms.setPressed(true);
+		button_index = 4;
 	}
 }

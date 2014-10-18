@@ -38,8 +38,7 @@ public class OrderTypeFragment extends Fragment implements IPlaceableFragment{
 		bb_order_date.setOnTouchListener(new myOnTouchListener(1));
 		bb_order_price.setOnTouchListener(new myOnTouchListener(2));
 		
-		bb_order_relevance.setPressed(true);
-		button_index = 0;
+		setDefault();
 	}
 	
 	private class myOnTouchListener implements OnTouchListener{
@@ -75,6 +74,14 @@ public class OrderTypeFragment extends Fragment implements IPlaceableFragment{
 	}
 	
 	public String toString(){
-		return ConfigManager.ORDER_BY_OPT[button_index];
+		return ConfigManager.ORDER_BY.concat(ConfigManager.ORDER_BY_OPT[button_index]);
+	}
+
+	@Override
+	public void setDefault() {
+		bb_order_date.setPressed(false);
+		bb_order_price.setPressed(false);
+		bb_order_relevance.setPressed(true);
+		button_index = 0;
 	}
 }

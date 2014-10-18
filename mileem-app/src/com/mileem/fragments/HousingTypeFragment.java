@@ -38,8 +38,7 @@ public class HousingTypeFragment extends Fragment implements IPlaceableFragment{
 		bb_housing_appartment.setOnTouchListener(new myOnTouchListener(1));
 		bb_housing_all.setOnTouchListener(new myOnTouchListener(2));
 		
-		bb_housing_all.setPressed(true);
-		button_index = 2;
+		setDefault();
 	}
 	
 	private class myOnTouchListener implements OnTouchListener{
@@ -75,6 +74,14 @@ public class HousingTypeFragment extends Fragment implements IPlaceableFragment{
 	}
 	
 	public String toString(){
-		return button_index < 2 ? ConfigManager.HOUS_TYPE_OPT[button_index] : null;
+		return button_index < 2 ? ConfigManager.HOUS_TYPE.concat(ConfigManager.HOUS_TYPE_OPT[button_index]) : "";
+	}
+
+	@Override
+	public void setDefault() {
+		bb_housing_house.setPressed(false);
+		bb_housing_appartment.setPressed(false);
+		bb_housing_all.setPressed(true);
+		button_index = 2;
 	}
 }
