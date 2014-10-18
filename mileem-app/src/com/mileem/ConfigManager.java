@@ -11,8 +11,8 @@ public class ConfigManager {
 	public static String ORDER_BY = "&orderby=";
 	public static String ORDER_TYPE = "&ordertype=";
 	
-	public static String TRAN_TYPE = "&ttrans=";
-	public static String PROP_TYPE = "&tprop=";
+	public static String OPE_TYPE = "&ttrans=";
+	public static String HOUS_TYPE = "&tprop=";
 	public static String ZONE = "&zone=";
 	public static String PRICE_FROM = "&pricefrom=";
 	public static String PRICE_TO = "&priceto=";
@@ -25,8 +25,8 @@ public class ConfigManager {
 	public static String[] COUNT_OPT = {"10","20","50"};
 	public static String[] ORDER_BY_OPT = {"rel","pubtime","price"};
 	public static String[] ORDER_TYPE_OPT = {"desc","asc"};
-	public static String[] TRAN_TYPE_OPT = {"buy","rent"};
-	public static String[] PROP_TYPE_OPT = {"house","department"};
+	public static String[] OPE_TYPE_OPT = {"buy","rent"};
+	public static String[] HOUS_TYPE_OPT = {"house","department"};
 	public static String[] ROOMS_OPT = {"1","2","3","4"};
 	
 }

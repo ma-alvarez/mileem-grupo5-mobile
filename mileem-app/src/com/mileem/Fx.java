@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -34,17 +35,18 @@ public class Fx {
 				translationY(-mTmpRect.top).
 				setDuration(ANIMATION_DURATION).
 				setInterpolator(ANIMATION_INTERPOLATOR).
-				setListener(new LayerEnablingAnimatorListener(movableView)).
-				start();
+				setListener(new LayerEnablingAnimatorListener(movableView));
+				//start();
 	}
 
-	public void unfocus(View v, View movableView) {
-		movableView.animate().
+	public ViewPropertyAnimator unfocus(View v, View movableView) {
+		return movableView.animate().
 				translationY(0).
 				setDuration(ANIMATION_DURATION).
 				setInterpolator(ANIMATION_INTERPOLATOR).
-				setListener(new LayerEnablingAnimatorListener(movableView)).
-				start();
+				setListener(new LayerEnablingAnimatorListener(movableView));
+				//start();
+
 	}
 	
 	public void fadeOutToBottom(View v, View containerView, int offset) {
@@ -53,8 +55,8 @@ public class Fx {
 				translationYBy(containerView.getHeight() + offset).
 				setDuration(ANIMATION_DURATION).
 				setInterpolator(ANIMATION_INTERPOLATOR).
-				setListener(new LayerEnablingAnimatorListener(v)).
-				start();
+				setListener(new LayerEnablingAnimatorListener(v));
+				//start();
 	}
 
 	public void fadeInToTop(View v, View containerView, int offset) {		
@@ -63,8 +65,8 @@ public class Fx {
 				translationYBy(-(containerView.getHeight() + offset)).
 				setDuration(ANIMATION_DURATION).
 				setInterpolator(ANIMATION_INTERPOLATOR).
-				setListener(new LayerEnablingAnimatorListener(v)).
-				start();
+				setListener(new LayerEnablingAnimatorListener(v));
+				//start();
 	}
 	
 	public void slideInToTop(View v) {

@@ -2,39 +2,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_margin="2dp"
     android:layout_gravity="center_vertical"
-    android:background="@android:color/holo_blue_light"
+    android:background="@android:color/white"
     android:orientation="horizontal" >
 
 			<com.beardedhen.androidbootstrap.BootstrapButton
+			    android:id="@+id/bb_order_relevance"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
-			    android:layout_margin="10dp"
+			    android:layout_margin="5dp"
 			    android:layout_alignParentLeft="true"
 			    android:layout_centerInParent="true"
-			    android:text="Compra"
-			    bootstrapbutton:bb_icon_left="fa-key"
+			    android:text="relevancia"
+			    bootstrapbutton:bb_icon_left="fa-star-o"
 			    bootstrapbutton:bb_roundedCorners="true"
 			    bootstrapbutton:bb_type="warning" />
 
             <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_order_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_centerInParent="true"
-                android:text="Alquiler"
-                bootstrapbutton:bb_icon_left="fa-clock-o"
+                android:layout_toRightOf="@+id/bb_order_relevance"
+                android:text="Fecha"
+                bootstrapbutton:bb_icon_left="fa-calendar"
                 bootstrapbutton:bb_roundedCorners="true"
                 bootstrapbutton:bb_type="warning" />
 
             <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_order_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:text="Todas"
+                bootstrapbutton:bb_icon_left="fa-usd"
+                android:text="Precio"
                 bootstrapbutton:bb_roundedCorners="true"
                 bootstrapbutton:bb_type="warning" />
 

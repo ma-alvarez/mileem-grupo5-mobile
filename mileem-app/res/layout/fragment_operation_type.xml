@@ -9,30 +9,30 @@
     android:orientation="horizontal" >
 
 			<com.beardedhen.androidbootstrap.BootstrapButton
-			    android:id="@+id/bb_housing_house"
+			    android:id="@+id/bb_operation_buy"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="10dp"
 			    android:layout_alignParentLeft="true"
 			    android:layout_centerInParent="true"
-			    android:text="Casa"
-			    bootstrapbutton:bb_icon_left="fa-home"
+			    android:text="Compra"
+			    bootstrapbutton:bb_icon_left="fa-key"
 			    bootstrapbutton:bb_roundedCorners="true"
 			    bootstrapbutton:bb_type="warning" />
 
             <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/bb_housing_appartment"
+                android:id="@+id/bb_operation_rent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_centerInParent="true"
-                android:text="Depto."
-                bootstrapbutton:bb_icon_left="fa-building"
+                android:text="Alquiler"
+                bootstrapbutton:bb_icon_left="fa-clock-o"
                 bootstrapbutton:bb_roundedCorners="true"
                 bootstrapbutton:bb_type="warning" />
 
             <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/bb_housing_all"
+                android:id="@+id/bb_operation_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
