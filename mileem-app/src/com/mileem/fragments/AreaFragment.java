@@ -95,7 +95,7 @@ public class AreaFragment extends Fragment implements IPlaceableFragment {
 	
 	public String toString(){
 		if(bb_allareas.isPressed()){
-			return null;
+			return "";
 		}else{
 			StringBuilder sb = new StringBuilder();
 			sb.append(ConfigManager.PRICE_FROM);

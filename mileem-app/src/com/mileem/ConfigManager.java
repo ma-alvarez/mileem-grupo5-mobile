@@ -11,7 +11,7 @@ public class ConfigManager {
 	public static String ORDER_BY = "&orderby=";
 	public static String ORDER_TYPE = "&ordertype=";
 	
-	public static String TRAN_TYPE = "&ttrans=";
+	public static String OPE_TYPE = "&ttrans=";
 	public static String PROP_TYPE = "&tprop=";
 	public static String ZONE = "&zone=";
 	public static String PRICE_FROM = "&pricefrom=";

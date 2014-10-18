@@ -15,13 +15,14 @@ import android.widget.RelativeLayout;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.mileem.R;
+import com.mileem.ConfigManager;
 import com.mileem.Fx;
 import com.mileem.IPlaceableFragment;
 
 public class NewSearchFragment extends Fragment {
 
 	private FrameLayout mMainContainer;
-	private BootstrapButton bb_operation, bb_housing_type, bb_zones, bb_price, bb_advanced_search;
+	private BootstrapButton bb_operation, bb_housing_type, bb_zones, bb_price, bb_advanced_search, bb_search, bb_clean_filters;
 	private RelativeLayout movableGroup;
 	private View search_bar;
 	private ArrayList<View> sliding_views;
@@ -38,6 +39,7 @@ public class NewSearchFragment extends Fragment {
 		
 		retrieveViews(rootView);
 		setEditButtons();
+		setBarButtons();
 		setEditFragments();
 		
 		animator = new Fx(mMainContainer);
@@ -58,6 +60,9 @@ public class NewSearchFragment extends Fragment {
 		bb_price = (BootstrapButton) rootView.findViewById(R.id.bb_price);
 		bb_advanced_search = (BootstrapButton) rootView.findViewById(R.id.bb_advanced_search);
 		
+		bb_search = (BootstrapButton) rootView.findViewById(R.id.bb_search);
+		bb_clean_filters = (BootstrapButton) rootView.findViewById(R.id.bb_clean_filters);
+		
 	}
 	
 	private void setEditButtons(){
@@ -73,6 +78,34 @@ public class NewSearchFragment extends Fragment {
 		}
 	}
 	
+	private void setBarButtons(){
+		bb_search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				PublicationsFragment fragment = new PublicationsFragment();
+				String queryParams = buildQuery();
+				fragment.AppendAdditionalParameters(queryParams);
+				
+		    	// update the main content by replacing fragments
+		        FragmentManager fragmentManager = getFragmentManager();
+		        fragmentManager.beginTransaction()
+		        .replace(R.id.container, fragment)
+		        .addToBackStack("busqueda")
+		        .commit();
+			}
+		});
+		
+		bb_clean_filters.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+	
 	private void setEditFragments(){
 		fragments = new ArrayList<IPlaceableFragment>();
 		
@@ -80,7 +113,7 @@ public class NewSearchFragment extends Fragment {
 		fragments.add(pFragment);
 		pFragment = new HousingTypeFragment();
 		fragments.add(pFragment);
-		pFragment = new FragmentListZones();
+		pFragment = new ListZonesFragment();
 		fragments.add(pFragment);
 		pFragment = new PricesFragment();
 		fragments.add(pFragment);
@@ -190,6 +223,16 @@ public class NewSearchFragment extends Fragment {
 		}
 		animator.fadeInToTop(search_bar,containerView,dp);
 		return animator.unfocus(v, movableGroup);	
+	}
+	
+	private String buildQuery(){
+		StringBuilder sb = new StringBuilder();
+		
+		for(int i=0; i < fragments.size(); i++){
+			sb.append(fragments.get(i).toString());
+		}
+				
+		return sb.toString();
 	}
 
 }
