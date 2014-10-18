@@ -1,48 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="70dp"
-    android:background="@color/Wheat" >
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/White"
+    android:gravity="clip_vertical" >
 
     <ImageView
         android:id="@+id/house_thumbnail"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:contentDescription="nada"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/Black"
+        android:contentDescription="PubIcon"
+        android:padding="1dp"
         android:src="@drawable/home_mileem2" />
- 
-    <TextView
-        android:id="@+id/text_barrio_itemlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@+id/house_thumbnail"
-        android:text="direccion"
-         />
- 
-    <TextView
-        android:id="@+id/price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text_barrio_itemlist"
-        android:layout_toRightOf="@+id/rooms"
-        android:layout_marginRight="2dp"
-        android:gravity="center|right"
-        android:text="precio"
-        android:textColor="@color/DarkBlue"
-        android:textStyle="bold" />
- 
-    <TextView
-        android:id="@+id/rooms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:layout_marginLeft="2dp"
-        android:layout_toRightOf="@+id/house_thumbnail"
-        android:layout_below="@+id/text_barrio_itemlist"
-        android:text="habitaciones"/>
 
- 
+    <TextView
+        android:id="@+id/price_itemlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_proptype_zone_itemlist"
+        android:layout_alignParentTop="true"
+        android:gravity="left"
+        android:text="Price"
+        android:textColor="@color/SteelBlue"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/text_proptype_zone_itemlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="2dp"
+        android:layout_toRightOf="@+id/house_thumbnail"
+        android:fontFamily="@string/action_example"
+        android:text="Property type | Zone"
+        android:textStyle="normal" />
+
+	<ImageView
+	    android:id="@+id/address_thumbnail"
+	    android:layout_width="13dp"
+	    android:layout_height="13dp"
+	    android:layout_toRightOf="@+id/house_thumbnail"
+	    android:layout_centerVertical="true"
+	    android:contentDescription="AddressIcon"
+	    android:src="@drawable/location_icon" />
+    
+	<TextView
+        android:id="@+id/text_address_itemlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/address_thumbnail"
+        android:layout_centerVertical="true"
+        android:text="Address" 
+        android:textSize="@dimen/address_font_size"
+        android:textStyle="bold" />
+        
+    <TextView
+        android:id="@+id/text_transType_rooms_itemlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:text="Transaction type | Rooms"
+        android:textStyle="italic" />
+    
+    <TextView
+        android:id="@+id/text_see_detail_itemlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="5dp"
+        android:text="Ver detalle"
+        android:textColor="@color/SteelBlue"
+        android:textStyle="normal" />
+
+    <ImageView
+	    android:id="@+id/seeDetail_thumbnail"
+	    android:layout_width="13dp"
+	    android:layout_height="15dp"
+	    android:layout_toLeftOf="@+id/text_see_detail_itemlist"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="SeeDetailIcon"
+	    android:src="@drawable/seedetail_icon" />
+    
 </RelativeLayout>    
 
