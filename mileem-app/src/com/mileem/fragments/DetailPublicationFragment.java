@@ -49,86 +49,95 @@ public class DetailPublicationFragment extends Fragment{
 		
 		if (detailView == null){
 			
-		detailView = inflater.inflate(R.layout.fragment_detailpublication,
-					 container, false);
-
-        adapter = new PublicationSlidesFragmentAdapter(getActivity().getSupportFragmentManager(),publication.getUrls_image());
-        
-        pager = (ViewPager) detailView.findViewById(R.id.pager);
-        pager.setAdapter(adapter);
-	   
-        // Locate the TextViews in layout
-        TextView type = (TextView) detailView.findViewById(R.id.type_op);
-        TextView address = (TextView) detailView.findViewById(R.id.address);
-        TextView zone = (TextView) detailView.findViewById(R.id.zone);
-        TextView area = (TextView) detailView.findViewById(R.id.area);
-        TextView age = (TextView) detailView.findViewById(R.id.age);
-        TextView rooms = (TextView) detailView.findViewById(R.id.number_of_rooms);
-
-        // Capture position and set results to the TextViews
-        type.setText(publication.getProperty_type());
-        address.setText(publication.getAddress());
-        zone.setText(publication.getZone());
-        area.setText(Integer.toString(publication.getArea()) + " m2");
-        age.setText(publication.getAge() + " Años");      
-        rooms.setText(Integer.toString(publication.getNumber_of_rooms()) + " Ambientes");
-        
-        // Botón para ver el mapa
-        viewMap = (ImageButton) detailView.findViewById(R.id.viewMap);
-        viewMap.setOnClickListener(new OnClickListener() {
-        	 
-			@Override
-			public void onClick(View arg0) {
- 
-//				Toast.makeText(getActivity(),
-//					"ViewMap is clicked!", Toast.LENGTH_SHORT).show();
-				
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				fragmentManager.beginTransaction().
-				replace(R.id.container,new PublicationMapFragment(publication)).
-				addToBackStack("detalle").commit(); 				
- 
-			}
- 
-		});
-        
-        
-        contact_layout = (ViewGroup) detailView.findViewById(R.id.contact_layout);
-		contact = (Button) detailView.findViewById(R.id.contact);
-		setUpContact();
-		
-		call = (ImageButton) detailView.findViewById(R.id.callButton);
-         
-		call.setOnClickListener(new OnClickListener() {
- 
-			@Override
-			public void onClick(View arg0) {
- 
-				/*Toast.makeText(getActivity(),
-					"CallButton is clicked!", Toast.LENGTH_SHORT).show();*/
-			   
-				Intent callIntent = new Intent(Intent.ACTION_CALL);
-				callIntent.setData(Uri.parse("tel:"+publication.getPhone()));
-				startActivity(callIntent);
- 
-			}
- 
-		});
-        
-		mail = (ImageButton) detailView.findViewById(R.id.mailButton);
- 	
-		mail.setOnClickListener(new OnClickListener() {
-			 
-			@Override
-			public void onClick(View arg0) {
- 
-			   /*Toast.makeText(getActivity(),
-				"MailButton is clicked!", Toast.LENGTH_SHORT).show();*/
-			   sendEmail();
- 
-			}
- 
-		}); 
+			detailView = inflater.inflate(R.layout.fragment_detailpublication,
+						 container, false);
+	
+	        adapter = new PublicationSlidesFragmentAdapter(getActivity().getSupportFragmentManager(),publication.getUrls_image());
+	        
+	        pager = (ViewPager) detailView.findViewById(R.id.pager);
+	        pager.setAdapter(adapter);
+		   
+	        // Locate the TextViews in layout
+	        TextView main_text = (TextView) detailView.findViewById(R.id.main_desc);
+	        TextView price = (TextView) detailView.findViewById(R.id.price);
+	        TextView sec_text = (TextView) detailView.findViewById(R.id.sec_text);
+	        
+	        TextView area = (TextView) detailView.findViewById(R.id.area);
+	        TextView age = (TextView) detailView.findViewById(R.id.age);
+	        TextView expenses = (TextView) detailView.findViewById(R.id.expenses);
+	        
+	
+	        // Capture position and set results to the TextViews
+	        main_text.setText(publication.getProperty_type() + " | " + publication.getTransaction_type() + " | " +
+	        			 Integer.toString(publication.getNumber_of_rooms()) + " Amb.");
+	        
+	        price.setText(publication.getCurrency() + " " + publication.getPrice());
+	        
+	        sec_text.setText(publication.getAddress() + " | " + publication.getZone());
+	      
+	        
+	        
+	        area.setText("Superficie: " + Integer.toString(publication.getArea()) + " m2");
+	        age.setText("Antiguedad: " + publication.getAge() + " Años");  
+	        expenses.setText("Expensas: "  + publication.getCurrency() + " " + Double.toString(publication.getExpenses())); 
+	       
+	        
+	        // Botón para ver el mapa
+	        viewMap = (ImageButton) detailView.findViewById(R.id.viewMap);
+	        viewMap.setOnClickListener(new OnClickListener() {
+	        	 
+				@Override
+				public void onClick(View arg0) {
+	 
+	//				Toast.makeText(getActivity(),
+	//					"ViewMap is clicked!", Toast.LENGTH_SHORT).show();
+					
+					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+					fragmentManager.beginTransaction().
+					replace(R.id.container,new PublicationMapFragment(publication)).
+					addToBackStack("detalle").commit(); 				
+	 
+				}
+	 
+			});
+	        
+	        
+	        contact_layout = (ViewGroup) detailView.findViewById(R.id.contact_layout);
+			contact = (Button) detailView.findViewById(R.id.contact);
+			setUpContact();
+			
+			call = (ImageButton) detailView.findViewById(R.id.callButton);
+	         
+			call.setOnClickListener(new OnClickListener() {
+	 
+				@Override
+				public void onClick(View arg0) {
+	 
+					/*Toast.makeText(getActivity(),
+						"CallButton is clicked!", Toast.LENGTH_SHORT).show();*/
+				   
+					Intent callIntent = new Intent(Intent.ACTION_CALL);
+					callIntent.setData(Uri.parse("tel:"+publication.getPhone()));
+					startActivity(callIntent);
+	 
+				}
+	 
+			});
+	        
+			mail = (ImageButton) detailView.findViewById(R.id.mailButton);
+	 	
+			mail.setOnClickListener(new OnClickListener() {
+				 
+				@Override
+				public void onClick(View arg0) {
+	 
+				   /*Toast.makeText(getActivity(),
+					"MailButton is clicked!", Toast.LENGTH_SHORT).show();*/
+				   sendEmail();
+	 
+				}
+	 
+			}); 
 		}
 		else{
 			 ((ViewGroup)detailView.getParent()).removeView(detailView);
