@@ -3,29 +3,19 @@ package com.mileem.fragments;
 import com.mileem.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.mileem.PublicationSlidesFragmentAdapter;
 import com.mileem.model.Publication;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class PublicationMapFragment extends Fragment{
@@ -34,7 +24,6 @@ public class PublicationMapFragment extends Fragment{
 	private Publication publication;
 	private View mapView;
 	private SupportMapFragment mapFragment;
-	private SupportMapFragment mSupportMapFragment;
 	
 	public PublicationMapFragment(Publication publication) {
 		super();
@@ -119,6 +108,10 @@ public class PublicationMapFragment extends Fragment{
 	        super.onCreate(savedInstanceState);
 	    }
 
+	 private String createMarkerMessage(){
+		 
+		 return "";
+	 }
 
 //	@Override
 //	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
