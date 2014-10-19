@@ -58,7 +58,7 @@ public class AreaFragment extends Fragment implements IPlaceableFragment {
 	private void setUpRangeSeekBarArea(){
 
 		int MIN_AREA = 0;
-		int MAX_AREA = 10000;
+		int MAX_AREA = 1000;
 		final DecimalFormat df = new DecimalFormat( "#,###,###,##0" );
 		
 		seekBarArea = new RangeSeekBar<Integer>(MIN_AREA, MAX_AREA, this.getActivity());
