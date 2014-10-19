@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.Fx;
 import com.mileem.IPlaceableFragment;
 

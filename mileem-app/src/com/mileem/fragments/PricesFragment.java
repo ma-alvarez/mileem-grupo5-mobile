@@ -12,7 +12,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.IPlaceableFragment;
 import com.mileem.RangeSeekBar;

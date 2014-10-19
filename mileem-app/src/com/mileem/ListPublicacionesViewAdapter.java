@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.FontAwesomeText;
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.model.Publication;
 import com.mileem.tasks.BitmapWorkerTask;
 

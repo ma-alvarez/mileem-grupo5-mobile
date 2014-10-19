@@ -22,7 +22,7 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.Fx;
 import com.mileem.MainActivity;

@@ -2,7 +2,7 @@ package com.mileem;
 
 import java.math.BigDecimal;
 
-import com.example.mileem.R;
+import com.mileem.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.view.View.OnTouchListener;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.IPlaceableFragment;
 

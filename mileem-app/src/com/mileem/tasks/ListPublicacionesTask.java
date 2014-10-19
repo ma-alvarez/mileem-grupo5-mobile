@@ -16,7 +16,7 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.mileem.R;
+import com.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.HttpUtils;
 import com.mileem.JSONResponse;
@@ -119,7 +119,8 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     		publication.setZone(jsonobject.getString(Publication.ZONE));
     		publication.setNumber_of_rooms(jsonobject.getInt(Publication.NUM_OF_ROOMS));
     		publication.setArea(jsonobject.getInt(Publication.AREA));
-    		//TODO: COmpletar con los otros datos que me faltan.
+    		publication.setLatitude(jsonobject.getDouble(Publication.LATITUDE));
+    		publication.setLongitude(jsonobject.getDouble(Publication.LONGITUDE));
     		publication.setCurrency(jsonobject.getString(Publication.CURRENCY));
     		publication.setPrice(jsonobject.getDouble(Publication.PRICE));
     		publication.setExpenses(jsonobject.getDouble(Publication.EXPENSES));
