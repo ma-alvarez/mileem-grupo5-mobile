@@ -318,10 +318,10 @@ public class SearchFragment extends Fragment{
 	private String buildQuery(){
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(ConfigManager.TRAN_TYPE);
-		sb.append(ConfigManager.TRAN_TYPE_OPT[sp_tran_type.getSelectedItemPosition()]);
-		sb.append(ConfigManager.PROP_TYPE);
-		sb.append(ConfigManager.PROP_TYPE_OPT[sp_prop_type.getSelectedItemPosition()]);
+		sb.append(ConfigManager.OPE_TYPE);
+		sb.append(ConfigManager.OPE_TYPE_OPT[sp_tran_type.getSelectedItemPosition()]);
+		sb.append(ConfigManager.HOUS_TYPE);
+		sb.append(ConfigManager.HOUS_TYPE_OPT[sp_prop_type.getSelectedItemPosition()]);
 		sb.append(n_dialog.getSelectedZones());
 		sb.append(ConfigManager.PRICE_FROM);
 		sb.append(seekBarPrice.getSelectedMinValue());

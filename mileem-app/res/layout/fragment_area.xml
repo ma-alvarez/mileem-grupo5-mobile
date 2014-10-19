@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:background="@android:color/white" >
+    
+        <RelativeLayout
+        android:id="@+id/rangeSeekBarArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    
+         <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_area_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rangeSeekBarArea"
+                android:layout_alignLeft="@+id/rangeSeekBarArea"
+                android:text="Min"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="xsmall"
+                bootstrapbutton:bb_type="info" />
+         
+         <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_area_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/rangeSeekBarArea"
+                android:layout_below="@+id/rangeSeekBarArea"
+                android:text="Max"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="xsmall"
+                bootstrapbutton:bb_type="info" />
+         
+         <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_allareas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/bb_area_to"
+				android:layout_alignRight="@+id/bb_area_to"
+                android:text="Todas"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="small"
+                bootstrapbutton:bb_type="warning" />
+         
+</RelativeLayout>
