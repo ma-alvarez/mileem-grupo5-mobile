@@ -154,9 +154,9 @@ public class DetailPublicationFragment extends Fragment{
 			});
 	        
 	        
-	        contact_layout = (ViewGroup) detailView.findViewById(R.id.contact_layout);
-			contact = (BootstrapButton) detailView.findViewById(R.id.contact);
-			setUpContact();
+	        //contact_layout = (ViewGroup) detailView.findViewById(R.id.contact_layout);
+			//contact = (BootstrapButton) detailView.findViewById(R.id.contact);
+			//setUpContact();
 			
 			call = (BootstrapButton) detailView.findViewById(R.id.callButton);
 	         
@@ -198,23 +198,23 @@ public class DetailPublicationFragment extends Fragment{
 
 	}
 	
-	private void setUpContact() {
-		contact_layout.setVisibility(View.GONE);
-		contact.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if(contact_layout.isShown()){
-					Fx.slide_up(getActivity(), contact_layout);
-					contact_layout.setVisibility(View.GONE);
-				}
-				else{
-					contact_layout.setVisibility(View.VISIBLE);
-					Fx.slide_down(getActivity(), contact_layout);
-				}			
-			}
-		});
-	}
+//	private void setUpContact() {
+//		contact_layout.setVisibility(View.GONE);
+//		contact.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				if(contact_layout.isShown()){
+//					Fx.slide_up(getActivity(), contact_layout);
+//					contact_layout.setVisibility(View.GONE);
+//				}
+//				else{
+//					contact_layout.setVisibility(View.VISIBLE);
+//					Fx.slide_down(getActivity(), contact_layout);
+//				}			
+//			}
+//		});
+//	}
 		
 
 	protected void sendEmail() {
