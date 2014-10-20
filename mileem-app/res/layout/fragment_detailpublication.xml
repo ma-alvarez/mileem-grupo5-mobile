@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -7,77 +8,91 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="180dp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/pager"
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/type_op"
+                android:id="@+id/main_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="tipo_propiedad"
-                android:textStyle="bold" />
+                android:text="Descripcion_principal"
+                android:layout_alignParentLeft="true"
+                android:textStyle="normal" />
             
             <TextView
-                android:id="@+id/address"
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="direccion"
+                android:text="Precio"
+                android:textColor="@color/SteelBlue"
+                android:layout_alignParentRight="true"
                 android:textStyle="bold" />
-            
-            <TextView
-                android:id="@+id/zone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="barrio"
-                android:textStyle="bold" />
-            
+                      
+             <TextView
+                 android:id="@+id/sec_text"
+                 android:layout_width="wrap_content"
+                 android:layout_height="25dp"
+                 android:layout_below="@id/main_desc"
+                 android:text="Secondary Text"
+                 android:textSize="14sp"
+                 android:textStyle="bold" />
+             
             <TextView
                 android:id="@+id/area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="superficie"
-                android:textStyle="bold" />
-            
-              <TextView
-                android:id="@+id/number_of_rooms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ambientes"
-                android:textStyle="bold" />  
-                      
+                android:layout_below="@id/sec_text"
+                android:textStyle="normal" />
+                                         
             <TextView
                 android:id="@+id/age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/area"
                 android:text="antiguedad"
-                android:textStyle="bold" />
+                android:textStyle="normal" />
 
-            <ImageButton
-                android:id="@+id/viewMap"
+            <TextView
+                android:id="@+id/expenses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_map" />
-            
-            <Button
+                android:layout_below="@id/age"
+                android:text="expensas"
+                android:textStyle="normal" />  
+                    
+           <ImageButton
+                android:id="@+id/locationMapSnapshot"
+                android:layout_width="match_parent"
+                android:layout_below="@id/expenses"
+                android:layout_height="145dp" />
+           
+           <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/contact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="Contactar" />
-
+                android:layout_height="25dp"
+                android:layout_margin="5dp"
+                android:layout_below="@+id/locationMapSnapshot"
+                android:text="Contactar"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="xsmall"
+                bootstrapbutton:bb_icon_right="fa-chevron-circle-left"
+                bootstrapbutton:bb_type="primary" />
+           
             <RelativeLayout
                 android:id="@+id/contact_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/contact"
                 android:orientation="horizontal" >
 
-                <ImageButton
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/callButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,18 +100,25 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="47dp"
                     android:contentDescription="Llamar Anunciante"
-                    android:src="@drawable/icon_call1" />
+                    bootstrapbutton:bb_roundedCorners="true"
+                	bootstrapbutton:bb_size="large"
+                	bootstrapbutton:bb_icon_left="fa-phone"
+                	bootstrapbutton:bb_type="success" />
+                    
 
-                <ImageButton
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/mailButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="28dp"
+                    android:layout_marginRight="47dp"
                     android:contentDescription="Enviar Mail"
-                    android:src="@drawable/icon_mail" />
+                    bootstrapbutton:bb_roundedCorners="true"
+                	bootstrapbutton:bb_size="large"
+                	bootstrapbutton:bb_icon_left="fa-envelope"
+                	bootstrapbutton:bb_type="info" 
+                	/>
             </RelativeLayout>
-  			
-        </LinearLayout> 
-</LinearLayout>
+ 	</RelativeLayout>
+</RelativeLayout>

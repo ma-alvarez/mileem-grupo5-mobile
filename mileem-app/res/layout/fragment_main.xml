@@ -179,7 +179,7 @@
 
     <Button
         android:id="@+id/button_buscar"
-        style="?android:attr/buttonStyleSmall"
+        style="@android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/precio_hasta"
