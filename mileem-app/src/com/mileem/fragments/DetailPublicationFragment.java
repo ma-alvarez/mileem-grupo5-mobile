@@ -1,7 +1,19 @@
 package com.mileem.fragments;
 
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,7 +35,8 @@ import com.mileem.model.Publication;
 import com.mileem.fragments.PublicationMapFragment;
 
 public class DetailPublicationFragment extends Fragment{
-
+	
+	private String TAG = this.getClass().getSimpleName();
 	private Publication publication;
 	private PublicationSlidesFragmentAdapter adapter;
 	private View detailView;
@@ -71,19 +84,57 @@ public class DetailPublicationFragment extends Fragment{
 	        main_text.setText(publication.getProperty_type() + " | " + publication.getTransaction_type() + " | " +
 	        			 Integer.toString(publication.getNumber_of_rooms()) + " Amb.");
 	        
-	        price.setText(publication.getCurrency() + " " + publication.getPrice());
+	        DecimalFormat df = new DecimalFormat("#,###,###,##0" );
+	        DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("es", "AR"));
+	        symbols.setDecimalSeparator(',');
+	        symbols.setGroupingSeparator('.');
+	        df.setDecimalFormatSymbols(symbols);
+	        price.setText(publication.getCurrency() + " " + df.format(publication.getPrice()));
 	        
 	        sec_text.setText(publication.getAddress() + " | " + publication.getZone());
-	      
-	        
+	      	        
 	        
 	        area.setText("Superficie: " + Integer.toString(publication.getArea()) + " m2");
-	        age.setText("Antiguedad: " + publication.getAge() + " Años");  
-	        expenses.setText("Expensas: "  + publication.getCurrency() + " " + Double.toString(publication.getExpenses())); 
+	        age.setText("Antiguedad: " + Math.round(publication.getAge()) + " años");  
+	        expenses.setText("Expensas: "  + publication.getCurrency() + " " + df.format(publication.getExpenses())); 
 	       
+	        final String STATIC_MAP_API_ENDPOINT = 
+	                "http://maps.google.com/maps/api/staticmap?" +
+	                "center=" + publication.getLatitude() + "," + publication.getLongitude() + "&" +
+	                "markers=" + publication.getLatitude() + "," + publication.getLongitude() + "&" +
+	                "size=640x480&" +
+	                "zoom=14&" +
+	                "scale=2&" +
+	                "sensor=false";
+	        //Carga de imagen estatica del mapa
+	        AsyncTask<Void, Void, Bitmap> setImageFromUrl = new AsyncTask<Void, Void, Bitmap>(){
+	            @Override
+	            protected Bitmap doInBackground(Void... params) {
+	                Bitmap bmp = null;
+	                HttpClient httpclient = new DefaultHttpClient();   
+	                HttpGet request = new HttpGet(STATIC_MAP_API_ENDPOINT); 
+	                InputStream in = null;
+	                try {
+	                    in = httpclient.execute(request).getEntity().getContent();
+	                    bmp = BitmapFactory.decodeStream(in);
+	                    in.close();
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                }
+	                return bmp;
+	            }
+	            protected void onPostExecute(Bitmap bmp) {
+	                if (bmp!=null) {
+	                    final ImageButton iv = (ImageButton) detailView.findViewById(R.id.locationMapSnapshot);
+	                    iv.setImageBitmap(bmp);
+	                }
+	            }
+	        };
+	        setImageFromUrl.execute();
+	        
 	        
 	        // Botón para ver el mapa
-	        viewMap = (ImageButton) detailView.findViewById(R.id.viewMap);
+	        viewMap = (ImageButton) detailView.findViewById(R.id.locationMapSnapshot);
 	        viewMap.setOnClickListener(new OnClickListener() {
 	        	 
 				@Override
