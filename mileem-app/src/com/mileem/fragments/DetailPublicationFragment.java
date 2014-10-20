@@ -28,6 +28,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.mileem.R;
 import com.mileem.Fx;
 import com.mileem.PublicationSlidesFragmentAdapter;
@@ -42,10 +43,10 @@ public class DetailPublicationFragment extends Fragment{
 	private View detailView;
     private ViewPager pager;
     private ViewGroup contact_layout;
-    private Button contact;
+    private BootstrapButton contact;
     private ImageButton viewMap;
-    private ImageButton call;
-    private ImageButton mail;
+    private BootstrapButton call;
+    private BootstrapButton mail;
 	
 	public DetailPublicationFragment(Publication publication) {
 		this.publication = publication;
@@ -154,10 +155,10 @@ public class DetailPublicationFragment extends Fragment{
 	        
 	        
 	        contact_layout = (ViewGroup) detailView.findViewById(R.id.contact_layout);
-			contact = (Button) detailView.findViewById(R.id.contact);
+			contact = (BootstrapButton) detailView.findViewById(R.id.contact);
 			setUpContact();
 			
-			call = (ImageButton) detailView.findViewById(R.id.callButton);
+			call = (BootstrapButton) detailView.findViewById(R.id.callButton);
 	         
 			call.setOnClickListener(new OnClickListener() {
 	 
@@ -175,7 +176,7 @@ public class DetailPublicationFragment extends Fragment{
 	 
 			});
 	        
-			mail = (ImageButton) detailView.findViewById(R.id.mailButton);
+			mail = (BootstrapButton) detailView.findViewById(R.id.mailButton);
 	 	
 			mail.setOnClickListener(new OnClickListener() {
 				 

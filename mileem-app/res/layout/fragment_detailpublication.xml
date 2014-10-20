@@ -70,20 +70,20 @@
                 android:id="@+id/locationMapSnapshot"
                 android:layout_width="match_parent"
                 android:layout_below="@id/expenses"
-                android:layout_height="150dp" />
-            
-
-			<Button
-	        	android:id="@+id/contact"
-	        	style="?android:attr/buttonStyleSmall"
-	        	android:layout_width="match_parent"
-	       	 	android:layout_height="wrap_content"
-	        	android:layout_below="@+id/locationMapSnapshot"
-	        	android:layout_centerHorizontal="true"
-	        	android:layout_alignParentLeft="true"
-	        	android:text="Contactar" />
-        	
-        	
+                android:layout_height="145dp" />
+           
+           <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_margin="5dp"
+                android:layout_below="@+id/locationMapSnapshot"
+                android:text="Contactar"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="xsmall"
+                bootstrapbutton:bb_icon_right="fa-chevron-circle-left"
+                bootstrapbutton:bb_type="primary" />
+           
             <RelativeLayout
                 android:id="@+id/contact_layout"
                 android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                 android:layout_below="@+id/contact"
                 android:orientation="horizontal" >
 
-                <ImageButton
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/callButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,17 +100,25 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="47dp"
                     android:contentDescription="Llamar Anunciante"
-                    android:src="@drawable/icon_call1" />
+                    bootstrapbutton:bb_roundedCorners="true"
+                	bootstrapbutton:bb_size="large"
+                	bootstrapbutton:bb_icon_left="fa-phone"
+                	bootstrapbutton:bb_type="success" />
+                    
 
-                <ImageButton
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/mailButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="28dp"
+                    android:layout_marginRight="47dp"
                     android:contentDescription="Enviar Mail"
-                    android:src="@drawable/icon_mail" />
+                    bootstrapbutton:bb_roundedCorners="true"
+                	bootstrapbutton:bb_size="large"
+                	bootstrapbutton:bb_icon_left="fa-envelope"
+                	bootstrapbutton:bb_type="info" 
+                	/>
             </RelativeLayout>
  	</RelativeLayout>
 </RelativeLayout>
