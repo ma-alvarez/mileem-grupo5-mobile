@@ -140,9 +140,6 @@ public class DetailPublicationFragment extends Fragment{
 	        	 
 				@Override
 				public void onClick(View arg0) {
-	 
-	//				Toast.makeText(getActivity(),
-	//					"ViewMap is clicked!", Toast.LENGTH_SHORT).show();
 					
 					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 					fragmentManager.beginTransaction().
