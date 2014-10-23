@@ -34,6 +34,7 @@ import com.mileem.Fx;
 import com.mileem.PublicationSlidesFragmentAdapter;
 import com.mileem.model.Publication;
 import com.mileem.fragments.PublicationMapFragment;
+import com.viewpagerindicator.CirclePageIndicator;
 
 public class DetailPublicationFragment extends Fragment{
 	
@@ -42,6 +43,7 @@ public class DetailPublicationFragment extends Fragment{
 	private PublicationSlidesFragmentAdapter adapter;
 	private View detailView;
     private ViewPager pager;
+    private CirclePageIndicator indicator;
     private ViewGroup contact_layout;
     private BootstrapButton contact;
     private ImageButton viewMap;
@@ -70,6 +72,9 @@ public class DetailPublicationFragment extends Fragment{
 	        
 	        pager = (ViewPager) detailView.findViewById(R.id.pager);
 	        pager.setAdapter(adapter);
+	        
+	        indicator = (CirclePageIndicator)detailView.findViewById(R.id.indicator);
+	        indicator.setViewPager(pager);
 		   
 	        // Locate the TextViews in layout
 	        TextView main_text = (TextView) detailView.findViewById(R.id.main_desc);
