@@ -1,7 +1,6 @@
 package com.mileem.tasks;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +15,6 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.HttpUtils;
 import com.mileem.JSONResponse;

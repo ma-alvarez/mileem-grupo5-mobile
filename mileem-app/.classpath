@@ -6,8 +6,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AndroidBootstrap"/>
-	<classpathentry kind="src" path="/library"/>
+	<classpathentry kind="src" path="/calendar-library"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PixateFreestyle"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/PixateFreestyleShowcase"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
