@@ -225,7 +225,7 @@ public class DetailPublicationFragment extends Fragment{
 	      String[] TO = {publication.getUser_email()};
 	      Intent emailIntent = new Intent(Intent.ACTION_SEND);
 	      emailIntent.setData(Uri.parse("mailto:"));
-	      emailIntent.setType("text/plain");
+	      emailIntent.setType("message/rfc822");
 
 	      emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
 	      emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Consulta sobre anuncio");
