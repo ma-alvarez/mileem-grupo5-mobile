@@ -1,9 +1,13 @@
 package com.mileem;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -108,42 +112,28 @@ public class HttpUtils {
 
    }
    
-   private static Bitmap decodeSampledBitmapFromResource(InputStream stream,
-	        int reqWidth, int reqHeight) {
+   public static void getFileFromURLandStoreIt(String src, File file){
+	   try {
+		   URL url = new URL(src);
+		   HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		   connection.setDoInput(true);
+		   connection.connect();
+		   InputStream input = connection.getInputStream();
+		   
+		   OutputStream stream = new BufferedOutputStream(new FileOutputStream(file)); 
+		   int bufferSize = 1024;
+		   byte[] buffer = new byte[bufferSize];
+		   int len = 0;
+		   while ((len = input.read(buffer)) != -1) {
+		       stream.write(buffer, 0, len);
+		   }
+		   if(stream!=null)
+		       stream.close();
 
-	    // First decode with inJustDecodeBounds=true to check dimensions
-	    final BitmapFactory.Options options = new BitmapFactory.Options();
-	    options.inJustDecodeBounds = true;
-	    BitmapFactory.decodeStream(stream, null, options);
+	   } catch (IOException e) {
+		   e.printStackTrace();
+		   Log.e(TAG, "Error fetching img from URL:  " + src);
+	   }
 
-	    // Calculate inSampleSize
-	    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-	    // Decode bitmap with inSampleSize set
-	    options.inJustDecodeBounds = false;
-	    return BitmapFactory.decodeStream(stream, null, options);
-	}
-   
-   public static int calculateInSampleSize(
-           BitmapFactory.Options options, int reqWidth, int reqHeight) {
-   // Raw height and width of image
-   final int height = options.outHeight;
-   final int width = options.outWidth;
-   int inSampleSize = 1;
-
-   if (height > reqHeight || width > reqWidth) {
-
-       final int halfHeight = height / 2;
-       final int halfWidth = width / 2;
-
-       // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-       // height and width larger than the requested height and width.
-       while ((halfHeight / inSampleSize) > reqHeight
-               && (halfWidth / inSampleSize) > reqWidth) {
-           inSampleSize *= 2;
-       }
    }
-
-   return inSampleSize;
-}
 }

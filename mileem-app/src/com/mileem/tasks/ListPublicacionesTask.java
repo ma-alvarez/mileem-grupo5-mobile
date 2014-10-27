@@ -21,6 +21,9 @@ import com.mileem.JSONResponse;
 import com.mileem.ListPublicacionesViewAdapter;
 import com.mileem.fragments.PublicationsFragment;
 import com.mileem.model.Publication;
+import com.mileem.model.PublicationBasic;
+import com.mileem.model.PublicationFree;
+import com.mileem.model.PublicationPremium;
 
 public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 
@@ -66,7 +69,17 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     				
     				try {
 						JSONObject jsonobject = jsonarray.getJSONObject(i);
-	    				publication = new Publication();
+						String relevance = jsonobject.getString(Publication.RELEVANCE);
+						
+						if(relevance == "1"){
+							publication = new PublicationFree();
+						}else{
+							if(relevance == "2"){
+								publication = new PublicationBasic();
+							}else{
+								publication = new PublicationPremium();
+							}
+						}
 	    				loadPublication(publication, jsonobject);
 	    				
     				} catch (JSONException e) {
@@ -111,6 +124,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     private void loadPublication(Publication publication,JSONObject jsonobject){
     	
     	try {
+    		publication.setRelevance(jsonobject.getString(Publication.RELEVANCE));
     		publication.setTransaction_type(jsonobject.getString(Publication.TRAN_TYPE));
     		publication.setProperty_type(jsonobject.getString(Publication.PROP_TYPE));
     		publication.setAddress(jsonobject.getString(Publication.ADDRESS));
