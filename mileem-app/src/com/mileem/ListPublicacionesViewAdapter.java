@@ -20,24 +20,24 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
     private Context context;
     private ImageLoader mImageLoader;
 
-    private ArrayList<Publication> lista_publicaciones;
+    private ArrayList<PublicationAdapter> publication_adapters;
 
 
     public ListPublicacionesViewAdapter(Context context,
-    		ArrayList<Publication> arraylist) {
+    		ArrayList<PublicationAdapter> adapters) {
     	this.context = context;
-    	lista_publicaciones = arraylist;
+    	publication_adapters = adapters;
     	mImageLoader = new ImageLoader(context);
     }
 
     @Override
 	public int getCount() {
-		return lista_publicaciones.size();
+		return publication_adapters.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return lista_publicaciones.get(position);
+		return publication_adapters.get(position);
 	}
 
 	@Override
@@ -46,24 +46,26 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
 	}
 	
 	static class ViewHolder{
-		TextView price;
-        TextView address;
-        TextView propTypeAndZone;
-        TextView transactionTypeAndRooms;
-        ImageView icon;
+		public TextView price;
+        public TextView address;
+        public TextView propTypeAndZone;
+        public TextView transactionTypeAndRooms;
+        public ImageView icon;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder;
-
-        if(convertView == null){
+        PublicationAdapter pub_adapter = publication_adapters.get(position);
+        Publication publicacion = pub_adapter.getPublication();
+        
+        if(convertView == null || convertView.getId() != pub_adapter.getLayoutId()){
 
         	LayoutInflater inflater = (LayoutInflater) context
         			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        	convertView = inflater.inflate(R.layout.listview_item, parent, false);
+        	convertView = inflater.inflate(pub_adapter.getLayoutId(), parent, false);
         	viewHolder = new ViewHolder();
         	
         	viewHolder.price = (TextView) convertView.findViewById(R.id.price_itemlist);
@@ -77,7 +79,7 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
         	viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Publication publicacion = lista_publicaciones.get(position);
+        
 
         // Capture position and set results to the TextViews
         viewHolder.address.setText(publicacion.getAddress());

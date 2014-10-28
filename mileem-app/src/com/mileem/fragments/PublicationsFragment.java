@@ -68,12 +68,6 @@ public class PublicationsFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		Log.i("PublicationsFragment", "Click"); 
-		/*Toast.makeText(
-				getActivity(), 
-				getListView().getItemAtPosition(position).toString(), 
-				Toast.LENGTH_LONG).show();
-		 */
 		
 		Publication publication = publicaciones.get(position);
 		

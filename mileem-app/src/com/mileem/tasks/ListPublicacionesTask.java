@@ -19,11 +19,12 @@ import com.mileem.ConfigManager;
 import com.mileem.HttpUtils;
 import com.mileem.JSONResponse;
 import com.mileem.ListPublicacionesViewAdapter;
+import com.mileem.PublicationAdapter;
+import com.mileem.PublicationBasicAdapter;
+import com.mileem.PublicationFreeAdapter;
+import com.mileem.PublicationPremiumAdapter;
 import com.mileem.fragments.PublicationsFragment;
 import com.mileem.model.Publication;
-import com.mileem.model.PublicationBasic;
-import com.mileem.model.PublicationFree;
-import com.mileem.model.PublicationPremium;
 
 public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 
@@ -31,6 +32,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 	private PublicationsFragment pFragment;
     private NoResultsDialog mNoticeDialog;
     private ArrayList<Publication> publications;
+    private ArrayList<PublicationAdapter> pub_adapters;
 	private JSONResponse jResponse;
 	private ListPublicacionesViewAdapter adapter;
 	private String query;
@@ -40,47 +42,37 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 		this.pFragment = fragment;
 		query = fragment.getPublicationsQuery();
 	}
-    
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-//        // Create a progressdialog
-//        mProgressDialog = new ProgressDialog(pFragment.getActivity());
-//        // Set progressdialog title
-//        mProgressDialog.setTitle("MiLEEM");
-//        // Set progressdialog message
-//        mProgressDialog.setMessage("Cargando Publicaciones...");
-//        mProgressDialog.setIndeterminate(false);
-//        // Show progressdialog
-//        mProgressDialog.show();
-    }
 
     @Override
     protected Void doInBackground(Void... params) {
 
     	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_SEARCH + query);
     	publications = new ArrayList<Publication>();
+    	pub_adapters = new ArrayList<PublicationAdapter>();
 
     	if(jResponse.getError().isEmpty()){
     		JSONArray jsonarray = jResponse.getjArray();
 
     			for (int i = 0; i < jsonarray.length(); i++) {
     				Publication publication = null;
+					PublicationAdapter pub_adapter = null;
     				
     				try {
 						JSONObject jsonobject = jsonarray.getJSONObject(i);
 						String relevance = jsonobject.getString(Publication.RELEVANCE);
+						publication = new Publication();
 						
-						if(relevance == "1"){
-							publication = new PublicationFree();
+						if(relevance.equalsIgnoreCase("1")){
+							pub_adapter = new PublicationFreeAdapter();
 						}else{
-							if(relevance == "2"){
-								publication = new PublicationBasic();
+							if(relevance.equalsIgnoreCase("2")){
+								pub_adapter = new PublicationBasicAdapter();
 							}else{
-								publication = new PublicationPremium();
+								pub_adapter = new PublicationPremiumAdapter();
 							}
 						}
 	    				loadPublication(publication, jsonobject);
+	    				pub_adapter.setPublication(publication);
 	    				
     				} catch (JSONException e) {
     					Log.e(TAG, "Error in parsing JSON object " + i);
@@ -88,6 +80,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
 					}
 
     				publications.add(publication);
+    				pub_adapters.add(pub_adapter);
     			}
 
     	}
@@ -111,7 +104,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     		pFragment.setPublicaciones(publications);
 
 //    	// Pass the results into ListViewAdapter.java
-    		adapter = new ListPublicacionesViewAdapter(pFragment.getActivity(), publications);
+    		adapter = new ListPublicacionesViewAdapter(pFragment.getActivity(), pub_adapters);
     	
     		pFragment.setListAdapter(adapter);
     	
