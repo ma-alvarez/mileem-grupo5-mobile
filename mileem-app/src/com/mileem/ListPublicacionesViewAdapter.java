@@ -18,7 +18,7 @@ import com.mileem.tasks.BitmapWorkerTask;
 public class ListPublicacionesViewAdapter extends BaseAdapter {
 
     private Context context;
-    private ImageLoader mImageLoader;
+    //private ImageLoader mImageLoader;
 
     private ArrayList<PublicationAdapter> publication_adapters;
 
@@ -27,7 +27,7 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
     		ArrayList<PublicationAdapter> adapters) {
     	this.context = context;
     	publication_adapters = adapters;
-    	mImageLoader = new ImageLoader(context);
+    	//mImageLoader = new ImageLoader(context);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
         
         if(publicacion.getUrls_image().size() > 0){
         	//loadBitmap( viewHolder.icon, publicacion.getUrl_Image(0));
-        	mImageLoader.displayImage(publicacion.getUrl_Image(0), viewHolder.icon);
+        	ImageLoader.displayImage(publicacion.getUrl_Image(0), viewHolder.icon, 100,100);
         }
         	
         

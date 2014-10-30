@@ -22,20 +22,21 @@ import android.widget.ImageView;
 
 public class ImageLoader {
 
-	private LruCache<String,Bitmap> memoryCache;
-	private FileCache fileCache;
-	private Map<ImageView,String> imageViews = Collections.synchronizedMap(new WeakHashMap<ImageView,String>());
-	private Context context;
-
-	private Drawable mStubDrawable;
+	private static LruCache<String,Bitmap> memoryCache;
+	private static FileCache fileCache;
+	private static Map<ImageView,String> imageViews = Collections.synchronizedMap(new WeakHashMap<ImageView,String>());
+	private static Context context;
+	private static int px = 100;
+	private static int py = 100;
+	private static Drawable mStubDrawable;
 
 	public ImageLoader(Context context) {
-		fileCache = new FileCache(context);
 		init(context);
-		this.context = context;
 	}
 
-	private void init(Context context) {
+	public static void init(Context ctx) {
+		context = ctx;
+		fileCache = new FileCache(context);
 		// Get memory class of this device, exceeding this amount will throw an
 		// OutOfMemory exception.
 		final int memClass = ((ActivityManager) context.getSystemService(
@@ -47,7 +48,9 @@ public class ImageLoader {
 		mStubDrawable = context.getResources().getDrawable(R.drawable.ic_noimage);
 	}
 
-	public void displayImage(String url, ImageView imageView) {
+	public static void displayImage(String url, ImageView imageView, int _px, int _py) {
+		px = _px;
+		py = _py;
 		imageViews.put(imageView, url);
 		Bitmap bitmap = null;
 		if (url != null )
@@ -64,7 +67,7 @@ public class ImageLoader {
 		}
 	}
 
-	private void queuePhoto(String url, ImageView imageView) {
+	private static void queuePhoto(String url, ImageView imageView) {
 		new LoadBitmapTask().execute(url, imageView);
 	}
 
@@ -73,13 +76,14 @@ public class ImageLoader {
 	 * @param url
 	 * @return
 	 */
-	private Bitmap getBitmap(String url) {
+	private static Bitmap getBitmap(String url) {
 		Bitmap ret = null;
 		//from SD cache
 		File f = fileCache.getFile(url);
 		if (f.exists()) {
 			try {
-				ret = decodeSampledBitmapFromResourceMemOpt(new FileInputStream(f),100,100);
+				ret = decodeSampledBitmapFromResourceMemOpt(new FileInputStream(f),px,py);
+				
 			} catch (FileNotFoundException e) {
 				
 				e.printStackTrace();
@@ -94,8 +98,8 @@ public class ImageLoader {
 			//your requester will fetch the bitmap from the web and store it in the phone using the fileCache
 			HttpUtils.getFileFromURLandStoreIt(ConfigManager.URL_SERVER + url,fileCache.getFile(url));
 			File storedFile = fileCache.getFile(url);	
-			ret = decodeSampledBitmapFromResourceMemOpt(new FileInputStream(storedFile),100,100);
-			
+			ret = decodeSampledBitmapFromResourceMemOpt(new FileInputStream(storedFile),px,py);
+
 			return ret;
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -103,20 +107,7 @@ public class ImageLoader {
 		}
 	}
 
-	//decodes image and scales it to reduce memory consumption
-	private Bitmap decodeFile(File f) {
-		Bitmap ret = null;
-		try {
-			FileInputStream is = new FileInputStream(f);
-			ret = BitmapFactory.decodeStream(is, null, null);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return ret;
-	}
-	public Bitmap decodeSampledBitmapFromResourceMemOpt(
+	public static Bitmap decodeSampledBitmapFromResourceMemOpt(
             InputStream inputStream, int reqWidth, int reqHeight) {
 
         byte[] byteArr = new byte[0];
@@ -181,7 +172,7 @@ public class ImageLoader {
 	    return inSampleSize;
 	}
 
-	private class PhotoToLoad {
+	private static class PhotoToLoad {
 		public String url;
 		public ImageView imageView;
 
@@ -191,7 +182,7 @@ public class ImageLoader {
 		}
 	}
 
-	private boolean imageViewReused(PhotoToLoad photoToLoad) {
+	private static boolean imageViewReused(PhotoToLoad photoToLoad) {
 		//tag used here
 		String tag = (String) imageViews.get(photoToLoad.imageView);
 		if (tag == null || !tag.equals(photoToLoad.url))
@@ -199,7 +190,7 @@ public class ImageLoader {
 		return false;
 	}
 
-	class LoadBitmapTask extends AsyncTask<Object, Void, TransitionDrawable> {
+	private static class LoadBitmapTask extends AsyncTask<Object, Void, TransitionDrawable> {
 		private PhotoToLoad mPhoto;
 
 		@Override
