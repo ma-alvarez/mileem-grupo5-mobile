@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/map_marker_basic"
         android:layout_alignBottom="@+id/map_marker_basic"
-        android:layout_below="@+id/price_itemlist"
         android:text="Address"
         android:gravity="center_vertical"
         android:textStyle="bold" />

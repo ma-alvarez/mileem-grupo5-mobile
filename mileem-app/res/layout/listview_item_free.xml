@@ -51,7 +51,6 @@
 	    android:id="@+id/text_address_itemlist"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/price_itemlist"
 	    android:layout_toRightOf="@+id/map_marker_free"
 	    android:layout_alignBottom="@+id/map_marker_free"
 	    android:text="Address"
