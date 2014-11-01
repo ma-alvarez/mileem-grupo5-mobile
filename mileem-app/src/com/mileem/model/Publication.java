@@ -45,7 +45,7 @@ public class Publication {
 	private String publication_date;
 	private String user_phone;
 	private String user_email;
-	private ArrayList<String> urls_image;
+	private ArrayList<String> imageURL_list;
 	
 	public Publication(){
 		transaction_type = "def_type";
@@ -56,16 +56,16 @@ public class Publication {
 		price = 0;
 		expenses = 0;
 		age = 0;
-		urls_image = new ArrayList<String>();
+		imageURL_list = new ArrayList<String>();
 		
 	}
 	
-	public ArrayList<String> getUrls_image() {
-		return urls_image;
+	public ArrayList<String> getListImagesURL() {
+		return imageURL_list;
 	}
 
-	public void setUrls_image(ArrayList<String> urls_image) {
-		this.urls_image = urls_image;
+	public void setListimagesURL(ArrayList<String> urls_image) {
+		this.imageURL_list = urls_image;
 	}
 	
 	public String getTransaction_type() {
@@ -201,11 +201,11 @@ public class Publication {
 	}
 	
 	public void addUrl_Image(String url){
-		this.urls_image.add(url);
+		this.imageURL_list.add(url);
 	}
 	
-	public String getUrl_Image(int pos){
-		return this.urls_image.get(pos);
+	public String getImageURLAtIndex(int pos){
+		return this.imageURL_list.get(pos);
 	}
 	
 	public String toString(){

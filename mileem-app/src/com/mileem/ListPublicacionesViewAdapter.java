@@ -50,7 +50,10 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
         public TextView address;
         public TextView propTypeAndZone;
         public TextView transactionTypeAndRooms;
-        public ImageView icon;
+        public ImageView main_icon;
+        public ImageView icon1;
+        public ImageView icon2;
+        public ImageView icon3;
 	}
 
 	@Override
@@ -72,8 +75,10 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
         	viewHolder.address = (TextView) convertView.findViewById(R.id.text_address_itemlist);
         	viewHolder.propTypeAndZone = (TextView) convertView.findViewById(R.id.text_proptype_zone_itemlist);
         	viewHolder.transactionTypeAndRooms = (TextView) convertView.findViewById(R.id.text_transType_rooms_itemlist);
-        	viewHolder.icon = (ImageView) convertView.findViewById(R.id.house_thumbnail);
+        	viewHolder.main_icon = (ImageView) convertView.findViewById(R.id.house_thumbnail);
 
+        	
+        	
         	convertView.setTag(viewHolder);
         }else{
         	viewHolder = (ViewHolder) convertView.getTag();
@@ -93,18 +98,17 @@ public class ListPublicacionesViewAdapter extends BaseAdapter {
         df.setDecimalFormatSymbols(symbols);
         viewHolder.price.setText( publicacion.getCurrency() + " " + df.format(publicacion.getPrice()));
         
-        if(publicacion.getUrls_image().size() > 0){
-        	//loadBitmap( viewHolder.icon, publicacion.getUrl_Image(0));
-        	ImageLoader.displayImage(publicacion.getUrl_Image(0), viewHolder.icon, 100,100);
-        }
-        	
+//        if(publicacion.getListImagesURL().size() > 0){
+//        	ImageLoader.displayImage(publicacion.getImageURLAtIndex(0), viewHolder.main_icon, 100,100);
+//        }
+        pub_adapter.addImages(viewHolder, convertView);
         
         return convertView;
 	}
 	
-	public void loadBitmap(ImageView imageView, String url) {
-	    BitmapWorkerTask task = new BitmapWorkerTask(imageView, true);
-	    task.execute(url);
-	}
+//	public void loadBitmap(ImageView imageView, String url) {
+//	    BitmapWorkerTask task = new BitmapWorkerTask(imageView, true);
+//	    task.execute(url);
+//	}
 
 }
