@@ -17,11 +17,21 @@
         android:contentDescription="PubIcon"
         android:src="@drawable/ic_noimage" />
 
+     <com.beardedhen.androidbootstrap.FontAwesomeText
+         android:id="@+id/map_marker_free"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_toRightOf="@+id/house_thumbnail"
+         android:layout_below="@+id/price_itemlist"
+         android:textColor="@color/bbutton_danger"
+         android:textSize="12sp"
+         fontawesometext:fa_icon="fa-map-marker" />
+
     <TextView
         android:id="@+id/price_itemlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_proptype_zone_itemlist"
+        android:layout_alignLeft="@+id/text_address_itemlist"
         android:layout_alignParentTop="true"
         android:gravity="left"
         android:text="Price"
@@ -32,59 +42,37 @@
         android:id="@+id/text_proptype_zone_itemlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="2dp"
-        android:layout_toRightOf="@+id/house_thumbnail"
-        android:fontFamily="@string/action_example"
+        android:layout_below="@+id/text_transType_rooms_itemlist"
+        android:layout_alignLeft="@+id/text_transType_rooms_itemlist"
         android:text="Property type | Zone"
         android:textStyle="normal" />
-
-	<ImageView
-	    android:id="@+id/address_thumbnail"
-	    android:layout_width="13dp"
-	    android:layout_height="13dp"
-	    android:layout_toRightOf="@+id/house_thumbnail"
-	    android:layout_centerVertical="true"
-	    android:contentDescription="AddressIcon"
-	    android:src="@drawable/location_icon" />
     
 	<TextView
-        android:id="@+id/text_address_itemlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/address_thumbnail"
-        android:layout_centerVertical="true"
-        android:text="Address" 
-        android:textStyle="bold" />
-        
+	    android:id="@+id/text_address_itemlist"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_toRightOf="@+id/map_marker_free"
+	    android:layout_alignBottom="@+id/map_marker_free"
+	    android:text="Address"
+	    android:textStyle="normal" />
+
     <TextView
         android:id="@+id/text_transType_rooms_itemlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="5dp"
+        android:layout_alignLeft="@+id/text_address_itemlist"
+        android:layout_below="@+id/text_address_itemlist"
         android:text="Transaction type | Rooms" />
-    
-    <TextView
-        android:id="@+id/text_see_detail_itemlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="5dp"
-        android:text="Ver detalle"
-        android:textColor="@color/SteelBlue"
-        android:textStyle="normal" />
-
-    <ImageView
-	    android:id="@+id/seeDetail_thumbnail"
-	    android:layout_width="13dp"
-	    android:layout_height="15dp"
-	    android:layout_toLeftOf="@+id/text_see_detail_itemlist"
-        android:layout_alignParentBottom="true"
-        android:contentDescription="SeeDetailIcon"
-	    android:src="@drawable/seedetail_icon" />
+   
+     <com.beardedhen.androidbootstrap.FontAwesomeText
+         android:id="@+id/icon_camera"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentBottom="true"
+         android:textColor="@color/bbutton_inverse_disabled"
+         android:textSize="24sp"
+         fontawesometext:fa_icon="fa-camera" />
     
 </RelativeLayout>    
 
