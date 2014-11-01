@@ -58,9 +58,9 @@
          android:id="@+id/map_marker"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_toRightOf="@+id/house_thumbnail"
          android:layout_alignBottom="@+id/text_address_itemlist"
          android:layout_below="@+id/price_itemlist"
-         android:layout_alignLeft="@+id/text_transType_rooms_itemlist"
          android:textColor="@color/bbutton_danger"
          android:textSize="24sp"
          fontawesometext:fa_icon="fa-map-marker" />
@@ -99,19 +99,9 @@
         android:id="@+id/text_transType_rooms_itemlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:layout_alignLeft="@+id/price_itemlist"
+		android:layout_alignLeft="@+id/text_address_itemlist"
 		android:layout_below="@+id/map_marker"
         android:text="Transaction type | Rooms" />
-
-    <TextView
-        android:id="@+id/price_itemlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/house_thumbnail"
-        android:layout_below="@+id/bootstrapButton1"
-        android:text="Price"
-        android:textColor="@color/SteelBlue"
-        android:textStyle="normal|bold" />
 
     <TextView
         android:id="@+id/text_proptype_zone_itemlist"
@@ -129,10 +119,19 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/house_thumbnail"
         android:text="Propiedad Destacada"
-        fontawesometext:bb_icon_left="fa-star"
         fontawesometext:bb_roundedCorners="true"
         fontawesometext:bb_size="xsmall"
         fontawesometext:bb_type="primary" >
     </com.beardedhen.androidbootstrap.BootstrapButton>
+
+    <TextView
+        android:id="@+id/price_itemlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bootstrapButton1"
+        android:layout_alignLeft="@+id/text_address_itemlist"
+        android:text="Price"
+        android:textColor="@color/SteelBlue"
+        android:textStyle="normal|bold" />
 
 </RelativeLayout>
