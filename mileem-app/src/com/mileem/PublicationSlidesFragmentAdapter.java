@@ -3,13 +3,11 @@ package com.mileem;
 
 import java.util.ArrayList;
 
-import com.mileem.R;
-import com.mileem.fragments.PublicationSlidesFragment;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.mileem.fragments.PublicationSlidesFragment;
 
 public class PublicationSlidesFragmentAdapter extends FragmentStatePagerAdapter {
 
@@ -27,13 +25,11 @@ public class PublicationSlidesFragmentAdapter extends FragmentStatePagerAdapter 
 	
 	@Override
 	public Fragment getItem(int arg0) {
-		// TODO Auto-generated method stub
 		return new PublicationSlidesFragment(Url_images.get(arg0));
 	}
 	
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return Url_images.size();
 	}
 

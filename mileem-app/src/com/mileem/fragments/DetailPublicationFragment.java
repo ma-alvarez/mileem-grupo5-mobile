@@ -68,7 +68,7 @@ public class DetailPublicationFragment extends Fragment{
 			detailView = inflater.inflate(R.layout.fragment_detailpublication,
 						 container, false);
 	
-	        adapter = new PublicationSlidesFragmentAdapter(getActivity().getSupportFragmentManager(),publication.getUrls_image());
+	        adapter = new PublicationSlidesFragmentAdapter(getActivity().getSupportFragmentManager(),publication.getListImagesURL());
 	        
 	        pager = (ViewPager) detailView.findViewById(R.id.pager);
 	        pager.setAdapter(adapter);

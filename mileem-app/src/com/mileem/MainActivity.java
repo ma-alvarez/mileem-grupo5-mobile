@@ -28,7 +28,7 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.activity_main);
 
         PixateFreestyle.init(this);
-        
+        ImageLoader.init(this);
 //        mNavigationDrawerFragment = (NavigationDrawerFragment)
 //                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 //        mTitle = getTitle();

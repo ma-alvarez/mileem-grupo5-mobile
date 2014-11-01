@@ -4,20 +4,13 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Locale;
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.beardedhen.androidbootstrap.FontAwesomeText;
-import com.mileem.R;
 import com.mileem.model.Publication;
 import com.mileem.tasks.BitmapWorkerTask;
 
@@ -25,81 +18,97 @@ import com.mileem.tasks.BitmapWorkerTask;
 public class ListPublicacionesViewAdapter extends BaseAdapter {
 
     private Context context;
-    LayoutInflater inflater;
+    //private ImageLoader mImageLoader;
 
-    private ArrayList<Publication> lista_publicaciones;
-    private Publication publicacion = null;
+    private ArrayList<PublicationAdapter> publication_adapters;
 
 
     public ListPublicacionesViewAdapter(Context context,
-    		ArrayList<Publication> arraylist) {
+    		ArrayList<PublicationAdapter> adapters) {
     	this.context = context;
-    	lista_publicaciones = arraylist;
-
+    	publication_adapters = adapters;
+    	//mImageLoader = new ImageLoader(context);
     }
 
     @Override
 	public int getCount() {
-		return lista_publicaciones.size();
+		return publication_adapters.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return lista_publicaciones.get(position);
+		return publication_adapters.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		return 0;
 	}
+	
+	static class ViewHolder{
+		public TextView price;
+        public TextView address;
+        public TextView propTypeAndZone;
+        public TextView transactionTypeAndRooms;
+        public ImageView main_icon;
+        public ImageView icon1;
+        public ImageView icon2;
+        public ImageView icon3;
+	}
 
-	//@SuppressLint("ViewHolder")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		TextView price;
-        TextView address;
-        TextView propTypeAndZone;
-        TextView transactionTypeAndRooms;
-        ImageView icon;
-
-        inflater = (LayoutInflater) context
-        		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View itemView = inflater.inflate(R.layout.listview_item, parent, false);
-
-        publicacion = lista_publicaciones.get(position);
-        // Locate the TextViews in listview_item.xml
-        price = (TextView) itemView.findViewById(R.id.price_itemlist);
-        address = (TextView) itemView.findViewById(R.id.text_address_itemlist);
-        //FontAwesomeText tv1 = (FontAwesomeText) itemView.findViewById(R.id.text_address_itemlist);
-        propTypeAndZone = (TextView) itemView.findViewById(R.id.text_proptype_zone_itemlist);
-        transactionTypeAndRooms = (TextView) itemView.findViewById(R.id.text_transType_rooms_itemlist);
+        ViewHolder viewHolder;
+        PublicationAdapter pub_adapter = publication_adapters.get(position);
+        Publication publicacion = pub_adapter.getPublication();
         
-        // Locate the ImageView in listview_item.xml
-        icon = (ImageView) itemView.findViewById(R.id.house_thumbnail);
+        if(convertView == null || convertView.getId() != pub_adapter.getLayoutId()){
+
+        	LayoutInflater inflater = (LayoutInflater) context
+        			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        	convertView = inflater.inflate(pub_adapter.getLayoutId(), parent, false);
+        	viewHolder = new ViewHolder();
+        	
+        	viewHolder.price = (TextView) convertView.findViewById(R.id.price_itemlist);
+        	viewHolder.address = (TextView) convertView.findViewById(R.id.text_address_itemlist);
+        	viewHolder.propTypeAndZone = (TextView) convertView.findViewById(R.id.text_proptype_zone_itemlist);
+        	viewHolder.transactionTypeAndRooms = (TextView) convertView.findViewById(R.id.text_transType_rooms_itemlist);
+        	viewHolder.main_icon = (ImageView) convertView.findViewById(R.id.house_thumbnail);
+
+        	
+        	
+        	convertView.setTag(viewHolder);
+        }else{
+        	viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        
 
         // Capture position and set results to the TextViews
-        address.setText(publicacion.getAddress());
-        propTypeAndZone.setText(publicacion.getProperty_type() + " | " + publicacion.getZone());
-        transactionTypeAndRooms.setText(publicacion.getTransaction_type() + " | " + Integer.toString(publicacion.getNumber_of_rooms()) + " Amb.");
+        viewHolder.address.setText(publicacion.getAddress());
+        viewHolder.propTypeAndZone.setText(publicacion.getProperty_type() + " | " + publicacion.getZone());
+        viewHolder.transactionTypeAndRooms.setText(publicacion.getTransaction_type() + " | " + Integer.toString(publicacion.getNumber_of_rooms()) + " Amb.");
         
         DecimalFormat df = new DecimalFormat("#,###,###,##0" );
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("es", "AR"));
         symbols.setDecimalSeparator(',');
         symbols.setGroupingSeparator('.');
         df.setDecimalFormatSymbols(symbols);
-        price.setText( publicacion.getCurrency() + " " + df.format(publicacion.getPrice()));
+        viewHolder.price.setText( publicacion.getCurrency() + " " + df.format(publicacion.getPrice()));
         
-        if(publicacion.getUrls_image().size() > 0)
-        	loadBitmap(icon, publicacion.getUrl_Image(0));
+//        if(publicacion.getListImagesURL().size() > 0){
+//        	ImageLoader.displayImage(publicacion.getImageURLAtIndex(0), viewHolder.main_icon, 100,100);
+//        }
+        pub_adapter.addImages(viewHolder, convertView);
         
-        return itemView;
+        return convertView;
 	}
 	
-	public void loadBitmap(ImageView imageView, String url) {
-	    BitmapWorkerTask task = new BitmapWorkerTask(imageView, true);
-	    task.execute(url);
-	}
+//	public void loadBitmap(ImageView imageView, String url) {
+//	    BitmapWorkerTask task = new BitmapWorkerTask(imageView, true);
+//	    task.execute(url);
+//	}
 
 }
