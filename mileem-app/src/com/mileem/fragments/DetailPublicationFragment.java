@@ -295,7 +295,7 @@ public class DetailPublicationFragment extends Fragment{
 		
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage("¿Desea comparir la publicación en Twitter?")
+		builder.setMessage("¿Desea compartir la publicación en Twitter?")
 		       .setTitle("Compartir en Twitter");
 		// Add the buttons
 		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -380,7 +380,7 @@ public class DetailPublicationFragment extends Fragment{
 	protected void sharePublicationOnFacebook() {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage("¿Desea comparir la publicación en Facebook?")
+		builder.setMessage("¿Desea compartir la publicación en Facebook?")
 		       .setTitle("Compartir en Facebook");
 		// Add the buttons
 		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
