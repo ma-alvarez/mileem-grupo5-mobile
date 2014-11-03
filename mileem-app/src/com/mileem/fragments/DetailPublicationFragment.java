@@ -1,40 +1,27 @@
 package com.mileem.fragments;
 
+import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
-
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,29 +29,29 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.*;
-import com.facebook.model.*;
 import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.LoginButton;
-import com.facebook.widget.LoginButton.UserInfoChangedCallback;
-
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.mileem.ConfigManager;
 import com.mileem.R;
 import com.mileem.PublicationSlidesFragmentAdapter;
 import com.mileem.model.Publication;
-import com.mileem.util.Twitt_Sharing;
+import com.mileem.util.Util;
+import com.mileem.util.twitter.HelperMethods;
+import com.mileem.util.twitter.HelperMethods.TwitterCallback;
+import com.mileem.util.twitter.TwitterLoginActivity;
 import com.mileem.fragments.PublicationMapFragment;
+import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
 
 public class DetailPublicationFragment extends Fragment{
@@ -88,9 +75,13 @@ public class DetailPublicationFragment extends Fragment{
     private BootstrapButton twitterButton;
 	public final String consumer_key = "w6oD9dAh7zYHpQIicPTVfyhbf";
 	public final String secret_key = "7YTdOstEdn75OEVJRFmgRp2CU5FQnr7bpHIXoiGBv7fECfrEU8";
+	public final String accessToken = "2853897964-X5AxG2wibWnqDqebX3o2nnkBRylFxhxo7hHDfsi";
+	public final String accessTokenSecret = "DE1urljEmejZlO2CDgDYiXFHPn1SiM59jZ2rUoah5O4FA";
 	File casted_image;
 	String string_img_url = null , string_msg = null;
-	
+	private AlertDialog mAlertBuilder;
+	private LayoutInflater layoutInflater;
+	ImageView twitterImageView;
 	
     public DetailPublicationFragment(Publication publication) {
 		this.publication = publication;
@@ -104,7 +95,7 @@ public class DetailPublicationFragment extends Fragment{
 	
 	@Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-			
+		layoutInflater = inflater;
 		
 		if (detailView == null){
 			
@@ -300,155 +291,146 @@ public class DetailPublicationFragment extends Fragment{
 	      }
 	}
 	
-	
 	protected void sharePublicationOnTwitter() {
-		if (isNetworkAvailable()) {
-			Twitt_Sharing twitt = new Twitt_Sharing(this.getActivity(), consumer_key, secret_key);
-			string_img_url = ConfigManager.URL_SERVER + publication.getUrl_Image(0);
-			string_msg = publication.getTransaction_type() +  " de " + 
-        			publication.getProperty_type() + " | " + 
-					publication.getAddress() + " | " +
-					publication.getZone() + " | " +
-        			formattedPrice + " " +
-        			"#mileem";
-			// here we have web url image so we have to make it as file to upload
-			String_to_File(string_img_url);
-			// Now share both message & image to sharing activity
-			//TODO: Ver por que falla la subida de la imagen.
-			//twitt.shareToTwitter(string_msg, casted_image);
-			twitt.shareToTwitter(string_msg, null);
-		} else {
-			showToast("No Network Connection Available !!!");
-		}
-	}
+		
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("¿Desea comparir la publicación en Twitter?")
+		       .setTitle("Compartir en Twitter");
+		// Add the buttons
+		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   if (Util.isNetworkAvailable(getActivity())) {
+		       			if (TwitterLoginActivity.isActive(getActivity())) {
+		       				try {
 
-	// when user will click on twitte then first that will check that is
-	// internet exist or not
-	public boolean isNetworkAvailable() {
-		ConnectivityManager connectivity = (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-		if (connectivity == null) {
-			return false;
-		} else {
-			NetworkInfo[] info = connectivity.getAllNetworkInfo();
-			if (info != null) {
-				for (int i = 0; i < info.length; i++) {
-					if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
+		       					mAlertBuilder = new AlertDialog.Builder(getActivity()).create();
+		       					mAlertBuilder.setCancelable(false);
+		       					mAlertBuilder.setTitle(R.string.please_wait_title);
+		       					View view = layoutInflater.inflate(R.layout.view_loading, null);
+		       					((TextView) view.findViewById(R.id.messageTextViewFromLoading)).setText(getString(R.string.posting_image_message));
+		       					mAlertBuilder.setView(view);
+		       					mAlertBuilder.show();
+		       					
+		       					//Download image to device.
+		       					String imageName = Util.random();
+		       					Util.downloadFile(getActivity(), 
+		       							ConfigManager.URL_SERVER + publication.getUrl_Image(0),
+		       							imageName);
+		       					Thread.sleep(2000);
+		       					
+		       					String inFilename = Environment.getExternalStorageDirectory()
+		       		                    + "/Download/" + imageName;
+		       					String outFilename = Environment.getExternalStorageDirectory()
+		       		                    + "/Download/" + "_" + imageName;
+		       					
+		       					Log.d(TAG, "In Filename: " + inFilename);
+		       					Log.d(TAG, "Out Filename: " + outFilename);
+		       					
+		       					File file = new File(inFilename); 
+		       		            if (!file.isDirectory())
+		       		                file.mkdir();
+		       					FileInputStream fileInputStream = new FileInputStream(file);
+		       					Bitmap bmp = BitmapFactory.decodeStream(fileInputStream);
+		       					FileOutputStream out = new FileOutputStream(outFilename);
+		       					bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+		       					
+		       					string_msg = publication.getTransaction_type() +  " de " + 
+		       							publication.getProperty_type() + " | " + 
+		       							publication.getAddress() + " | " +
+		       							publication.getZone() + " | " +
+		       							formattedPrice + " " +
+		       							"#mileem";
+		       					
+		       					HelperMethods.postToTwitterWithImage(getActivity().getApplicationContext(), 
+		       							getActivity(), outFilename, string_msg , new TwitterCallback() {
 
-	private void showToast(String msg) {
-		Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
-	}
+		       						@Override
+		       						public void onFinsihed(Boolean response) {
+		       							mAlertBuilder.dismiss();
+		       							Log.d(TAG, "----------------response----------------" + response);
+		       							Toast.makeText(getActivity(), getString(R.string.image_posted_on_twitter), Toast.LENGTH_SHORT).show();
+		       						}
+		       					});
 
-	// this function will make your image to file
-	public File String_to_File(String img_url) {
-		try {
-			File rootSdDirectory = Environment.getExternalStorageDirectory();
-			casted_image = new File(rootSdDirectory, "attachment.jpg");
-			if (casted_image.exists()) {
-				casted_image.delete();
-			}
-			casted_image.createNewFile();
-			FileOutputStream fos = new FileOutputStream(casted_image);
-			URL url = new URL(img_url);
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("GET");
-			connection.setDoOutput(true);
-			connection.connect();
-			InputStream in = connection.getInputStream();
-			byte[] buffer = new byte[1024];
-			int size = 0;
-			while ((size = in.read(buffer)) > 0) {
-				fos.write(buffer, 0, size);
-			}
-			
-//			Bitmap bm = ShrinkBitmap(img_url, 50, 50);
-//			bm.compress(Bitmap.CompressFormat.JPEG, 50, fos);
-			
-			fos.close();
-		} catch (Exception e) {
-			System.out.print(e);
-		}
-		return casted_image;
-	}
-	
-	public Bitmap ShrinkBitmap(String file, int width, int height) {
-		BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
-		bmpFactoryOptions.inJustDecodeBounds = true;
-		Bitmap bitmap = BitmapFactory.decodeFile(file, bmpFactoryOptions);
-		int heightRatio = (int) Math.ceil(bmpFactoryOptions.outHeight
-				/ (float) height);
-		int widthRatio = (int) Math.ceil(bmpFactoryOptions.outWidth
-				/ (float) width);
-
-		if (heightRatio > 1 || widthRatio > 1) {
-			if (heightRatio > widthRatio) {
-				bmpFactoryOptions.inSampleSize = heightRatio;
-			} else {
-				bmpFactoryOptions.inSampleSize = widthRatio;
-			}
-		}
-
-		bmpFactoryOptions.inJustDecodeBounds = false;
-		bitmap = BitmapFactory.decodeFile(file, bmpFactoryOptions);
-		return bitmap;
+		       				} catch (Exception ex) {
+		       					Log.e(TAG, ex.toString());
+		       					Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+		       				}
+		       			}else{
+		       				startActivity(new Intent(getActivity(), TwitterLoginActivity.class));
+		       			}
+		       			
+		       			
+		       		} else {
+		       			Util.showToast(getActivity(), "No dispones de conexión a Internet para compartir la publicación.");
+		       		}
+		           }
+		       });
+		builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		               // User cancelled the dialog
+		           }
+		       });
+		// Create the AlertDialog
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 	
 	protected void sharePublicationOnFacebook() {
-		Log.i("Attempting to share publication on facebook...", "");
-	    // Add code to print out the key hash
-	    try {
-	        PackageInfo info = this.getActivity().getPackageManager().getPackageInfo(
-	                "com.facebook.samples.hellofacebook", 
-	                PackageManager.GET_SIGNATURES);
-	        for (Signature signature : info.signatures) {
-	            MessageDigest md = MessageDigest.getInstance("SHA");
-	            md.update(signature.toByteArray());
-	            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-	            }
-	    } catch (NameNotFoundException e) {
 
-	    } catch (NoSuchAlgorithmException e) {
-
-	    }
-		FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this.getActivity())
-        	.setLink("https://www.google.com.ar")
-        	.setCaption("Encontrá tu próxima propiedad con Mileem.")
-			.setName(
-					publication.getAddress() + " | " +
-		        	publication.getZone() )
-        	.setPicture(ConfigManager.URL_SERVER + publication.getUrl_Image(0))
-        	.setDescription(
-        			publication.getTransaction_type() + " de " + 
-        			publication.getProperty_type() + " | " + 
-        			formattedPrice + " " +
-        			"#mileem")
-   			.build();
-		uiHelper.trackPendingDialogCall(shareDialog.present());
-		
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("¿Desea comparir la publicación en Facebook?")
+		       .setTitle("Compartir en Facebook");
+		// Add the buttons
+		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   Log.i(TAG,"Publicando en facebook...");
+		       		//TODO: Remove this
+		       		Util.printKeyHashes(getActivity());
+		       		FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getActivity())
+		               	.setLink("https://www.mileem.com.ar")
+		               	.setCaption("Encontrá tu próxima propiedad con Mileem.")
+		       			.setName(
+		       					publication.getAddress() + " | " +
+		       		        	publication.getZone() )
+		       		    //Si la imagen vive en localhost, no se va a ver en FB.
+		               	.setPicture(ConfigManager.URL_SERVER + publication.getUrl_Image(0))
+		       		    //Para probar, usar una imagen publica como esta:
+		               	//.setPicture("http://images01.olx.cl/ui/2/75/50/20737550_1.jpg")
+		               	.setDescription(
+		               			publication.getTransaction_type() + " de " + 
+		               			publication.getProperty_type() + " | " + 
+		               			formattedPrice + " " +
+		               			"#mileem")
+		          			.build();
+		       		uiHelper.trackPendingDialogCall(shareDialog.present());
+		           }
+		       });
+		builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		               // User cancelled the dialog
+		           }
+		       });
+		// Create the AlertDialog
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
 		uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
 	        @Override
 	        public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
 	            Log.e("Activity", String.format("Error: %s", error.toString()));
 	        }
-
 	        @Override
 	        public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
+	        	Util.showToast(getActivity(), "La publicación fue compartida con éxito en Facebook.");
 	            Log.i("Activity", "Success!");
 	        }
 	    });
-		
 	}
 	
 	@Override
