@@ -53,7 +53,6 @@ import com.mileem.util.twitter.HelperMethods.TwitterCallback;
 import com.mileem.util.twitter.TwitterLoginActivity;
 import com.mileem.fragments.PublicationMapFragment;
 import com.squareup.picasso.Picasso;
-import com.viewpagerindicator.CirclePageIndicator;
 
 
 public class DetailPublicationFragment extends Fragment{
@@ -86,12 +85,6 @@ public class DetailPublicationFragment extends Fragment{
 	private AlertDialog mAlertBuilder;
 	private LayoutInflater layoutInflater;
 	ImageView twitterImageView;
-	
-	public static final DetailPublicationFragment newInstance(Publication p){
-		DetailPublicationFragment fragment = new DetailPublicationFragment();
-	    fragment.setArguments(p.getBundle());
-	    return fragment ;
-	}
 	
 	public static final DetailPublicationFragment newInstance(Publication p){
 		DetailPublicationFragment fragment = new DetailPublicationFragment();
@@ -329,7 +322,7 @@ public class DetailPublicationFragment extends Fragment{
 		       					//Download image to device.
 		       					String imageName = Util.random();
 		       					Util.downloadFile(getActivity(), 
-		       							ConfigManager.URL_SERVER + publication.getUrl_Image(0),
+		       							ConfigManager.URL_SERVER + publication.getImageURLAtIndex(0),
 		       							imageName);
 		       					Thread.sleep(2000);
 		       					
@@ -409,7 +402,7 @@ public class DetailPublicationFragment extends Fragment{
 		       					publication.getAddress() + " | " +
 		       		        	publication.getZone() )
 		       		    //Si la imagen vive en localhost, no se va a ver en FB.
-		               	.setPicture(ConfigManager.URL_SERVER + publication.getUrl_Image(0))
+		               	.setPicture(ConfigManager.URL_SERVER + publication.getImageURLAtIndex(0))
 		       		    //Para probar, usar una imagen publica como esta:
 		               	//.setPicture("http://images01.olx.cl/ui/2/75/50/20737550_1.jpg")
 		               	.setDescription(
