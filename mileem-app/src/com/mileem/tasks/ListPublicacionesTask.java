@@ -1,5 +1,8 @@
 package com.mileem.tasks;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -11,6 +14,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.Toast;
@@ -46,6 +50,25 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
 
+        File dir = Environment.getExternalStorageDirectory();
+        String fileName = dir + "/" + "IP.txt";
+        File f = new File(fileName);
+        if (f.exists()){
+        	try {
+				FileReader fis = new FileReader(f);
+				BufferedReader bufRead = new BufferedReader(fis, 100);
+				String ip_line = bufRead.readLine();
+				ConfigManager.URL_SERVER = ip_line;
+				ConfigManager.URL_SEARCH = ConfigManager.URL_SERVER + "/filterpublications.json";
+				bufRead.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
+        }
+    	
+    	
     	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_SEARCH + query);
     	publications = new ArrayList<Publication>();
     	pub_adapters = new ArrayList<PublicationAdapter>();
