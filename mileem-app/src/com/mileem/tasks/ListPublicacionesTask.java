@@ -134,6 +134,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     		
     		publication.setUser_email(user.getString(Publication.USER_EMAIL));
     		publication.setPhone(user.getString(Publication.USER_PHONE));
+    		publication.setUrl_video(jsonobject.getString(Publication.URL_VIDEO));
     		
     		JSONArray attachments = jsonobject.getJSONArray(Publication.ATTACHMENTS);
     		

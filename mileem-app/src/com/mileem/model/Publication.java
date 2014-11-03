@@ -2,6 +2,8 @@ package com.mileem.model;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
+
 public class Publication {
 	
 	public static String TRAN_TYPE = "transaction_type";
@@ -25,7 +27,9 @@ public class Publication {
 	public static String USER_PHONE = "phone";
 	public static String ATTACHMENTS = "publication_attachments";
 	public static String URL_IMAGE = "image";
+	public static String LIST_URL_IMAGE = "list_images";
 	public static String URL = "url";
+	public static String URL_VIDEO = "video_link";
 	
 	private String transaction_type;
 	private String property_type;
@@ -45,6 +49,7 @@ public class Publication {
 	private String publication_date;
 	private String user_phone;
 	private String user_email;
+	private String url_video;
 	private ArrayList<String> imageURL_list;
 	
 	public Publication(){
@@ -58,6 +63,29 @@ public class Publication {
 		age = 0;
 		imageURL_list = new ArrayList<String>();
 		
+	}
+	
+	public Publication(Bundle bundle){
+		transaction_type = bundle.getString(TRAN_TYPE);
+		property_type = bundle.getString(PROP_TYPE);
+		address = bundle.getString(ADDRESS);
+		zone = bundle.getString(ZONE);
+		area = bundle.getInt(AREA);
+		number_of_rooms = bundle.getInt(NUM_OF_ROOMS);
+		price = bundle.getDouble(PRICE);
+		expenses = bundle.getDouble(EXPENSES);
+		currency = bundle.getString(CURRENCY);
+		age = bundle.getDouble(AGE);
+		latitude = bundle.getDouble(LATITUDE);
+		longitude = bundle.getDouble(LONGITUDE);
+		relevance = bundle.getString(RELEVANCE);
+		created_date = bundle.getString(CREATED_DATE);
+		updated_date = bundle.getString(UPDATED_DATE);
+		publication_date = bundle.getString(PUBLICATION_DATE);
+		user_phone = bundle.getString(USER_PHONE);
+		user_email = bundle.getString(USER_EMAIL);
+		url_video = bundle.getString(URL_VIDEO);
+		imageURL_list = bundle.getStringArrayList(LIST_URL_IMAGE);
 	}
 	
 	public ArrayList<String> getListImagesURL() {
@@ -224,6 +252,32 @@ public class Publication {
 		return sb.toString();
 		
 	}
+	
+	public Bundle getBundle(){
+		Bundle bundle = new Bundle();
+		bundle.putString(TRAN_TYPE, transaction_type);
+		bundle.putString(PROP_TYPE, property_type);
+		bundle.putString(ADDRESS,address);
+		bundle.putString(ZONE,zone);
+		bundle.putInt(AREA,area);
+		bundle.putInt(NUM_OF_ROOMS,number_of_rooms);
+		bundle.putDouble(PRICE, price);
+		bundle.putDouble(EXPENSES,expenses);
+		bundle.putString(CURRENCY,currency);
+		bundle.putDouble(AGE,age);
+		bundle.putDouble(LATITUDE,latitude);
+		bundle.putDouble(LONGITUDE,longitude);
+		bundle.putString(RELEVANCE,relevance);
+		bundle.putString(CREATED_DATE,created_date);
+		bundle.putString(UPDATED_DATE,updated_date);
+		bundle.putString(PUBLICATION_DATE,publication_date);
+		bundle.putString(USER_PHONE, user_phone);
+		bundle.putString(USER_EMAIL,user_email);
+		bundle.putString(URL_VIDEO,url_video);
+		bundle.putStringArrayList(LIST_URL_IMAGE, imageURL_list);
+
+		return bundle;
+	}
 
 	public String getZone() {
 		return zone;
@@ -231,5 +285,13 @@ public class Publication {
 
 	public void setZone(String zone) {
 		this.zone = zone;
+	}
+	
+	public String getUrl_video() {
+		return url_video;
+	}
+
+	public void setUrl_video(String url_video) {
+		this.url_video = url_video;
 	}
 }

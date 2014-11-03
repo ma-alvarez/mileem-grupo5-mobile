@@ -2,9 +2,10 @@ package com.mileem;
 
 public class ConfigManager {
 
-	//public static String URL_SERVER = "http://192.168.1.147:3000";
+	//public static String URL_SERVER = "http://192.168.1.148:3000";
 	public static String URL_SERVER = "http://192.168.56.1:3000";
 	public static String URL_SEARCH = URL_SERVER + "/filterpublications.json";
+	public static final String API_KEY = "AIzaSyDLMpS9XVtPrPae_TzBLSJVkZNhLW6gdII";
 	
 	//Interface params query names
 	public static String PAGE = "?page=";

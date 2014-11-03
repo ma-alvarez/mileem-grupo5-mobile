@@ -9,17 +9,26 @@ import android.widget.ImageView;
 
 import com.mileem.ImageLoader;
 import com.mileem.R;
-import com.mileem.tasks.BitmapWorkerTask;
 
 public class PublicationSlidesFragment extends Fragment {
 
 	private String image_url;
 	private ImageView image;
-	private ImageLoader mImageLoader;
 	
 	
-	public PublicationSlidesFragment(String url) {
-		image_url = url;
+	public static final PublicationSlidesFragment newInstance(String url){
+		PublicationSlidesFragment fragment = new PublicationSlidesFragment();
+	    Bundle bundle = new Bundle(1);
+	    bundle.putString("url", url);
+	    fragment.setArguments(bundle);
+	    return fragment ;
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		image_url = getArguments().getString("url");
 	}
 
 	@Override
@@ -30,10 +39,7 @@ public class PublicationSlidesFragment extends Fragment {
 	    
 	    image = (ImageView) itemView.findViewById(R.id.imageView);
 	    
-	    //mImageLoader = new ImageLoader(getActivity());
 	    ImageLoader.displayImage(image_url, image, 1600, 1000);
-//	    BitmapWorkerTask task = new BitmapWorkerTask(image, false);
-//	    task.execute(image_url);
 	 
 	    return itemView;
 	}

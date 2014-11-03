@@ -23,18 +23,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.mileem.R;
-import com.mileem.Fx;
 import com.mileem.PublicationSlidesFragmentAdapter;
+import com.mileem.R;
 import com.mileem.model.Publication;
-import com.mileem.fragments.PublicationMapFragment;
-import com.viewpagerindicator.CirclePageIndicator;
 
 public class DetailPublicationFragment extends Fragment{
 	
@@ -43,20 +39,30 @@ public class DetailPublicationFragment extends Fragment{
 	private PublicationSlidesFragmentAdapter adapter;
 	private View detailView;
     private ViewPager pager;
-    private CirclePageIndicator indicator;
+//    private CirclePageIndicator indicator;
     private ViewGroup contact_layout;
     private BootstrapButton contact;
     private ImageButton viewMap;
     private BootstrapButton call;
     private BootstrapButton mail;
 	
-	public DetailPublicationFragment(Publication publication) {
-		this.publication = publication;
+	public static final DetailPublicationFragment newInstance(Publication p){
+		DetailPublicationFragment fragment = new DetailPublicationFragment();
+	    fragment.setArguments(p.getBundle());
+	    return fragment ;
+	}
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		this.publication = new Publication(getArguments());
 		this.detailView = null;
 		this.adapter = null;
 		this.pager = null;
 		this.call = null;
 		this.mail = null;
+		
 	}
 	
 	@Override
@@ -68,13 +74,13 @@ public class DetailPublicationFragment extends Fragment{
 			detailView = inflater.inflate(R.layout.fragment_detailpublication,
 						 container, false);
 	
-	        adapter = new PublicationSlidesFragmentAdapter(getActivity().getSupportFragmentManager(),publication.getListImagesURL());
+	        adapter = new PublicationSlidesFragmentAdapter(getActivity().getSupportFragmentManager(),publication.getListImagesURL(),publication.getUrl_video());
 	        
 	        pager = (ViewPager) detailView.findViewById(R.id.pager);
 	        pager.setAdapter(adapter);
 	        
-	        indicator = (CirclePageIndicator)detailView.findViewById(R.id.indicator);
-	        indicator.setViewPager(pager);
+//	        indicator = (CirclePageIndicator)detailView.findViewById(R.id.indicator);
+//	        indicator.setViewPager(pager);
 		   
 	        // Locate the TextViews in layout
 	        TextView main_text = (TextView) detailView.findViewById(R.id.main_desc);

@@ -28,12 +28,7 @@
 		             android:layout_height="match_parent"
 		             android:layout_marginBottom="5dp" />
 
-             	<com.viewpagerindicator.CirclePageIndicator
-	        		android:id="@+id/indicator"
-			        android:padding="10dip"
-    				android:layout_height="wrap_content"
-    				android:layout_width="fill_parent"
-    				android:layout_alignParentBottom="true" />
+
              	
              	</RelativeLayout>
              	

@@ -73,7 +73,7 @@ public class PublicationsFragment extends ListFragment {
 		
 		FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 		fragmentManager.beginTransaction().
-		replace(R.id.container,new DetailPublicationFragment(publication)).
+		replace(R.id.container,DetailPublicationFragment.newInstance(publication)).
 		addToBackStack("publicaciones").commit(); 
 	}
 	
