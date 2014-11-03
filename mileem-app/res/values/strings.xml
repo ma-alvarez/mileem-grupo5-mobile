@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">MiLEEM</string>
+    <string name="facebook_app_id">699326323507864</string>
     <string name="title_section1">Search</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -13,7 +14,21 @@
     <string name="eleccion_localidades">"Elegí las localidades."</string>
     <string name="ok">"Ok"</string>
     <string name="cancel">"Cancelar"</string>
-
+    
+    <!-- Twitter strings -->
+    <string name="twitter_consumer_key">w6oD9dAh7zYHpQIicPTVfyhbf</string>
+    <string name="twitter_consumer_secret">7YTdOstEdn75OEVJRFmgRp2CU5FQnr7bpHIXoiGBv7fECfrEU8</string>
+    <!-- loading messages -->
+    <string name="please_wait_title"> Por favor aguarde </string>
+    <string name="authenticating_your_app_message"> Autorizando la aplicación... </string>
+    <string name="posting_image_message"> Publicando en Twitter... </string>
+    <string name="posting_tweet_message"> Publicando en Twitter... </string>
+    <!-- toast -->
+    <string name="image_posted_on_twitter"> La publicación se compartió con éxito. </string>
+    <string name="tweet_posted_on_twitter"> La publicación se compartió con éxito. </string>
+    
+    
+    
     <string-array name="operations">
         <item>Compra</item>
         <item>Alquiler</item>
