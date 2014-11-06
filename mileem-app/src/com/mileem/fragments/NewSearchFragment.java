@@ -95,6 +95,8 @@ public class NewSearchFragment extends Fragment {
 		        .replace(R.id.container, fragment)
 		        .addToBackStack("busqueda")
 		        .commit();
+		        
+		        int count = fragmentManager.getBackStackEntryCount();
 			}
 		});
 		

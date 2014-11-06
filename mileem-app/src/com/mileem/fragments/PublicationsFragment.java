@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.mileem.ListPublicacionesViewAdapter;
+import com.mileem.PublicationAdapter;
 import com.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.model.Publication;
@@ -57,13 +59,61 @@ public class PublicationsFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		new ListPublicacionesTask(this).execute();
+		if (savedInstanceState == null){
+			new ListPublicacionesTask(this).execute();
+		} else {
+	    	ArrayList<Bundle> list_bundles = savedInstanceState.getParcelableArrayList("publications");
+	    	publicaciones = new ArrayList<Publication>();
+	    	for(Bundle b: list_bundles){
+	    		publicaciones.add(new Publication(b));
+	    	}
+	    	
+	    	ArrayList<PublicationAdapter> list_adapters = new ArrayList<PublicationAdapter>();
+	    	for(Publication p : publicaciones){
+	    		list_adapters.add(PublicationAdapter.newAdapterInstance(p));
+	    	}
+	    	ListPublicacionesViewAdapter adapter = new ListPublicacionesViewAdapter(activity,list_adapters);
+	    	this.setListAdapter(adapter);
+		}
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		this.activity = activity;
+	}
+	
+	public void onActivityCreated(Bundle savedInstanceState) {
+	    super.onActivityCreated(savedInstanceState);
+
+//	    if (savedInstanceState != null) {
+//	    	ArrayList<Bundle> list_bundles = savedInstanceState.getParcelableArrayList("publications");
+//	    	publicaciones = new ArrayList<Publication>();
+//	    	for(Bundle b: list_bundles){
+//	    		publicaciones.add(new Publication(b));
+//	    	}
+//	    	
+//	    	ArrayList<PublicationAdapter> list_adapters = new ArrayList<PublicationAdapter>();
+//	    	for(Publication p : publicaciones){
+//	    		list_adapters.add(PublicationAdapter.newAdapterInstance(p));
+//	    	}
+//	    	ListPublicacionesViewAdapter adapter = new ListPublicacionesViewAdapter(getActivity(),list_adapters);
+//	    	this.setListAdapter(adapter);
+//	    }
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		if(publicaciones != null){
+			//Save the fragment's state here
+			ArrayList<Bundle> list_bundles = new ArrayList<Bundle>();
+			for (Publication p : publicaciones){
+				list_bundles.add(p.getBundle());
+			}
+			outState.putParcelableArrayList("publications", list_bundles);
+		}
 	}
 
 	@Override

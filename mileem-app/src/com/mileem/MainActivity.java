@@ -1,24 +1,13 @@
 package com.mileem;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mileem.R;
 import com.mileem.fragments.NavigationDrawerFragment;
 import com.mileem.fragments.NewSearchFragment;
-import com.mileem.fragments.SearchFragment;
 import com.pixate.freestyle.PixateFreestyle;
 
 public class MainActivity extends FragmentActivity
@@ -35,59 +24,23 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.activity_main);
         
         PixateFreestyle.init(this);
-        ImageLoader.init(this);
-//        mNavigationDrawerFragment = (NavigationDrawerFragment)
-//                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-//        mTitle = getTitle();
-//
-//        // Set up the drawer.
-//        mNavigationDrawerFragment.setUp(
-//                R.id.navigation_drawer,
-//                (DrawerLayout) findViewById(R.id.drawer_layout));
-//        
-    	// update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container,new NewSearchFragment())
-        		//.replace(R.id.container,new SearchFragment())
-                .commit();
-        
+
+
+        if (savedInstanceState == null){
+        	ImageLoader.init(this);
+        	FragmentManager fragmentManager = getSupportFragmentManager();
+        	fragmentManager.beginTransaction()
+        	.replace(R.id.container,new NewSearchFragment())
+        	.commit();
+        }
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        
-//    	Fragment fragment = null;
-//        switch(position) {
-//        case 0:
-//            fragment = new PublicationsFragment();
-//            break;
-//        case 1:
-//            //
-//            break;
-//    }
-//    	
-//    	// update the main content by replacing fragments
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, fragment)
-//                .commit();
+      
 
     }
 
-//    public void onSectionAttached(int number) {
-//        switch (number) {
-//            case 1:
-//                mTitle = getString(R.string.title_section1);
-//                break;
-//            case 2:
-//                mTitle = getString(R.string.title_section2);
-//                break;
-//            case 3:
-//                mTitle = getString(R.string.title_section3);
-//                break;
-//        }
-//    }
 
     public void restoreActionBar() {
 //        ActionBar actionBar = getActionBar();

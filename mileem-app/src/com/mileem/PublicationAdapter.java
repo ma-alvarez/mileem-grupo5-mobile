@@ -19,4 +19,20 @@ public abstract class PublicationAdapter {
 	public void setPublication(Publication p){
 		mPublication = p;
 	}
+	
+	public static PublicationAdapter newAdapterInstance(Publication pub){
+		
+		PublicationAdapter pAdapter = null;
+		if(pub.getRelevance().equalsIgnoreCase("1")){
+			pAdapter = new PublicationFreeAdapter();
+		}else{
+			if(pub.getRelevance().equalsIgnoreCase("2")){
+				pAdapter = new PublicationBasicAdapter();
+			}else{
+				pAdapter = new PublicationPremiumAdapter();
+			}
+		}
+		pAdapter.setPublication(pub);
+		return pAdapter;
+	}
 }

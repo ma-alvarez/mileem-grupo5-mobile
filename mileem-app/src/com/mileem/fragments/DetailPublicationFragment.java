@@ -116,10 +116,10 @@ public class DetailPublicationFragment extends Fragment{
 			detailView = inflater.inflate(R.layout.fragment_detailpublication,
 						 container, false);
 	
-	        adapter = new PublicationSlidesFragmentAdapter(getActivity().getSupportFragmentManager(),publication.getListImagesURL(),publication.getUrl_video());
+	        //adapter = new PublicationSlidesFragmentAdapter(getActivity().getSupportFragmentManager(),publication.getListImagesURL(),publication.getUrl_video());
 	        
 	        pager = (ViewPager) detailView.findViewById(R.id.pager);
-	        pager.setAdapter(adapter);
+	        //pager.setAdapter(adapter);
 	        
 //	        indicator = (CirclePageIndicator)detailView.findViewById(R.id.indicator);
 //	        indicator.setViewPager(pager);
@@ -445,11 +445,27 @@ public class DetailPublicationFragment extends Fragment{
 	    super.onResume();
 	    uiHelper.onResume();
 	}
+	
+	public void onActivityCreated(Bundle savedInstanceState) {
+	    super.onActivityCreated(savedInstanceState);
+	    
+	    if(adapter == null){
+	    	adapter = new PublicationSlidesFragmentAdapter(getChildFragmentManager(),publication.getListImagesURL(),publication.getUrl_video());
+
+	    	if(savedInstanceState != null){
+	    		adapter.restoreState(savedInstanceState, ClassLoader.getSystemClassLoader());
+	    	}
+	    	pager.setAdapter(adapter);
+	    }
+	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
 	    uiHelper.onSaveInstanceState(outState);
+	    if(adapter != null){
+	    	outState.putParcelable("adapter", adapter.saveState());
+	    }
 	}
 
 	@Override

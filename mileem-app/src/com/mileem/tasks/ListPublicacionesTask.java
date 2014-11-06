@@ -82,20 +82,10 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
     				
     				try {
 						JSONObject jsonobject = jsonarray.getJSONObject(i);
-						String relevance = jsonobject.getString(Publication.RELEVANCE);
 						publication = new Publication();
 						
-						if(relevance.equalsIgnoreCase("1")){
-							pub_adapter = new PublicationFreeAdapter();
-						}else{
-							if(relevance.equalsIgnoreCase("2")){
-								pub_adapter = new PublicationBasicAdapter();
-							}else{
-								pub_adapter = new PublicationPremiumAdapter();
-							}
-						}
 	    				loadPublication(publication, jsonobject);
-	    				pub_adapter.setPublication(publication);
+	    				pub_adapter = PublicationAdapter.newAdapterInstance(publication);
 	    				
     				} catch (JSONException e) {
     					Log.e(TAG, "Error in parsing JSON object " + i);

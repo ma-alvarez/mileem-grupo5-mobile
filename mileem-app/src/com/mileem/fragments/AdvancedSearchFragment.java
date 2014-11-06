@@ -79,7 +79,8 @@ public class AdvancedSearchFragment extends Fragment implements
 		pFragment = new OrderTypeFragment();
 		fragments.add(pFragment);
 		
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+		FragmentManager fragmentManager = getChildFragmentManager();
         for(IPlaceableFragment fragment : fragments){
             fragmentManager.beginTransaction()
             .add(fragment.getTargetContainer(),fragment.getFragment())
