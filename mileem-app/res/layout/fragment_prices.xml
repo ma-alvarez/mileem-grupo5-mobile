@@ -6,10 +6,27 @@
     android:layout_margin="5dp"
     android:background="@android:color/white" >
     
+    	<LinearLayout
+             android:id="@+id/quotation_layout"
+        	 android:layout_width="match_parent"
+        	 android:layout_height="50dp"
+        	 android:gravity="center"
+        	 android:layout_margin="10dp" >
+         	<com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/bb_quotation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Cotización: "
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="medium"
+                bootstrapbutton:bb_type="info" />
+		</LinearLayout>
+    
         <RelativeLayout
         android:id="@+id/RSeekBarPrices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/quotation_layout"
          />
  
          <com.beardedhen.androidbootstrap.BootstrapButton
@@ -70,5 +87,5 @@
                 bootstrapbutton:bb_roundedCorners="true"
                 bootstrapbutton:bb_size="small"
                 bootstrapbutton:bb_type="warning" />
-
+         
 </RelativeLayout>

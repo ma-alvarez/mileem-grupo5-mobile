@@ -22,7 +22,7 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 
 	
 	private RangeSeekBar<Long> seekBarPrice;
-	private BootstrapButton bb_ars, bb_usd, bb_allprices, bb_price_from, bb_price_to;
+	private BootstrapButton bb_ars, bb_usd, bb_allprices, bb_price_from, bb_price_to, bb_quotation;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +35,8 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 		bb_allprices = (BootstrapButton) rootView.findViewById(R.id.bb_allprices);
 		bb_price_from = (BootstrapButton) rootView.findViewById(R.id.bb_price_from);
 		bb_price_to = (BootstrapButton) rootView.findViewById(R.id.bb_price_to);
+		bb_quotation = (BootstrapButton) rootView.findViewById(R.id.bb_quotation);
+		bb_quotation.setText("Cotización: 1 $USD = 8,53 $ARS");
 		
 		setUpRangeSeekBarPrice();
 		ViewGroup seekBarPrice_layout = (ViewGroup) rootView.findViewById(R.id.RSeekBarPrices);
@@ -101,7 +103,7 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 	
 	@Override
 	public int getTargetContainer() {
-		return R.id.edit_mode_fragment_container_small;
+		return R.id.edit_mode_fragment_container_medium;
 	}
 
 	@Override
@@ -129,6 +131,7 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 		bb_price_from.setText("min");
 		bb_price_to.setText("max");
 		bb_allprices.setPressed(true);
+		bb_quotation.setText("Cotización: 1 $USD = 8,53 $ARS");
 	}
 
 }
