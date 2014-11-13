@@ -133,6 +133,10 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 			return "";
 		}else{
 			StringBuilder sb = new StringBuilder();
+			if (bb_usd.isPressed()){
+				sb.append(ConfigManager.CURRENCY);
+				sb.append("usd");
+			}
 			sb.append(ConfigManager.PRICE_FROM);
 			sb.append(seekBarPrice.getSelectedMinValue());
 			sb.append(ConfigManager.PRICE_TO);
