@@ -8,7 +8,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleccionar Barrio: "
+        android:text="Seleccione Barrio: "
         android:layout_alignParentTop="true" />
 
 	<Spinner
@@ -21,10 +21,8 @@
 
     <WebView
         android:id="@+id/web"
-        android:layout_width="210dp"
-        android:layout_height="220dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="65dp" />
 
     

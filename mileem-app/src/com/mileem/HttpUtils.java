@@ -68,6 +68,7 @@ public class HttpUtils {
     		   
     	   } catch (JSONException e) {
     		   jResponse.setError(e.getMessage());
+    		   jResponse.setResult(result);
     		   Log.e(TAG, "Error parsing data " + e.toString());
     	   }
        }

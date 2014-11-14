@@ -21,14 +21,15 @@
       data.addColumn('string', 'ITEM');
       data.addColumn('number', 'VALUE');
       data.addRows([
-        ['Item 1', Android.getNum1()],
-        ['Item 2', Android.getNum2()],
-        ['Item 3', Android.getNum3()]
+        ['1 Ambiente', Android.getNum1()],
+        ['2 Ambientes', Android.getNum2()],
+        ['3 Ambientes', Android.getNum3()],
+        ['4 Ambientes', Android.getNum4()]
       ]);
 
       // Set chart options
       var options = {'title':'Cantidad de Ambientes por Barrio',
-                     'width':200,
+                     'width':400,
                      'height':200};
       
       // Instantiate and draw our chart, passing in some options.
@@ -40,7 +41,7 @@
 
   <body>
  <!--Div that will hold the pie chart-->
-    <div id="chart_div" style="width:200; height:200"></div>
+    <div id="chart_div" style="width:400; height:200"></div>
   </body>
 </html>
 

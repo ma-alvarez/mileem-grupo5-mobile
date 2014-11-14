@@ -13,6 +13,8 @@ import android.widget.PopupMenu;
 import com.mileem.fragments.AmbXBarrioFragment;
 import com.mileem.fragments.NavigationDrawerFragment;
 import com.mileem.fragments.NewSearchFragment;
+import com.mileem.fragments.PrecioXMetroFragment;
+import com.mileem.fragments.ZonasAledanasFragment;
 import com.pixate.freestyle.PixateFreestyle;
 
 public class MainActivity extends FragmentActivity
@@ -107,10 +109,16 @@ public class MainActivity extends FragmentActivity
 	        	.commit();
 	            return true;
 	        case R.id.precio_metro:
-	           
+	        	fragmentManager.beginTransaction()
+	        	.replace(R.id.container,new PrecioXMetroFragment())
+	        	.addToBackStack("busqueda")
+	        	.commit();
 	            return true;
 	        case R.id.zonas_cercanas:
-		           
+	        	fragmentManager.beginTransaction()
+	        	.replace(R.id.container,new ZonasAledanasFragment())
+	        	.addToBackStack("busqueda")
+	        	.commit();   
 	            return true;    
 	        default:
 	            return false;
