@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -62,8 +60,6 @@ public class AmbXBarrioFragment extends Fragment {
         	     this.getActivity(),
         	     android.R.layout.simple_spinner_item,
         	     new ArrayList<CharSequence>(Arrays.asList(zones)));
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-//        		this.getActivity(), R.array.neighbourhoods, android.R.layout.simple_spinner_item );
         adapter.remove("Todas");
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
         
@@ -168,7 +164,7 @@ public class AmbXBarrioFragment extends Fragment {
 		@Override
 		protected void onPostExecute(Void args) {
 	        webView.getSettings().setJavaScriptEnabled(true); 
-	        webView.loadUrl("file:///android_asset/chart.html");
+	        webView.loadUrl("file:///android_asset/" + "chart_ambientesxzona.html");
 		}
 
 	}

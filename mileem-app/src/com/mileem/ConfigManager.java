@@ -6,6 +6,7 @@ public class ConfigManager {
 	public static String URL_SERVER = "http://192.168.56.1:3000";
 	public static String URL_SEARCH = URL_SERVER + "/filterpublications.json";
 	public static String URL_ROOMSBYZONE = URL_SERVER + "/roomsByZone";
+	public static String URL_ZONECOMPARISON = URL_SERVER + "/zoneComparison";
 	public static final String API_KEY = "AIzaSyDLMpS9XVtPrPae_TzBLSJVkZNhLW6gdII";
 	
 	//Interface params query names
