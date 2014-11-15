@@ -8,23 +8,31 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleccione Barrio: "
-        android:layout_alignParentTop="true" />
+        android:layout_alignBottom="@+id/spinner1"
+        android:layout_alignTop="@+id/spinner1"
+        android:gravity="center"
+        android:text="Por favor, seleccione un barrio: " />
 
 	<Spinner
 	    android:id="@+id/spinner1"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
 	    android:layout_alignParentTop="true"
-	    android:layout_toRightOf="@+id/textView1"
+	    android:layout_toRightOf="@+id/progress1"
 	    android:entries="@array/neighbourhoods" />
 
     <WebView
         android:id="@+id/web"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="65dp" />
+        android:layout_below="@+id/spinner1" />
 
-    
+    <ProgressBar
+    	android:id="@+id/progress1"
+    	android:layout_centerHorizontal="true"
+    	android:layout_centerVertical="true"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content" />
 
 </RelativeLayout>

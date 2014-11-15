@@ -18,11 +18,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.mileem.ConfigManager;
@@ -34,22 +37,25 @@ public class AmbXBarrioFragment extends Fragment {
 
 	private String TAG = this.getClass().getSimpleName();
 	private WebView webView;
+	private ProgressBar progressBar;
 	private Spinner zone_spinner;
 	private String last_selected = "";
 	private int num1, num2, num3, num4;
-	 
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View rootView = inflater.inflate(R.layout.fragment_ambxbarrio, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_ambxbarrio, container, false); 
 		
         webView = (WebView)rootView.findViewById(R.id.web);
         webView.addJavascriptInterface(new WebAppInterface(), "Android");
 
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
-
+        webView.setWebViewClient(new myWebClient());
+        
+        progressBar = (ProgressBar) rootView.findViewById(R.id.progress1);
         zone_spinner = (Spinner) rootView.findViewById(R.id.spinner1);
         String[] zones = getResources().getStringArray(R.array.neighbourhoods);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
@@ -105,6 +111,16 @@ public class AmbXBarrioFragment extends Fragment {
 		public int getNum4() {
 			return num4;
 		}
+		@JavascriptInterface
+		public String getBarrio() {
+			return zone_spinner.getSelectedItem().toString();
+		}
+		
+		@JavascriptInterface
+		public boolean notEnoughData() {
+			return (num1 + num2 + num3 + num4 == 0) ? true : false;
+		}
+		
 	}
 	
 	class GetChartDataTask extends AsyncTask<Void, Void, Void>{
@@ -131,7 +147,7 @@ public class AmbXBarrioFragment extends Fragment {
 		        }
 		    	
 		    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_ROOMSBYZONE + 
-		    			ConfigManager.ZONE2 + zone_spinner.getSelectedItem().toString().replace(" ", "\b"));
+		    			ConfigManager.ZONE2 + zone_spinner.getSelectedItem().toString().replace(" ", "_").toLowerCase());
 		    	if(!jResponse.getResult().isEmpty()){
 		    		String result = jResponse.getResult();
     				try {
@@ -155,6 +171,22 @@ public class AmbXBarrioFragment extends Fragment {
 	        webView.loadUrl("file:///android_asset/chart.html");
 		}
 
+	}
+
+	private class myWebClient extends WebViewClient
+	{
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			progressBar.setVisibility(View.VISIBLE);
+			view.loadUrl(url);
+			return true;
+
+		}
+		@Override
+		public void onPageFinished(WebView webview, String url){
+			super.onPageFinished(webview, url);
+			progressBar.setVisibility(View.GONE);
+		}
 	}
 
 }

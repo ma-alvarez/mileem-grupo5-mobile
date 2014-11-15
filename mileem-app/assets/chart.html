@@ -1,5 +1,6 @@
 <html>
   <head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -27,10 +28,17 @@
         ['4 Ambientes', Android.getNum4()]
       ]);
 
+	  var barrio = Android.getBarrio();
+	  var main = 'Tipología de Ambientes en el Barrio:\n';
+	  var title = main.concat(barrio);
+	  if (Android.notEnoughData() == true){
+	  	var sorry = 'Lo sentimos, no hay suficientes datos para el Barrio: ';
+	  	title = sorry.concat(barrio);
+	  }
       // Set chart options
-      var options = {'title':'Cantidad de Ambientes por Barrio',
+      var options = {'title': title,
                      'width':400,
-                     'height':200};
+                     'height':400};
       
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -41,7 +49,7 @@
 
   <body>
  <!--Div that will hold the pie chart-->
-    <div id="chart_div" style="width:400; height:200"></div>
+    <div id="chart_div" style="width:400; height:400"></div>
   </body>
 </html>
 
