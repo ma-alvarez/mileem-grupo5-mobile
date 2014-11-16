@@ -3,9 +3,10 @@
     tools:context="com.example.appejemplo.MainActivity" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/statistics"
+        android:orderInCategory="90"
+        android:showAsAction="always"
+        android:title="estadísticas"
+        android:icon="@drawable/ic_chart_bar"/>
 
 </menu>

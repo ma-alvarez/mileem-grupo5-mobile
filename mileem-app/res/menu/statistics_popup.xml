@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <item  
+        android:id="@+id/ambientes_barrios"  
+        android:title="Ambientes x Barrio"/>
+    <item  
+        android:id="@+id/precio_metro"  
+        android:title="Precio x Metro"/>
+    <item  
+        android:id="@+id/zonas_cercanas"  
+        android:title="Zonas Aledañas"/>  
+
+</menu>

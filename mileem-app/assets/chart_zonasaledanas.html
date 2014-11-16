@@ -1,0 +1,56 @@
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+
+  var length = Android.getCount();
+  var title = 'Precio Promedio en U$S en Zonas Aledañas a: ';
+  var barrio = Android.getBarrio();
+  title = title.concat(barrio);
+  
+  var arraydata = [];
+  var rows = length + 1;
+  for (var i  = 0; i < rows; i++){
+     arraydata[i] = [];
+  }
+
+  arraydata[0] = ['Barrios', 'Precio Prom.'];
+  
+  if(Android.notEnoughData() == false){
+   for (var i = 0; i < length; i++) {
+	 arraydata[i+1] = [Android.getZoneAt(i), Android.getAvgAt(i)];
+   }
+  } else {
+     arraydata[1] = ['0',0]
+     var sorry = 'Lo sentimos, no hay suficientes datos para el Barrio: ';
+	 title = sorry.concat(barrio);
+    }
+  var data = google.visualization.arrayToDataTable(arraydata);
+//  var data = google.visualization.arrayToDataTable([
+//    ['Barrios', 'Precio Prom.'],
+//    ['2002',  1000],
+//    ['2005',  1170],
+//    ['2006',  660],
+//    ['2007',  1030]
+//  ]);
+
+  var options = {
+    title: title,
+    legend: {position: 'none'}
+  };
+
+  var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+
+  chart.draw(data, options);
+
+}
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 400; height: 400;"></div>
+  </body>
+</html>
