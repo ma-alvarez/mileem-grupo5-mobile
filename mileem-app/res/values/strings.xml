@@ -11,7 +11,7 @@
     <string name="addresslabel">"Dirección : "</string>
     <string name="pricelabel">"Precio : "</string>
     <string name="roomslabel">"Ambientes : "</string>
-    <string name="eleccion_localidades">"Elegí las localidades."</string>
+    <string name="eleccion_barrios">"Elegí los barrios."</string>
     <string name="ok">"Ok"</string>
     <string name="cancel">"Cancelar"</string>
     
@@ -53,7 +53,7 @@
     </string-array>    
     
     <string-array name="neighbourhoods">
-        <item>Todas</item>
+        <item>Todos</item>
         <item>Agronomía</item>
         <item>Almagro</item>
         <item>Balvanera</item>

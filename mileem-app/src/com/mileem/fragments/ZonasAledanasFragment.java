@@ -151,7 +151,7 @@ public class ZonasAledanasFragment extends Fragment {
 		        }
 		    	
 		    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_ZONECOMPARISON + 
-		    			ConfigManager.ZONE2 + zone_spinner.getSelectedItem().toString().replace(" ", "_").toLowerCase());
+		    			ConfigManager.ZONE2 + zone_spinner.getSelectedItem().toString().replace(" ", "_").toLowerCase(), false);
 		    	if(!jResponse.getResult().isEmpty()){
 		    		String result = jResponse.getResult();
 		    		try {

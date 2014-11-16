@@ -116,7 +116,7 @@ public class PrecioXMetroFragment extends Fragment {
 
 		        }
 		        
-		        jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_EXCHANGERATE);
+		        jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_EXCHANGERATE, false);
 		        if(!jResponse.getResult().isEmpty()){
 		        	String result = jResponse.getResult();
 		        	try {
@@ -128,7 +128,7 @@ public class PrecioXMetroFragment extends Fragment {
 					}
 		        }
 		        jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_AVERAGEUSDPRICE + 
-		        		ConfigManager.ZONE2 + zone_spinner.getSelectedItem().toString().replace(" ", "_").toLowerCase());
+		        		ConfigManager.ZONE2 + zone_spinner.getSelectedItem().toString().replace(" ", "_").toLowerCase(), false);
 		        if(!jResponse.getResult().isEmpty()){
 		    		String result = jResponse.getResult();
 		    		try {

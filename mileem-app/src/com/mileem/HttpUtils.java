@@ -18,6 +18,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,7 +27,7 @@ import android.util.Log;
 public class HttpUtils {
 	private static String TAG = "HttpUtils";
 
-   public static JSONResponse getJSONfromURL(String url) {
+   public static JSONResponse getJSONfromURL(String url,Boolean simpleJSON) {
        InputStream is = null;
        String result = "";
        JSONArray jArray = null;
@@ -59,12 +60,16 @@ public class HttpUtils {
        } catch (Exception e) {
            Log.e(TAG, "Error converting result " + e.toString());
        }
-
+       
        if(!result.isEmpty()){
     	   try {
-
-    		   jArray = new JSONArray(result);
-    		   jResponse.setjArray(jArray);
+    		   if ( simpleJSON ){
+    			   jResponse.setJobject(new JSONObject(result));
+    		   }
+    		   else {
+    			   jArray = new JSONArray(result);
+        		   jResponse.setjArray(jArray);
+    		   }		   
     		   
     	   } catch (JSONException e) {
     		   jResponse.setError(e.getMessage());

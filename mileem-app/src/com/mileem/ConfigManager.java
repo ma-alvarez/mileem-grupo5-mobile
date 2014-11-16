@@ -28,6 +28,7 @@ public class ConfigManager {
 	public static String ROOMS = "&rooms=";
 	public static String PUB_TIME_FROM = "&pubtimefrom=";
 	public static String PUB_TIME_TO = "&pubtimeto=";
+	public static String CURRENCY = "&currency=";
 	
 	public static String[] COUNT_OPT = {"10","20","50"};
 	public static String[] ORDER_BY_OPT = {"rel","pubtime","price"};
@@ -35,5 +36,6 @@ public class ConfigManager {
 	public static String[] OPE_TYPE_OPT = {"buy","rent"};
 	public static String[] HOUS_TYPE_OPT = {"house","department"};
 	public static String[] ROOMS_OPT = {"1","2","3","4"};
+	public static String[] CURRENCY_OPT = {"ars","usd"};
 	
 }

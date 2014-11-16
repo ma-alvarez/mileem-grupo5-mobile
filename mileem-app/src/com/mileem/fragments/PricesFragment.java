@@ -2,8 +2,12 @@ package com.mileem.fragments;
 
 import java.text.DecimalFormat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,22 +16,32 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.mileem.HttpUtils;
+import com.mileem.JSONResponse;
 import com.mileem.R;
 import com.mileem.ConfigManager;
 import com.mileem.IPlaceableFragment;
 import com.mileem.RangeSeekBar;
 import com.mileem.RangeSeekBar.OnRangeSeekBarChangeListener;
+import com.mileem.tasks.ListPublicacionesTask;
+import com.mileem.tasks.QuotationTask;
 
 public class PricesFragment extends Fragment implements IPlaceableFragment {
 
 	
 	private RangeSeekBar<Long> seekBarPrice;
-	private BootstrapButton bb_ars, bb_usd, bb_allprices, bb_price_from, bb_price_to;
-
+	private String quotation;
+	private BootstrapButton bb_ars, bb_usd, bb_allprices, bb_price_from, bb_price_to, bb_quotation;
+	private String message = "Cotización: 1 $USD = " + quotation + " $ARS";
+	public PricesFragment() {
+		super();
+		new QuotationTask(this).execute();
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-				
+		
 		View rootView = inflater.inflate(R.layout.fragment_prices, container, false);
 		
 		bb_ars = (BootstrapButton) rootView.findViewById(R.id.bb_ars);
@@ -35,7 +49,17 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 		bb_allprices = (BootstrapButton) rootView.findViewById(R.id.bb_allprices);
 		bb_price_from = (BootstrapButton) rootView.findViewById(R.id.bb_price_from);
 		bb_price_to = (BootstrapButton) rootView.findViewById(R.id.bb_price_to);
+		bb_quotation = (BootstrapButton) rootView.findViewById(R.id.bb_quotation);
 		
+		if( quotation == null){
+			String error_message ="No se encontró la cotización";
+			Log.e("PriceFragmet", error_message);
+			bb_quotation.setText(error_message);
+		}
+		else{
+			bb_quotation.setText(message);
+		}
+			
 		setUpRangeSeekBarPrice();
 		ViewGroup seekBarPrice_layout = (ViewGroup) rootView.findViewById(R.id.RSeekBarPrices);
 		seekBarPrice_layout.addView(seekBarPrice);
@@ -101,7 +125,7 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 	
 	@Override
 	public int getTargetContainer() {
-		return R.id.edit_mode_fragment_container_small;
+		return R.id.edit_mode_fragment_container_medium;
 	}
 
 	@Override
@@ -114,6 +138,10 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 			return "";
 		}else{
 			StringBuilder sb = new StringBuilder();
+			if (bb_usd.isPressed()){
+				sb.append(ConfigManager.CURRENCY);
+				sb.append("usd");
+			}
 			sb.append(ConfigManager.PRICE_FROM);
 			sb.append(seekBarPrice.getSelectedMinValue());
 			sb.append(ConfigManager.PRICE_TO);
@@ -129,6 +157,10 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 		bb_price_from.setText("min");
 		bb_price_to.setText("max");
 		bb_allprices.setPressed(true);
+	}
+	
+	public void setQuotation(String quota){
+		this.quotation = quota;
 	}
 
 }
