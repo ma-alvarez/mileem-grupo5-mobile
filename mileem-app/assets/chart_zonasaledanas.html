@@ -13,7 +13,7 @@ function drawChart() {
   title = title.concat(barrio);
   
   var arraydata = [];
-  var rows = length;
+  var rows = length + 1;
   for (var i  = 0; i < rows; i++){
      arraydata[i] = [];
   }
@@ -21,8 +21,8 @@ function drawChart() {
   arraydata[0] = ['Barrios', 'Precio Prom.'];
   
   if(Android.notEnoughData() == false){
-   for (var i = 1; i < length; i++) {
-	 arraydata[i] = [Android.getZoneAt(i), Android.getAvgAt(i)];
+   for (var i = 0; i < length; i++) {
+	 arraydata[i+1] = [Android.getZoneAt(i), Android.getAvgAt(i)];
    }
   } else {
      arraydata[1] = ['0',0]
