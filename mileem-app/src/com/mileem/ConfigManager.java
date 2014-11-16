@@ -7,6 +7,8 @@ public class ConfigManager {
 	public static String URL_SEARCH = URL_SERVER + "/filterpublications.json";
 	public static String URL_ROOMSBYZONE = URL_SERVER + "/roomsByZone";
 	public static String URL_ZONECOMPARISON = URL_SERVER + "/zoneComparison";
+	public static String URL_EXCHANGERATE = URL_SERVER + "/quotation";
+	public static String URL_AVERAGEUSDPRICE = URL_SERVER + "/averageByZone";
 	public static final String API_KEY = "AIzaSyDLMpS9XVtPrPae_TzBLSJVkZNhLW6gdII";
 	
 	//Interface params query names
