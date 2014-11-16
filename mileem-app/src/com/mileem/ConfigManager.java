@@ -5,6 +5,7 @@ public class ConfigManager {
 	//public static String URL_SERVER = "http://192.168.1.148:3000";
 	public static String URL_SERVER = "http://192.168.56.1:3000";
 	public static String URL_SEARCH = URL_SERVER + "/filterpublications.json";
+	public static String URL_QUOTATION = URL_SERVER + "/quotation.json";
 	public static final String API_KEY = "AIzaSyDLMpS9XVtPrPae_TzBLSJVkZNhLW6gdII";
 	
 	//Interface params query names
@@ -23,6 +24,7 @@ public class ConfigManager {
 	public static String ROOMS = "&rooms=";
 	public static String PUB_TIME_FROM = "&pubtimefrom=";
 	public static String PUB_TIME_TO = "&pubtimeto=";
+	public static String CURRENCY = "&currency=";
 	
 	public static String[] COUNT_OPT = {"10","20","50"};
 	public static String[] ORDER_BY_OPT = {"rel","pubtime","price"};
@@ -30,5 +32,6 @@ public class ConfigManager {
 	public static String[] OPE_TYPE_OPT = {"buy","rent"};
 	public static String[] HOUS_TYPE_OPT = {"house","department"};
 	public static String[] ROOMS_OPT = {"1","2","3","4"};
+	public static String[] CURRENCY_OPT = {"ars","usd"};
 	
 }

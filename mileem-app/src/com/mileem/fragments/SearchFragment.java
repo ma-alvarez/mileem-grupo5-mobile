@@ -148,10 +148,10 @@ public class SearchFragment extends Fragment{
 
 		private boolean[] states;
 		private boolean[] last_states;
-		private ArrayList<String> localidades_seleccionadas;
+		private ArrayList<String> barrios_seleccionados;
 		
 		public NeighbourhoodsDialog(){
-			localidades_seleccionadas = new ArrayList<String>();
+			barrios_seleccionados = new ArrayList<String>();
 			states = new boolean[zones.length];
 			last_states = new boolean[zones.length];
 		}
@@ -159,11 +159,11 @@ public class SearchFragment extends Fragment{
 		public String getSelectedZones(){
 			StringBuilder sb = new StringBuilder();
 
-			if(localidades_seleccionadas.size() > 0){
+			if(barrios_seleccionados.size() > 0){
 				sb.append(ConfigManager.ZONE);
-				for(int i=0; i < localidades_seleccionadas.size(); i++){
+				for(int i=0; i < barrios_seleccionados.size(); i++){
 					if(i > 0) sb.append("-");
-					sb.append(localidades_seleccionadas.get(i).replaceAll(" ", "_").toLowerCase());
+					sb.append(barrios_seleccionados.get(i).replaceAll(" ", "_").toLowerCase());
 				}
 			}
 			return sb.toString();
@@ -178,7 +178,7 @@ public class SearchFragment extends Fragment{
 			
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			// Set the dialog title
-			builder.setTitle(R.string.eleccion_localidades)
+			builder.setTitle(R.string.eleccion_barrios)
 			// and the listener through which to receive callbacks when items are selected
 			.setMultiChoiceItems(R.array.neighbourhoods, states,
 					new DialogInterface.OnMultiChoiceClickListener() {
@@ -192,12 +192,12 @@ public class SearchFragment extends Fragment{
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
 
-	            	   localidades_seleccionadas.clear();
+	            	   barrios_seleccionados.clear();
 	            	   
 	            	   for(int i=0 ; i < states.length; i++){
 	            		   last_states[i] = states[i];
 	            		   if(states[i])
-	            			   localidades_seleccionadas.add(zones[i]);
+	            			   barrios_seleccionados.add(zones[i]);
 	            	   }
 	               }
 	           })
@@ -235,8 +235,8 @@ public class SearchFragment extends Fragment{
 	
 	private void setUpRangeSeekBarArea(){
 
-		int MIN_AREA = 0;
-		int MAX_AREA = 1000;
+		int MIN_AREA = 10;
+		int MAX_AREA = 200;
 		final DecimalFormat df = new DecimalFormat( "#,###,###,##0" );
 		sup_from_to.setText("De: " + df.format(MIN_AREA) + " A: " + df.format(MAX_AREA));
 		

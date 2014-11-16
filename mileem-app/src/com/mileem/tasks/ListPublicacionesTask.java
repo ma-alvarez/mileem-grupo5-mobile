@@ -69,7 +69,7 @@ public class ListPublicacionesTask extends AsyncTask<Void, Void, Void> {
         }
     	
     	
-    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_SEARCH + query);
+    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_SEARCH + query,false);
     	publications = new ArrayList<Publication>();
     	pub_adapters = new ArrayList<PublicationAdapter>();
 

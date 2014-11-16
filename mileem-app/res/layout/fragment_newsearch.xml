@@ -39,7 +39,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/view_height"
                         android:layout_below="@id/bb_operation_type"
-                        android:text="Tipo de Vivienda"
+                        android:text="Tipo de Propiedad"
                         bootstrapbutton:bb_icon_left="fa-home"
                         bootstrapbutton:bb_roundedCorners="false"
                         bootstrapbutton:bb_text_gravity="left"
@@ -50,7 +50,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/view_height"
                         android:layout_below="@id/bb_housing_type"
-                        android:text="Localidades"
+                        android:text="Barrios"
                         bootstrapbutton:bb_icon_left="fa-map-marker"
                         bootstrapbutton:bb_roundedCorners="false"
                         bootstrapbutton:bb_text_gravity="left"
@@ -128,6 +128,14 @@
                 android:id="@+id/edit_mode_fragment_container_small"
                 android:layout_width="fill_parent"
                 android:layout_height="120dp"
+                android:translationY="100dp"
+                android:layout_marginTop="@dimen/marginandview"
+                android:visibility="invisible"/>
+            
+            <FrameLayout
+                android:id="@+id/edit_mode_fragment_container_medium"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
                 android:translationY="100dp"
                 android:layout_marginTop="@dimen/marginandview"
                 android:visibility="invisible"/>
