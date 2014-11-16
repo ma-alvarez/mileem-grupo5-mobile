@@ -57,9 +57,10 @@ public class QuotationTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void args) {
     	
     	if (quotation == null || quotation.isEmpty()){
-    		mNoticeDialog = new NoResultsDialog();
-    		mNoticeDialog.show(pFragment.getActivity().getSupportFragmentManager(), 
-    							"NoResultsDialogFragment");  		
+//    		mNoticeDialog = new NoResultsDialog();
+//    		mNoticeDialog.show(pFragment.getActivity().getSupportFragmentManager(), 
+//    							"NoResultsDialogFragment");  
+    		Log.e(TAG, "No se encontró la cotización");
     	}
     	else{
     		pFragment.setQuotation(quotation);

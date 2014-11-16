@@ -32,7 +32,7 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 	private RangeSeekBar<Long> seekBarPrice;
 	private String quotation;
 	private BootstrapButton bb_ars, bb_usd, bb_allprices, bb_price_from, bb_price_to, bb_quotation;
-
+	private String message = "Cotización: 1 $USD = " + quotation + " $ARS";
 	public PricesFragment() {
 		super();
 		new QuotationTask(this).execute();
@@ -50,11 +50,16 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 		bb_price_from = (BootstrapButton) rootView.findViewById(R.id.bb_price_from);
 		bb_price_to = (BootstrapButton) rootView.findViewById(R.id.bb_price_to);
 		bb_quotation = (BootstrapButton) rootView.findViewById(R.id.bb_quotation);
-		String message = "Cotización: 1 $USD = " + quotation + " $ARS";
-		Log.e("PriceFragmet", message);
-		bb_quotation.setText(message);
-		//bb_quotation.setText("Cotización: 1 $USD = 8,53 $ARS");
 		
+		if( quotation == null){
+			String error_message ="No se encontró la cotización";
+			Log.e("PriceFragmet", error_message);
+			bb_quotation.setText(error_message);
+		}
+		else{
+			bb_quotation.setText(message);
+		}
+			
 		setUpRangeSeekBarPrice();
 		ViewGroup seekBarPrice_layout = (ViewGroup) rootView.findViewById(R.id.RSeekBarPrices);
 		seekBarPrice_layout.addView(seekBarPrice);
@@ -152,7 +157,6 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 		bb_price_from.setText("min");
 		bb_price_to.setText("max");
 		bb_allprices.setPressed(true);
-		//bb_quotation.setText("Cotización: 1 $USD = 8,53 $ARS");
 	}
 	
 	public void setQuotation(String quota){
