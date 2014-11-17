@@ -65,7 +65,7 @@ public class PrecioXMetroFragment extends Fragment {
         	     this.getActivity(),
         	     android.R.layout.simple_spinner_item,
         	     new ArrayList<CharSequence>(Arrays.asList(zones)));
-        adapter.remove("Todas");
+        adapter.remove("Todos");
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
         
         zone_spinner.setAdapter(adapter);		 

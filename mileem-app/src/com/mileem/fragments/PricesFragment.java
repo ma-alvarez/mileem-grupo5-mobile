@@ -46,8 +46,6 @@ public class PricesFragment extends Fragment implements IPlaceableFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		
-		Log.e("PriceFragmet", "onCreateView");
 		rootView = inflater.inflate(R.layout.fragment_prices, container, false);
 		
 		bb_ars = (BootstrapButton) rootView.findViewById(R.id.bb_ars);

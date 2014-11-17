@@ -11,6 +11,7 @@
         android:layout_alignBottom="@+id/spinner1"
         android:layout_alignTop="@+id/spinner1"
         android:gravity="center"
+        android:paddingLeft="4sp"
         android:text="Por favor, seleccione un barrio: " />
 
 	<Spinner
@@ -19,8 +20,9 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentRight="true"
 	    android:layout_alignParentTop="true"
-	    android:layout_toRightOf="@+id/progress1"
-	    android:entries="@array/neighbourhoods" />
+	    android:layout_toRightOf="@+id/progress1" />
+	    <!-- android:entries="@array/neighbourhoods" --> 
+	    
 
     <WebView
         android:id="@+id/web"

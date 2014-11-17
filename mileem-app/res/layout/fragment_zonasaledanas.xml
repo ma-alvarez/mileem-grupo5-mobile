@@ -11,6 +11,7 @@
         android:layout_alignBottom="@+id/spinner1"
         android:layout_alignTop="@+id/spinner1"
         android:gravity="center"
+        android:paddingLeft = "4sp"
         android:text="Por favor, seleccione un barrio: " />
 
 	<Spinner

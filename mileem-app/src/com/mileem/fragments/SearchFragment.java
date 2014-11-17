@@ -42,7 +42,7 @@ public class SearchFragment extends Fragment{
 	private Spinner sp_prop_type;
 	private Spinner sp_rooms;
 	private Spinner sp_orderby;
-	private NeighbourhoodsDialog n_dialog;
+	private NeighbourhoodsDialog n_dialog; 
 	private DatePickerFragment date_picker_from;
 	private DatePickerFragment date_picker_to;
 	private RangeSeekBar<Integer> seekBarPrice;
@@ -112,7 +112,14 @@ public class SearchFragment extends Fragment{
 		
 		return rootView;
 	}
-
+	
+	private static String[] addFirst(String raw[], String value) {
+	    String[] temp = new String[raw.length + 1];
+	    temp[0] = value;
+	    System.arraycopy(raw, 0, temp, 1, raw.length);
+	    return temp;
+	}
+	
 	private void setUpButtonSearch(){
 		button_search.setOnClickListener(new OnClickListener() {
 			

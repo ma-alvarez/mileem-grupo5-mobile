@@ -53,6 +53,7 @@
     </string-array>    
     
     <string-array name="neighbourhoods">
+        <item>Todos</item>
         <item>Agronomía</item>
         <item>Almagro</item>
         <item>Balvanera</item>
