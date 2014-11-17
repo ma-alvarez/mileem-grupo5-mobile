@@ -19,7 +19,8 @@ import com.mileem.fragments.ZonasAledanasFragment;
 import com.pixate.freestyle.PixateFreestyle;
 
 public class MainActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, PopupMenu.OnMenuItemClickListener {
+        //implements NavigationDrawerFragment.NavigationDrawerCallbacks, PopupMenu.OnMenuItemClickListener {
+		implements PopupMenu.OnMenuItemClickListener {
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
@@ -45,12 +46,12 @@ public class MainActivity extends FragmentActivity
         	.commit();
         }
     }
-
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-      
-
-    }
+//
+//    @Override
+//    public void onNavigationDrawerItemSelected(int position) {
+//      
+//
+//    }
 
 
     public void restoreActionBar() {
