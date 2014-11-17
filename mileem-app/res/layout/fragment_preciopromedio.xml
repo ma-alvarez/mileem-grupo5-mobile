@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinner1"
+        android:layout_alignTop="@+id/spinner1"
+        android:gravity="center"
+        android:text=" Por favor, seleccione un barrio: " />
+
+	<Spinner
+	    android:id="@+id/spinner1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentTop="true"
+	    android:layout_toRightOf="@+id/progress1"
+	    android:entries="@array/neighbourhoods" />
+
+    <RelativeLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/spinner1">
+
+    	<RelativeLayout
+    	    android:id="@+id/second_layout"
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_marginTop="25dp"
+    	    android:layout_marginLeft="25dp"
+    	    android:layout_marginRight="25dp" >
+
+    	    
+    	    <TextView
+            android:id="@+id/text_titulo_precioxmetro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:text="El precio promedio por metro cuadrado del barrio: " />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/text_nombre_barrio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/text_titulo_precioxmetro"
+            android:layout_marginTop="16dp"
+            android:text="Nombre Barrio"
+            android:textSize="30sp"
+            bootstrapbutton:bb_type="info" />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/text_usd_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_ars_price"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp"
+            android:text="USD 100.000"
+            android:textSize="30sp"
+            bootstrapbutton:bb_roundedCorners="true"
+            bootstrapbutton:bb_type="primary" />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/text_ars_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_nombre_barrio"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:text="ARS 1.000.000"
+            android:textSize="30sp"
+            bootstrapbutton:bb_roundedCorners="true"
+            bootstrapbutton:bb_type="primary" />
+
+        </RelativeLayout>
+        
+
+        <TextView
+            android:id="@+id/text_title_exchangerate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="20dp"
+            android:text=" Tipo de cambio utilizado es igual a USD 1 = ARS " />
+    
+    </RelativeLayout>
+
+    <ProgressBar
+    	android:id="@+id/progress1"
+    	android:layout_centerHorizontal="true"
+    	android:layout_centerVertical="true"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content" />
+
+</RelativeLayout>

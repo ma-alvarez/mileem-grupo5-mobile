@@ -35,7 +35,7 @@ public class QuotationTask extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... params) {
     	
     	
-    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_QUOTATION, true);
+    	jResponse = HttpUtils.getJSONfromURL(ConfigManager.URL_EXCHANGERATE, true);
 
     	if(jResponse.getError().isEmpty()){
     		
